@@ -4,9 +4,9 @@ namespace VeterinaryClinic.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using VeterinaryClinic.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+
+    using VeterinaryClinic.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -33,5 +33,9 @@ namespace VeterinaryClinic.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual Owner Owner { get; set; }
+
+        public virtual Doctor Doctor { get; set; }
     }
 }

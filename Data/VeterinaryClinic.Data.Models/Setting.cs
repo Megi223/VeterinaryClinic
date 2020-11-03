@@ -1,7 +1,10 @@
-﻿namespace VeterinaryClinic.Data.Models
-{
-    using VeterinaryClinic.Data.Common.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using VeterinaryClinic.Data.Common.Models;
 
+namespace VeterinaryClinic.Data.Models
+{
     public class Setting : BaseDeletableModel<int>
     {
         public string Name { get; set; }

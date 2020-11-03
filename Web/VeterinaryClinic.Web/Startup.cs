@@ -8,7 +8,7 @@
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Data.Repositories;
     using VeterinaryClinic.Data.Seeding;
-    using VeterinaryClinic.Services.Data;
+    //using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Services.Mapping;
     using VeterinaryClinic.Services.Messaging;
     using VeterinaryClinic.Web.ViewModels;
@@ -63,7 +63,7 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
+            ////////////services.AddTransient<ISettingsService, SettingsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

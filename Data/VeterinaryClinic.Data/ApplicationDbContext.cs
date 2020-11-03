@@ -11,6 +11,7 @@
 
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using System.Runtime.CompilerServices;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -18,13 +19,39 @@
             typeof(ApplicationDbContext).GetMethod(
                 nameof(SetIsDeletedQueryFilter),
                 BindingFlags.NonPublic | BindingFlags.Static);
-
+        
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
         public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<Pet> Pets { get; set; }
+
+        public DbSet<Owner> Owners { get; set; }
+
+        public DbSet<Doctor> Doctors { get; set; }
+
+        public DbSet<Diagnose> Diagnoses { get; set; }
+
+        public DbSet<ContactForm> ContactForms { get; set; }
+
+        public DbSet<News> News { get; set; }
+
+        public DbSet<Rating> Ratings { get; set; }
+
+        public DbSet<Appointment> Appointments { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Medication> Medications { get; set; }
+
+        public DbSet<DosingTime> DosingTimes { get; set; }
+
+        public DbSet<Reminder> Reminders { get; set; }
+
+        public DbSet<ChatNotification> ChatNotifications { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -83,7 +110,7 @@
         // Applies configurations
         private void ConfigureUserIdentityRelations(ModelBuilder builder)
              => builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
-
+        
         private void ApplyAuditInfoRules()
         {
             var changedEntries = this.ChangeTracker

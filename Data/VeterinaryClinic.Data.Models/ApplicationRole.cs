@@ -3,9 +3,9 @@ namespace VeterinaryClinic.Data.Models
 {
     using System;
 
-    using VeterinaryClinic.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+
+    using VeterinaryClinic.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {
