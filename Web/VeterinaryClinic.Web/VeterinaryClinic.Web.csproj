@@ -40,4 +40,10 @@
     <ProjectReference Include="..\VeterinaryClinic.Web.Infrastructure\VeterinaryClinic.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\VeterinaryClinic.Web.ViewModels\VeterinaryClinic.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
