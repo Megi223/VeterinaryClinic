@@ -2,13 +2,13 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using VeterinaryClinic.Data.Common;
+    using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Common.Models;
 
     public class Comment : BaseDeletableModel<int>
     {
         [Required]
-        [MaxLength(DataValidationConstants.CommentContentMaxLength)]
+        [MaxLength(GlobalConstants.CommentContentMaxLength)]
         public string Content { get; set; }
 
         [Required]

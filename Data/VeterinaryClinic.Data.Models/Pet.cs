@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using VeterinaryClinic.Data.Common;
+    using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Common.Models;
     using VeterinaryClinic.Data.Models.Enumerations;
 
@@ -15,7 +15,7 @@
         }
 
         [Required]
-        [MaxLength(DataValidationConstants.NameMaxLength)]
+        [MaxLength(GlobalConstants.NameMaxLength)]
         public string Name { get; set; }
 
         public TypeOfAnimal Type { get; set; }

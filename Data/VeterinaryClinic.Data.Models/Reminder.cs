@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using VeterinaryClinic.Data.Common;
+    using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Common.Models;
 
     public class Reminder : BaseDeletableModel<string>
@@ -14,7 +14,7 @@
         }
 
         [Required]
-        [MaxLength(DataValidationConstants.ReminderContentMaxLength)]
+        [MaxLength(GlobalConstants.ReminderContentMaxLength)]
         public string Content { get; set; }
 
         public DateTime ReceivedOn { get; set; }

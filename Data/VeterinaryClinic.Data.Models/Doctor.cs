@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using VeterinaryClinic.Data.Common;
+    using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Common.Models;
 
     public class Doctor : BaseDeletableModel<string>
@@ -17,11 +17,11 @@
         }
 
         [Required]
-        [MaxLength(DataValidationConstants.NameMaxLength)]
+        [MaxLength(GlobalConstants.NameMaxLength)]
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(DataValidationConstants.NameMaxLength)]
+        [MaxLength(GlobalConstants.NameMaxLength)]
         public string LastName { get; set; }
 
         public float Rating { get; set; }
