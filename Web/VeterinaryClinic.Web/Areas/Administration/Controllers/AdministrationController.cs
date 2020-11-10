@@ -10,5 +10,17 @@
     [Area("Administration")]
     public class AdministrationController : BaseController
     {
+        public IActionResult Register()
+        {
+            return this.View();
+        }
+
+        public IActionResult Login()
+        {
+            return this.View();
+        }
+      
+        
+        
     }
 }

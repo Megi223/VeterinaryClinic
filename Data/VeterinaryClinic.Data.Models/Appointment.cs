@@ -12,6 +12,7 @@
         public Appointment()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.IsCancelled = false;
         }
 
         public Status Status { get; set; }
@@ -36,5 +37,7 @@
         public string DoctorId { get; set; }
 
         public virtual Doctor Doctor { get; set; }
+
+        public bool IsCancelled { get; set; }
     }
 }

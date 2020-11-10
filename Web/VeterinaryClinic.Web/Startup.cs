@@ -22,6 +22,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using CloudinaryDotNet;
+    using Microsoft.AspNetCore.Authentication.Google;
 
     public class Startup
     {
@@ -74,6 +75,18 @@
             Cloudinary cloudinary = new Cloudinary(account);
 
             services.AddSingleton(cloudinary);
+
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = this.configuration["Facebook:AppID"];
+                facebookOptions.AppSecret = this.configuration["Facebook:AppSecret"];
+            });
+
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = this.configuration["GoogleSignIn:ClientID"];
+                googleOptions.ClientSecret = this.configuration["GoogleSignIn:ClientAppSecret"];
+            });
 
         }
 

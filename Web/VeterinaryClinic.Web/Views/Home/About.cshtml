@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pet Sitting - Free Bootstrap 4 Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_1_gkn9jj.jpg');" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-end">
+                <div class="col-md-9 ftco-animate pb-5">
+                    <h1 class="mb-0 bread"><b>About Us</b></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br />
+    <br />
+    <section class="ftco-section ftco-no-pt ftco-no-pb">
+        <div class="container">
+            <div class="row d-flex no-gutters">
+                <div class="col-md-5 d-flex">
+                    <div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="        background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684306/dog_txelvj.png);">
+                    </div>
+                </div>
+                <div class="col-md-7 pl-md-5 py-md-5">
+                    <div class="heading-section pt-md-5">
+                        <h2 class="mb-4">Welcome to M&K !</h2>
+                    </div>
+                    <div class="row">
+                        <div class="services-2 w-100 d-flex">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pawprint"></span></div>
+                            <div class="text pl-3">
+                                <h4>
+                                    M&K Veterinary Clinic is a dedicated small animal practice. Our mission is to help our clients and their pets coming to our door. We offer an excellent standard of healthcare at sensible prices. We have caring staff and up to date equipment to provide an accurate and fast diagnosis for your beloved pet.
+                                    In our clinic we provide the service for wide range of domestic animals like; dogs, cats, rabbits, hamsters, birds or turtles.
+                                </h4>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+   <div class="row">
+       <div class="col-md-6">
+           This is where our veterinary clinic is situated.
+       </div>
+
+       <div class="col-md-6">
+           <div id="map" style="height:480px;width:500px;"></div>
+           <script>
+               let googleMap;
+
+               function initMap() {
+                   googleMap = new google.maps.Map(document.getElementById("googleMap"), {
+                       center: { lat: 50, lng: 100 },
+                       zoom: 8,
+                   });
+               }
+           </script>
+           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuEfUJGwsllHxaXkKK5TxVz7SbEKledbM&callback=initMap" async defer type="text/javascript"></script>
+       </div>
+   </div>
+</body>
+</html>
+
