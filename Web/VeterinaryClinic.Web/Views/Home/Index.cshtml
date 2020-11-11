@@ -10,6 +10,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
+
+    <div class="wrap">
+        <div>
+            <div id="search-dropdown" class="custom-dropdown toggle-holder">
+
+                <form method="get" asp-action="Search" class="form-inline align-content-center">
+
+                    <input class="form-control form-control-sm  ml-3 col-6 search-field" type="text" placeholder="Search..."
+                           aria-label="Search" style="border: 2px solid #4dd0e1" name="search">
+
+                    <span style="display:inline-block; width: 10px;"></span>
+                    <button class="btn btn-light btn-group-sm" type="submit"><i class="fa fa-search d-flex justify-content-center block header-search-form-icon"></i></button>
+
+
+
+                    <span style="display:inline-block; width: 10px;"></span>
+
+                    <input type="checkbox"
+                           id="Veterinarians"
+                           value="true"
+                           checked
+                           name="Veterinarians" />
+                    <span style="display:inline-block; width: 10px;"></span>
+
+                    <label class="checkbox-label" for="Veterinarians" style="color:white">Veterinarians</label>
+
+                    <span style="display:inline-block; width: 10px;"></span>
+
+                    <input type="checkbox"
+                           id="Services"
+                           value="true"
+                           checked
+                           name="Services" />
+                    <span style="display:inline-block; width: 10px;"></span>
+
+                    <label class="checkbox-label" for="Services" style="color:white">Services</label>
+
+                    <span style="display:inline-block; width: 10px;"></span>
+
+                    <input type="checkbox"
+                           id="News"
+                           value="true"
+                           checked
+                           name="News" />
+                    <span style="display:inline-block; width: 10px;"></span>
+
+                    <label class="checkbox-label" for="News" style="color:white">News</label>
+
+
+
+
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        $('#search-dropdown form input:checkbox').click(function (ev) {
+            var checkbox = $(ev.currentTarget);
+            var checkboxValueAsBool = JSON.parse(checkbox.val())
+            checkbox.val(!checkboxValueAsBool);
+        });
+    </script>
+
     <div class="hero-wrap js-fullheight" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684306/dog_txelvj.png);" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -158,7 +225,7 @@
         </div>
     </section>
 
-    
+
 
     <section class="ftco-section testimony-section" style="background-image: url('https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_2_gfdtjt.jpg');">
         <div class="overlay"></div>

@@ -2,7 +2,9 @@
     ViewData["Title"] = "About";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@inject Microsoft.Extensions.Configuration.IConfiguration configuration
+@using Syncfusion.EJ2.Maps;
+@using Syncfusion.EJ2;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +18,7 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-end">
                 <div class="col-md-9 ftco-animate pb-5">
+                    <p class="breadcrumbs mb-2"><span class="mr-2"><a asp-controller="Home" asp-action="Index">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>About Us <i class="ion-ios-arrow-forward"></i></span></p>
                     <h1 class="mb-0 bread"><b>About Us</b></h1>
                 </div>
             </div>
@@ -36,13 +39,13 @@
                     </div>
                     <div class="row">
                         <div class="services-2 w-100 d-flex">
-                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pawprint"></span></div>
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pawprint"></span></div>
                             <div class="text pl-3">
                                 <h4>
                                     M&K Veterinary Clinic is a dedicated small animal practice. Our mission is to help our clients and their pets coming to our door. We offer an excellent standard of healthcare at sensible prices. We have caring staff and up to date equipment to provide an accurate and fast diagnosis for your beloved pet.
                                     In our clinic we provide the service for wide range of domestic animals like; dogs, cats, rabbits, hamsters, birds or turtles.
                                 </h4>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -52,26 +55,84 @@
     </section>
 
 
-   <div class="row">
-       <div class="col-md-6">
-           This is where our veterinary clinic is situated.
-       </div>
+    <div class="row">
+        <div class="col-md-6">
+            This is where our veterinary clinic is situated.
+        </div>
 
-       <div class="col-md-6">
-           <div id="map" style="height:480px;width:500px;"></div>
-           <script>
-               let googleMap;
+        <div class="col-md-6">
+            <div id="map" style="height:480px;width:500px;"></div>
+            <script>
+                let googleMap;
 
-               function initMap() {
-                   googleMap = new google.maps.Map(document.getElementById("googleMap"), {
-                       center: { lat: 50, lng: 100 },
-                       zoom: 8,
-                   });
-               }
-           </script>
-           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuEfUJGwsllHxaXkKK5TxVz7SbEKledbM&callback=initMap" async defer type="text/javascript"></script>
-       </div>
-   </div>
+                function initMap() {
+                    googleMap = new google.maps.Map(document.getElementById("googleMap"), {
+                        center: { lat: 50, lng: 100 },
+                        zoom: 8,
+                    });
+                }
+            </script>
+
+            @*<script src="https://maps.googleapis.com/maps/api/js?key=this.configuration[]" async defer type="text/javascript"></script>*@
+        </div>
+    </div>
+
+    <div>
+
+        <ejs-maps id="maps">
+            <e-maps-layers>
+                <e-maps-layer layerType="OSM" urlTemplate="http://a.tile.openstreetmap.org/level/tileX/tileY.png"></e-maps-layer>
+            </e-maps-layers>
+        </ejs-maps>
+
+        @*zooming*@
+        <ejs-maps id="maps">
+            <e-maps-zoomSettings Enable="true">
+                <e-maps-layers>
+                    <e-maps-layer layerType="OSM" urlTemplate="http://a.tile.openstreetmap.org/level/tileX/tileY.png"></e-maps-layer>
+                </e-maps-layers>
+        </ejs-maps>
+
+
+        @{
+            var data = new[]
+            {
+            new {latitude= 37.0000, longitude= -120.0000, city= "California" },
+            new {latitude= 40.7127, longitude= -74.0059, city= "New York" },
+            new {latitude= 42.0000, longitude= -93.0000, city= "Iowa" }
+       };
+            var marker = new List<MapsMarker>
+    {
+        new MapsMarker{Visible=true, DataSource=data}
+    };
+
+        }
+
+
+        <div id="control-section">
+            <ejs-maps id="maps" load="window.onMapLoad">
+                <e-maps-layers>
+                    <e-maps-layer LayerType="OSM" markerSettings="marker"></e-maps-layer>
+                </e-maps-layers>
+            </ejs-maps>
+        </div>
+
+        <script>
+            function onMapLoad(args) {
+                args.maps.layers[0].navigationLineSettings = [
+                    {
+                        visible: true,
+                        latitude: [40.7128, 36.7783],
+                        longitude: [-74.0060, -119.4179],
+                        color: 'black',
+                        angle: 90,
+                        width: 2,
+                        dashArray: '4'
+                    }
+                ];
+            }
+        </script>
+    </div>
 </body>
 </html>
 
