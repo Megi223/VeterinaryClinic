@@ -2,137 +2,105 @@
     ViewData["Title"] = "About";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@inject Microsoft.Extensions.Configuration.IConfiguration configuration
-@using Syncfusion.EJ2.Maps;
-@using Syncfusion.EJ2;
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Pet Sitting - Free Bootstrap 4 Template by Colorlib</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</head>
-<body>
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_1_gkn9jj.jpg');" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row no-gutters slider-text align-items-end">
-                <div class="col-md-9 ftco-animate pb-5">
-                    <p class="breadcrumbs mb-2"><span class="mr-2"><a asp-controller="Home" asp-action="Index">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>About Us <i class="ion-ios-arrow-forward"></i></span></p>
-                    <h1 class="mb-0 bread"><b>About Us</b></h1>
-                </div>
+<section class="hero-wrap hero-wrap-2" style="background-image: url('https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_1_gkn9jj.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs mb-2"><span class="mr-2"><a asp-controller="Home" asp-action="Index">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>About Us <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-0 bread"><b>About Us</b></h1>
             </div>
         </div>
-    </section>
-    <br />
-    <br />
-    <section class="ftco-section ftco-no-pt ftco-no-pb">
-        <div class="container">
-            <div class="row d-flex no-gutters">
-                <div class="col-md-5 d-flex">
-                    <div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="        background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684306/dog_txelvj.png);">
-                    </div>
+    </div>
+</section>
+<br />
+<br />
+<section class="ftco-section ftco-no-pt ftco-no-pb">
+    <div class="container">
+        <div class="row d-flex no-gutters">
+            <div class="col-md-5 d-flex">
+                <div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="        background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684306/dog_txelvj.png);">
                 </div>
-                <div class="col-md-7 pl-md-5 py-md-5">
-                    <div class="heading-section pt-md-5">
-                        <h2 class="mb-4">Welcome to M&K !</h2>
-                    </div>
-                    <div class="row">
-                        <div class="services-2 w-100 d-flex">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pawprint"></span></div>
-                            <div class="text pl-3">
-                                <h4>
-                                    M&K Veterinary Clinic is a dedicated small animal practice. Our mission is to help our clients and their pets coming to our door. We offer an excellent standard of healthcare at sensible prices. We have caring staff and up to date equipment to provide an accurate and fast diagnosis for your beloved pet.
-                                    In our clinic we provide the service for wide range of domestic animals like; dogs, cats, rabbits, hamsters, birds or turtles.
-                                </h4>
+            </div>
+            <div class="col-md-7 pl-md-5 py-md-5">
+                <div class="heading-section pt-md-5">
+                    <h2 class="mb-4">Welcome to M&K !</h2>
+                </div>
+                <div class="row">
+                    <div class="services-2 w-100 d-flex">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pawprint"></span></div>
+                        <div class="text pl-3">
+                            <h4>
+                                M&K Veterinary Clinic is a dedicated small animal practice. Our mission is to help our clients and their pets coming to our door. We offer an excellent standard of healthcare at sensible prices. We have caring staff and up to date equipment to provide an accurate and fast diagnosis for your beloved pet.
+                                In our clinic we provide the service for wide range of domestic animals like; dogs, cats, rabbits, hamsters, birds or turtles.
+                            </h4>
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<div id="mapdiv" style="height:400px;width:1349px"></div>
+
+<br />
 
 
-    <div class="row">
-        <div class="col-md-6">
-            This is where our veterinary clinic is situated.
-        </div>
-
-        <div class="col-md-6">
-            <div id="map" style="height:480px;width:500px;"></div>
-            <script>
-                let googleMap;
-
-                function initMap() {
-                    googleMap = new google.maps.Map(document.getElementById("googleMap"), {
-                        center: { lat: 50, lng: 100 },
-                        zoom: 8,
-                    });
-                }
-            </script>
-
-            @*<script src="https://maps.googleapis.com/maps/api/js?key=this.configuration[]" async defer type="text/javascript"></script>*@
+<section>
+    <h3 style="text-align:center">Contact us</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <span class="textData" style="text-align:center">
+                    <strong><b>Address</b></strong><br />
+                    Veliko Tarnovo, Bulgaria<br />
+                    bul.Nezavisimost
+                </span>
+            </div>
+            <div class="col-md-3">
+                <span class="textData" style="text-align:center">
+                    <b>Phone Number</b><br />
+                    +359 123 456 789
+                </span>
+            </div>
+            <div class="col-md-3">
+                <span class="textData" style="text-align:center">
+                    <strong>
+                        E-mail Address<br />
+                    </strong><span class="textData"><a title="office@MKvetclinic.com" href="mailto:office@MKvetclinic.com">office@MKvetclinic.com</a></span>
+                </span>
+            </div>
+            <div class="col-md-3">
+                <p style="text-align: center;"><strong>Business Hours</strong></p>
+                <p style="text-align: center;">
+                    Monday &#8211; non working day<br />
+                    Tuesday to Friday: 8.30 &#8211; 19.00<br />
+                    Saturday: 10.00 &#8211; 18.00<br />
+                    Sunday- non working day
+                </p>
+            </div>
         </div>
     </div>
+</section>
 
-    <div>
+<br />
 
-        <ejs-maps id="maps">
-            <e-maps-layers>
-                <e-maps-layer layerType="OSM" urlTemplate="http://a.tile.openstreetmap.org/level/tileX/tileY.png"></e-maps-layer>
-            </e-maps-layers>
-        </ejs-maps>
-
-        @*zooming*@
-        <ejs-maps id="maps">
-            <e-maps-zoomSettings Enable="true">
-                <e-maps-layers>
-                    <e-maps-layer layerType="OSM" urlTemplate="http://a.tile.openstreetmap.org/level/tileX/tileY.png"></e-maps-layer>
-                </e-maps-layers>
-        </ejs-maps>
+@section Scripts{
+    <script src="https://openlayers.org/api/OpenLayers.js" asp-append-version="true"></script>
+    <script src="~/js/map/map.js" asp-append-version="true"></script>
+}
 
 
-        @{
-            var data = new[]
-            {
-            new {latitude= 37.0000, longitude= -120.0000, city= "California" },
-            new {latitude= 40.7127, longitude= -74.0059, city= "New York" },
-            new {latitude= 42.0000, longitude= -93.0000, city= "Iowa" }
-       };
-            var marker = new List<MapsMarker>
-    {
-        new MapsMarker{Visible=true, DataSource=data}
-    };
-
-        }
 
 
-        <div id="control-section">
-            <ejs-maps id="maps" load="window.onMapLoad">
-                <e-maps-layers>
-                    <e-maps-layer LayerType="OSM" markerSettings="marker"></e-maps-layer>
-                </e-maps-layers>
-            </ejs-maps>
-        </div>
 
-        <script>
-            function onMapLoad(args) {
-                args.maps.layers[0].navigationLineSettings = [
-                    {
-                        visible: true,
-                        latitude: [40.7128, 36.7783],
-                        longitude: [-74.0060, -119.4179],
-                        color: 'black',
-                        angle: 90,
-                        width: 2,
-                        dashArray: '4'
-                    }
-                ];
-            }
-        </script>
-    </div>
-</body>
-</html>
+
+
+
+
+
+
+
 

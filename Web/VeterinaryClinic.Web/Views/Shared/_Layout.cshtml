@@ -1,6 +1,6 @@
 ﻿@using VeterinaryClinic.Common
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -59,7 +59,7 @@
                 <div class="col-md-6 d-flex align-items-center">
                     <p class="mb-0 phone pl-md-2">
                         <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +359 1234 56789</a>
-                        <a href="#"><span class="fa fa-paper-plane mr-1"></span> megi.d0790@gmail.com</a>
+                        <a href="#"><span class="fa fa-paper-plane mr-1"></span> office@MKvetclinic.com</a>
                     </p>
                 </div>
                 <div class="col-md-6 d-flex justify-content-md-end">
@@ -115,7 +115,7 @@
                 <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
                     <h2 class="footer-heading">Latest News</h2>
                     <div class="block-21 mb-4 d-flex">
-                        <a class="img mr-4 rounded" style="        background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684307/image_1_szun8e.jpg);"></a>
+                        <a class="img mr-4 rounded" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684307/image_1_szun8e.jpg);"></a>
                         <div class="text">
                             <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
                             <div class="meta">
@@ -194,11 +194,10 @@
     <script src="~/js/owl.carousel.min.js" asp-append-version="true"></script>
     <script src="~/js/jquery.magnific-popup.min.js" asp-append-version="true"></script>
     <script src="~/js/scrollax.min.js" asp-append-version="true"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false" asp-append-version="true"></script>
-    <script src="~/js/google-map.js" asp-append-version="true"></script>
+    @*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false" asp-append-version="true"></script>*@
+    @*<script src="~/js/google-map.js" asp-append-version="true"></script>*@
     <script src="~/js/main.js" asp-append-version="true"></script>
-    @*for open streets map- TODO: consider moving it to about.cshtml*@
-    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" asp-append-version="true"></script>
+
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

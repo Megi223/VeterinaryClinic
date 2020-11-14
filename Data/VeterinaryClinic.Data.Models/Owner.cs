@@ -18,6 +18,7 @@
             this.ChatNotifications = new HashSet<ChatNotification>();
             this.Rating = new HashSet<Rating>();
             this.Appointments = new HashSet<Appointment>();
+            this.Reviews = new HashSet<Review>();
         }
 
         [Required]
@@ -31,6 +32,8 @@
         public string City { get; set; }
 
         public string ProfilePicture { get; set; }
+
+        public string Job { get; set; }
 
         [Required]
         public string UserId { get; set; }
@@ -48,5 +51,7 @@
         public virtual ICollection<Rating> Rating { get; set; }
 
         public virtual ICollection<Appointment> Appointments { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }

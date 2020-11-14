@@ -654,6 +654,9 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Job")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
@@ -841,6 +844,42 @@ namespace VeterinaryClinic.Data.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Reminders");
+                });
+
+            modelBuilder.Entity("VeterinaryClinic.Data.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("VeterinaryClinic.Data.Models.Setting", b =>
@@ -1071,6 +1110,13 @@ namespace VeterinaryClinic.Data.Migrations
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("VeterinaryClinic.Data.Models.Review", b =>
+                {
+                    b.HasOne("VeterinaryClinic.Data.Models.Owner", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("OwnerId");
                 });
 #pragma warning restore 612, 618
         }
