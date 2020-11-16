@@ -21,9 +21,9 @@
         public TypeOfAnimal Type { get; set; }
 
         [Required]
-        public string DoctorId { get; set; }
+        public string VetId { get; set; }
 
-        public virtual Doctor Doctor { get; set; }
+        public virtual Vet Vet { get; set; }
 
         public float Weight { get; set; }
 

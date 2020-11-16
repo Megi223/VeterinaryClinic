@@ -82,14 +82,33 @@ namespace VeterinaryClinic.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
                     Content = table.Column<string>(nullable: false),
-                    PublishedOn = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
+                    Summary = table.Column<string>(nullable: false),
                     ImageUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_News", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Services",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Services", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -217,33 +236,6 @@ namespace VeterinaryClinic.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Doctors",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(maxLength: 50, nullable: false),
-                    Rating = table.Column<float>(nullable: false),
-                    ProfilePicture = table.Column<string>(nullable: true),
-                    HireDate = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Doctors", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Doctors_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Owners",
                 columns: table => new
                 {
@@ -264,6 +256,33 @@ namespace VeterinaryClinic.Data.Migrations
                     table.PrimaryKey("PK_Owners", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Owners_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vets",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    Rating = table.Column<float>(nullable: false),
+                    ProfilePicture = table.Column<string>(nullable: true),
+                    HireDate = table.Column<DateTime>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Vets_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -296,69 +315,6 @@ namespace VeterinaryClinic.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChatNotifications",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Content = table.Column<string>(maxLength: 100, nullable: false),
-                    ReceivedOn = table.Column<DateTime>(nullable: false),
-                    OwnerId = table.Column<string>(nullable: false),
-                    DoctorId = table.Column<string>(nullable: false),
-                    IsRead = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ChatNotifications", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ChatNotifications_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ChatNotifications_Owners_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "Owners",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Content = table.Column<string>(maxLength: 200, nullable: false),
-                    DoctorId = table.Column<string>(nullable: false),
-                    OwnerId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Comments_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comments_Owners_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "Owners",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ContactForms",
                 columns: table => new
                 {
@@ -385,81 +341,6 @@ namespace VeterinaryClinic.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pets",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Type = table.Column<int>(nullable: false),
-                    DoctorId = table.Column<string>(nullable: false),
-                    Weight = table.Column<float>(nullable: false),
-                    Picture = table.Column<string>(nullable: true),
-                    DiagnoseId = table.Column<int>(nullable: false),
-                    PassportId = table.Column<string>(nullable: false),
-                    Birthday = table.Column<DateTime>(nullable: false),
-                    Sterilised = table.Column<bool>(nullable: false),
-                    Gender = table.Column<int>(nullable: false),
-                    OwnerId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pets", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Pets_Diagnoses_DiagnoseId",
-                        column: x => x.DiagnoseId,
-                        principalTable: "Diagnoses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Pets_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Pets_Owners_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "Owners",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Ratings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    OwnerId = table.Column<string>(nullable: false),
-                    DoctorId = table.Column<string>(nullable: false),
-                    Score = table.Column<float>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ratings", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Owners_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "Owners",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Review",
                 columns: table => new
                 {
@@ -479,6 +360,181 @@ namespace VeterinaryClinic.Data.Migrations
                         name: "FK_Review_Owners_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "Owners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChatNotifications",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Content = table.Column<string>(maxLength: 100, nullable: false),
+                    ReceivedOn = table.Column<DateTime>(nullable: false),
+                    OwnerId = table.Column<string>(nullable: false),
+                    VetId = table.Column<string>(nullable: false),
+                    IsRead = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChatNotifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChatNotifications_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ChatNotifications_Vets_VetId",
+                        column: x => x.VetId,
+                        principalTable: "Vets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Content = table.Column<string>(maxLength: 200, nullable: false),
+                    VetId = table.Column<string>(nullable: false),
+                    OwnerId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comments_Vets_VetId",
+                        column: x => x.VetId,
+                        principalTable: "Vets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pets",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Type = table.Column<int>(nullable: false),
+                    VetId = table.Column<string>(nullable: false),
+                    Weight = table.Column<float>(nullable: false),
+                    Picture = table.Column<string>(nullable: true),
+                    DiagnoseId = table.Column<int>(nullable: false),
+                    PassportId = table.Column<string>(nullable: false),
+                    Birthday = table.Column<DateTime>(nullable: false),
+                    Sterilised = table.Column<bool>(nullable: false),
+                    Gender = table.Column<int>(nullable: false),
+                    OwnerId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pets_Diagnoses_DiagnoseId",
+                        column: x => x.DiagnoseId,
+                        principalTable: "Diagnoses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Pets_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Pets_Vets_VetId",
+                        column: x => x.VetId,
+                        principalTable: "Vets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    OwnerId = table.Column<string>(nullable: false),
+                    VetId = table.Column<string>(nullable: false),
+                    Score = table.Column<float>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Vets_VetId",
+                        column: x => x.VetId,
+                        principalTable: "Vets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VetsServices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    VetId = table.Column<string>(nullable: false),
+                    OwnerId = table.Column<string>(nullable: false),
+                    ServiceId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VetsServices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VetsServices_Owners_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "Owners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_VetsServices_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_VetsServices_Vets_VetId",
+                        column: x => x.VetId,
+                        principalTable: "Vets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -519,7 +575,7 @@ namespace VeterinaryClinic.Data.Migrations
                     Content = table.Column<string>(maxLength: 100, nullable: false),
                     ReceivedOn = table.Column<DateTime>(nullable: false),
                     OwnerId = table.Column<string>(nullable: false),
-                    DoctorId = table.Column<string>(nullable: false),
+                    VetId = table.Column<string>(nullable: false),
                     IsCompleted = table.Column<bool>(nullable: false),
                     MedicationId = table.Column<int>(nullable: false),
                     DateTime = table.Column<DateTime>(nullable: false)
@@ -527,12 +583,6 @@ namespace VeterinaryClinic.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reminders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reminders_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reminders_Medications_MedicationId",
                         column: x => x.MedicationId,
@@ -543,6 +593,12 @@ namespace VeterinaryClinic.Data.Migrations
                         name: "FK_Reminders_Owners_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "Owners",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Reminders_Vets_VetId",
+                        column: x => x.VetId,
+                        principalTable: "Vets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -562,18 +618,12 @@ namespace VeterinaryClinic.Data.Migrations
                     EndTime = table.Column<DateTime>(nullable: false),
                     PetId = table.Column<string>(nullable: false),
                     OwnerId = table.Column<string>(nullable: false),
-                    DoctorId = table.Column<string>(nullable: false),
+                    VetId = table.Column<string>(nullable: false),
                     IsCancelled = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Appointments_Doctors_DoctorId",
-                        column: x => x.DoctorId,
-                        principalTable: "Doctors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Appointments_Owners_OwnerId",
                         column: x => x.OwnerId,
@@ -586,12 +636,13 @@ namespace VeterinaryClinic.Data.Migrations
                         principalTable: "Pets",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Vets_VetId",
+                        column: x => x.VetId,
+                        principalTable: "Vets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Appointments_DoctorId",
-                table: "Appointments",
-                column: "DoctorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_IsDeleted",
@@ -607,6 +658,11 @@ namespace VeterinaryClinic.Data.Migrations
                 name: "IX_Appointments_PetId",
                 table: "Appointments",
                 column: "PetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_VetId",
+                table: "Appointments",
+                column: "VetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -658,11 +714,6 @@ namespace VeterinaryClinic.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChatNotifications_DoctorId",
-                table: "ChatNotifications",
-                column: "DoctorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ChatNotifications_IsDeleted",
                 table: "ChatNotifications",
                 column: "IsDeleted");
@@ -673,9 +724,9 @@ namespace VeterinaryClinic.Data.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_DoctorId",
-                table: "Comments",
-                column: "DoctorId");
+                name: "IX_ChatNotifications_VetId",
+                table: "ChatNotifications",
+                column: "VetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_IsDeleted",
@@ -686,6 +737,11 @@ namespace VeterinaryClinic.Data.Migrations
                 name: "IX_Comments_OwnerId",
                 table: "Comments",
                 column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_VetId",
+                table: "Comments",
+                column: "VetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ContactForms_IsDeleted",
@@ -701,17 +757,6 @@ namespace VeterinaryClinic.Data.Migrations
                 name: "IX_Diagnoses_IsDeleted",
                 table: "Diagnoses",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Doctors_IsDeleted",
-                table: "Doctors",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Doctors_UserId",
-                table: "Doctors",
-                column: "UserId",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_DosingTimes_IsDeleted",
@@ -755,11 +800,6 @@ namespace VeterinaryClinic.Data.Migrations
                 column: "DiagnoseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pets_DoctorId",
-                table: "Pets",
-                column: "DoctorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Pets_IsDeleted",
                 table: "Pets",
                 column: "IsDeleted");
@@ -770,9 +810,9 @@ namespace VeterinaryClinic.Data.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ratings_DoctorId",
-                table: "Ratings",
-                column: "DoctorId");
+                name: "IX_Pets_VetId",
+                table: "Pets",
+                column: "VetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_IsDeleted",
@@ -785,9 +825,9 @@ namespace VeterinaryClinic.Data.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reminders_DoctorId",
-                table: "Reminders",
-                column: "DoctorId");
+                name: "IX_Ratings_VetId",
+                table: "Ratings",
+                column: "VetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reminders_IsDeleted",
@@ -805,6 +845,11 @@ namespace VeterinaryClinic.Data.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reminders_VetId",
+                table: "Reminders",
+                column: "VetId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Review_IsDeleted",
                 table: "Review",
                 column: "IsDeleted");
@@ -815,9 +860,45 @@ namespace VeterinaryClinic.Data.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Services_IsDeleted",
+                table: "Services",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vets_IsDeleted",
+                table: "Vets",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vets_UserId",
+                table: "Vets",
+                column: "UserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VetsServices_IsDeleted",
+                table: "VetsServices",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VetsServices_OwnerId",
+                table: "VetsServices",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VetsServices_ServiceId",
+                table: "VetsServices",
+                column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VetsServices_VetId",
+                table: "VetsServices",
+                column: "VetId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -868,6 +949,9 @@ namespace VeterinaryClinic.Data.Migrations
                 name: "Settings");
 
             migrationBuilder.DropTable(
+                name: "VetsServices");
+
+            migrationBuilder.DropTable(
                 name: "Pets");
 
             migrationBuilder.DropTable(
@@ -877,10 +961,13 @@ namespace VeterinaryClinic.Data.Migrations
                 name: "Medications");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
+                name: "Services");
 
             migrationBuilder.DropTable(
                 name: "Owners");
+
+            migrationBuilder.DropTable(
+                name: "Vets");
 
             migrationBuilder.DropTable(
                 name: "Diagnoses");

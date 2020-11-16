@@ -1,0 +1,31 @@
+﻿@model IEnumerable<VeterinaryClinic.Web.ViewModels.Services.ServiceViewModel>
+
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h1 style="text-align:center; color:black;" class="mb-4"><b>Services</b></h1>
+
+<br />
+
+<section>
+    <div class="container">
+        <div class="row">
+            @foreach (var service in Model)
+            {
+                <div class="col-md-3 ftco-animate">
+                    <div class="work mb-4 img d-flex align-items-end" style="background-image: url(@service.ImageUrl);">
+                    </div>
+                    <h3 style="text-align:center"><a asp-controller="Services" asp-action="Details" asp-route-id="@service.Id">@service.Name</a></h3>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<br />
+<br />
+
+

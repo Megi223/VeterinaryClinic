@@ -15,9 +15,9 @@
         <div>
             <div id="search-dropdown" class="custom-dropdown toggle-holder">
 
-                <form method="get" asp-action="Search" class="form-inline align-content-center">
+                <form id="target" method="get" asp-action="Index" asp-controller="Search" class="form-inline align-content-center">
 
-                    <input class="form-control form-control-sm  ml-3 col-6 search-field" type="text" placeholder="Search..."
+                    <input id="search" class="form-control form-control-sm  ml-3 col-6 search-field" type="text" placeholder="Search..."
                            aria-label="Search" style="border: 2px solid #4dd0e1" name="search">
 
                     <span style="display:inline-block; width: 10px;"></span>
@@ -30,7 +30,7 @@
                     <input type="checkbox"
                            id="Veterinarians"
                            value="true"
-                           checked
+                           @*checked*@
                            name="Veterinarians" />
                     <span style="display:inline-block; width: 10px;"></span>
 
@@ -41,7 +41,7 @@
                     <input type="checkbox"
                            id="Services"
                            value="true"
-                           checked
+                           @*checked*@
                            name="Services" />
                     <span style="display:inline-block; width: 10px;"></span>
 
@@ -52,7 +52,7 @@
                     <input type="checkbox"
                            id="News"
                            value="true"
-                           checked
+                           @*checked*@
                            name="News" />
                     <span style="display:inline-block; width: 10px;"></span>
 
@@ -83,7 +83,7 @@
             <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
                 <div class="col-md-11 ftco-animate text-center">
                     <h1 class="mb-4" style="color:black;">Highest Quality Care For Pets You'll Love </h1>
-                    <p><a href="#" class="btn btn-primary mr-md-4 py-3 px-4">Learn more <span class="ion-ios-arrow-forward"></span></a></p>
+                    <p><a asp-controller="Home" asp-action="About" class="btn btn-primary mr-md-4 py-3 px-4">Learn more <span class="ion-ios-arrow-forward"></span></a></p>
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
                         <div class="media-body">
                             <h3 class="heading">Dog Training</h3>
                             <p>You don't have time? Or maybe your dog behaves different than normal? Don't worry! You will always find help in M&K. With a trained team of experts you will achieve the desired attitude and create a stronger bond with your pet.</p>
-                            <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                            <a asp-controller="Services" asp-action="All" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                         <div class="media-body">
                             <h3 class="heading">Pet Daycare And Medical Checkup</h3>
                             <p>Here in M&K we have the most caring and trained staff-veterinarians and trainers are always there when you have a problem with your pet. Just book an appointement and you won't regret it!</p>
-                            <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                            <a asp-controller="Services" asp-action="All" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         <div class="media-body">
                             <h3 class="heading">Pet Grooming</h3>
                             <p>As well as medical services, M&K has a lot to offer when it comes to pet grooming.Shampoo, trimming and shaping fur, clipping nails - whatever you want, whenever you want it!</p>
-                            <a href="#" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                            <a asp-controller="Services" asp-action="All" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
                         </div>
                     </div>
                 </div>
@@ -321,7 +321,7 @@
         </div>
     </section>
 
-    
+
 
     <section class="ftco-section">
         <div class="container">
@@ -537,4 +537,101 @@
     </section>
 </body>
 </html>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    @*<script>
+            $(document).ready(function () {
+                $("#search").autocomplete({
+                    source: 'api/searchapi/search'
+                });
+            });
+        </script>*@
+
+    @*<script>
+        var vets=false;
+        var services=false;
+        var news=false;
+
+            $('#News').change(function () {
+                if ($(this).is(":checked")) {
+                    news = !news;
+                    console.log(news);
+                }
+            });
+
+
+            $('#Veterinarians').change(function () {
+                if ($(this).is(":checked")) {
+                    vets = !vets;
+                    console.log("vets");
+                }
+            });
+
+
+            $('#Services').change(function () {
+                if ($(this).is(":checked")) {
+                    services = !services;
+                    console.log("services");
+                }
+            });
+
+
+        $(document).ready(function () {
+            $("#search").autocomplete({
+                source: 'api/searchapi/search?veterinarians=' + vets + '&services=' + services + '&news=' + news
+            });
+        });
+
+
+
+        </script>
+
+        <script>
+        $("#search").autocomplete({
+                source: 'api/searchapi/search?veterinarians=' + vets + '&services=' + services + '&news=' + news
+            });</script>*@
+
+    <script>
+        var vets = false;
+        var services = false;
+        var news = false;
+
+        $(document).ready(function () {
+            $('#News').change(function () {
+                if ($(this).is(":checked")) {
+                    news = !news;
+                    console.log(news);
+                }
+            });
+
+
+            $('#Veterinarians').change(function () {
+                if ($(this).is(":checked")) {
+                    vets = !vets;
+                    console.log("vets");
+                }
+            });
+
+
+            $('#Services').change(function () {
+                if ($(this).is(":checked")) {
+                    services = !services;
+                    console.log("services");
+                }
+            });
+        });
+        
+        $(document).ready(function () {
+            $("#search").autocomplete({
+                source: 'api/searchapi/search?veterinarians=' + vets + '&services=' + services + '&news=' + news
+            });
+        });
+    </script>
+    
+
+}
+
+
 

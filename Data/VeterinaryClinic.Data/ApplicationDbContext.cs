@@ -31,7 +31,7 @@
 
         public DbSet<Owner> Owners { get; set; }
 
-        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Vet> Vets { get; set; }
 
         public DbSet<Diagnose> Diagnoses { get; set; }
 
@@ -52,6 +52,12 @@
         public DbSet<Reminder> Reminders { get; set; }
 
         public DbSet<ChatNotification> ChatNotifications { get; set; }
+
+        public DbSet<VetsServices> VetsServices { get; set; }
+
+        public DbSet<Service> Services { get; set; }
+
+
 
         public override int SaveChanges() => this.SaveChanges(true);
 

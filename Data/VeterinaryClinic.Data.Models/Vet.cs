@@ -1,19 +1,20 @@
-﻿namespace VeterinaryClinic.Data.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using VeterinaryClinic.Common;
+using VeterinaryClinic.Data.Common.Models;
+
+namespace VeterinaryClinic.Data.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    using VeterinaryClinic.Common;
-    using VeterinaryClinic.Data.Common.Models;
-
-    public class Doctor : BaseDeletableModel<string>
+    public class Vet : BaseDeletableModel<string>
     {
-        public Doctor()
+        public Vet()
         {
             this.Id = Guid.NewGuid().ToString();
             this.ChatNotifications = new HashSet<ChatNotification>();
             this.Reminders = new HashSet<Reminder>();
+            this.VetsServices = new HashSet<VetsServices>();
         }
 
         [Required]
@@ -39,5 +40,7 @@
         public virtual ICollection<ChatNotification> ChatNotifications { get; set; }
 
         public virtual ICollection<Reminder> Reminders { get; set; }
+
+        public virtual ICollection<VetsServices> VetsServices { get; set; }
     }
 }

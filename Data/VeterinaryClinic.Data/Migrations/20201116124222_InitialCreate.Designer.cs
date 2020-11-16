@@ -10,7 +10,7 @@ using VeterinaryClinic.Data;
 namespace VeterinaryClinic.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201114171544_InitialCreate")]
+    [Migration("20201116124222_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,10 +259,6 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
 
@@ -289,15 +285,19 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<string>("VetId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("DoctorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("OwnerId");
 
                     b.HasIndex("PetId");
+
+                    b.HasIndex("VetId");
 
                     b.ToTable("Appointments");
                 });
@@ -318,10 +318,6 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -338,13 +334,17 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<DateTime>("ReceivedOn")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<string>("VetId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("DoctorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("OwnerId");
+
+                    b.HasIndex("VetId");
 
                     b.ToTable("ChatNotifications");
                 });
@@ -367,10 +367,6 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -380,13 +376,17 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<string>("OwnerId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("VetId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("DoctorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("OwnerId");
+
+                    b.HasIndex("VetId");
 
                     b.ToTable("Comments");
                 });
@@ -469,56 +469,6 @@ namespace VeterinaryClinic.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Diagnoses");
-                });
-
-            modelBuilder.Entity("VeterinaryClinic.Data.Models.Doctor", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("HireDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ProfilePicture")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("VeterinaryClinic.Data.Models.DosingTime", b =>
@@ -611,10 +561,6 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -624,8 +570,13 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("PublishedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Summary")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -701,10 +652,6 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<int>("DiagnoseId")
                         .HasColumnType("int");
 
-                    b.Property<string>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
@@ -736,6 +683,10 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
+                    b.Property<string>("VetId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<float>("Weight")
                         .HasColumnType("real");
 
@@ -743,11 +694,11 @@ namespace VeterinaryClinic.Data.Migrations
 
                     b.HasIndex("DiagnoseId");
 
-                    b.HasIndex("DoctorId");
-
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("OwnerId");
+
+                    b.HasIndex("VetId");
 
                     b.ToTable("Pets");
                 });
@@ -765,10 +716,6 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -782,13 +729,17 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<float>("Score")
                         .HasColumnType("real");
 
-                    b.HasKey("Id");
+                    b.Property<string>("VetId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("DoctorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("OwnerId");
+
+                    b.HasIndex("VetId");
 
                     b.ToTable("Ratings");
                 });
@@ -812,10 +763,6 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DoctorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
@@ -835,15 +782,19 @@ namespace VeterinaryClinic.Data.Migrations
                     b.Property<DateTime>("ReceivedOn")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<string>("VetId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.HasIndex("DoctorId");
+                    b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("MedicationId");
 
                     b.HasIndex("OwnerId");
+
+                    b.HasIndex("VetId");
 
                     b.ToTable("Reminders");
                 });
@@ -884,6 +835,44 @@ namespace VeterinaryClinic.Data.Migrations
                     b.ToTable("Review");
                 });
 
+            modelBuilder.Entity("VeterinaryClinic.Data.Models.Service", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Services");
+                });
+
             modelBuilder.Entity("VeterinaryClinic.Data.Models.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -914,6 +903,99 @@ namespace VeterinaryClinic.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("VeterinaryClinic.Data.Models.Vet", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("HireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ProfilePicture")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Vets");
+                });
+
+            modelBuilder.Entity("VeterinaryClinic.Data.Models.VetsServices", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VetId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.HasIndex("VetId");
+
+                    b.ToTable("VetsServices");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -969,12 +1051,6 @@ namespace VeterinaryClinic.Data.Migrations
 
             modelBuilder.Entity("VeterinaryClinic.Data.Models.Appointment", b =>
                 {
-                    b.HasOne("VeterinaryClinic.Data.Models.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("VeterinaryClinic.Data.Models.Owner", "Owner")
                         .WithMany("Appointments")
                         .HasForeignKey("OwnerId")
@@ -986,34 +1062,40 @@ namespace VeterinaryClinic.Data.Migrations
                         .HasForeignKey("PetId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("VeterinaryClinic.Data.Models.Vet", "Vet")
+                        .WithMany()
+                        .HasForeignKey("VetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("VeterinaryClinic.Data.Models.ChatNotification", b =>
                 {
-                    b.HasOne("VeterinaryClinic.Data.Models.Doctor", "Doctor")
-                        .WithMany("ChatNotifications")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("VeterinaryClinic.Data.Models.Owner", "Owner")
                         .WithMany("ChatNotifications")
                         .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VeterinaryClinic.Data.Models.Vet", "Vet")
+                        .WithMany("ChatNotifications")
+                        .HasForeignKey("VetId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("VeterinaryClinic.Data.Models.Comment", b =>
                 {
-                    b.HasOne("VeterinaryClinic.Data.Models.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("VeterinaryClinic.Data.Models.Owner", "Owner")
                         .WithMany("Comments")
                         .HasForeignKey("OwnerId");
+
+                    b.HasOne("VeterinaryClinic.Data.Models.Vet", "Vet")
+                        .WithMany()
+                        .HasForeignKey("VetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("VeterinaryClinic.Data.Models.ContactForm", b =>
@@ -1021,15 +1103,6 @@ namespace VeterinaryClinic.Data.Migrations
                     b.HasOne("VeterinaryClinic.Data.Models.Owner", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("VeterinaryClinic.Data.Models.Doctor", b =>
-                {
-                    b.HasOne("VeterinaryClinic.Data.Models.ApplicationUser", "User")
-                        .WithOne("Doctor")
-                        .HasForeignKey("VeterinaryClinic.Data.Models.Doctor", "UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -1065,42 +1138,36 @@ namespace VeterinaryClinic.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("VeterinaryClinic.Data.Models.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("VeterinaryClinic.Data.Models.Owner", "Owner")
                         .WithMany("Pets")
                         .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VeterinaryClinic.Data.Models.Vet", "Vet")
+                        .WithMany()
+                        .HasForeignKey("VetId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("VeterinaryClinic.Data.Models.Rating", b =>
                 {
-                    b.HasOne("VeterinaryClinic.Data.Models.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("VeterinaryClinic.Data.Models.Owner", "Owner")
                         .WithMany("Rating")
                         .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VeterinaryClinic.Data.Models.Vet", "Vet")
+                        .WithMany()
+                        .HasForeignKey("VetId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("VeterinaryClinic.Data.Models.Reminder", b =>
                 {
-                    b.HasOne("VeterinaryClinic.Data.Models.Doctor", "Doctor")
-                        .WithMany("Reminders")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("VeterinaryClinic.Data.Models.Medication", "Medication")
                         .WithMany()
                         .HasForeignKey("MedicationId")
@@ -1112,6 +1179,12 @@ namespace VeterinaryClinic.Data.Migrations
                         .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("VeterinaryClinic.Data.Models.Vet", "Vet")
+                        .WithMany("Reminders")
+                        .HasForeignKey("VetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("VeterinaryClinic.Data.Models.Review", b =>
@@ -1119,6 +1192,34 @@ namespace VeterinaryClinic.Data.Migrations
                     b.HasOne("VeterinaryClinic.Data.Models.Owner", null)
                         .WithMany("Reviews")
                         .HasForeignKey("OwnerId");
+                });
+
+            modelBuilder.Entity("VeterinaryClinic.Data.Models.Vet", b =>
+                {
+                    b.HasOne("VeterinaryClinic.Data.Models.ApplicationUser", "User")
+                        .WithOne("Vet")
+                        .HasForeignKey("VeterinaryClinic.Data.Models.Vet", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VeterinaryClinic.Data.Models.VetsServices", b =>
+                {
+                    b.HasOne("VeterinaryClinic.Data.Models.Owner", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("VeterinaryClinic.Data.Models.Service", null)
+                        .WithMany("VetsServices")
+                        .HasForeignKey("ServiceId");
+
+                    b.HasOne("VeterinaryClinic.Data.Models.Vet", "Vet")
+                        .WithMany("VetsServices")
+                        .HasForeignKey("VetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

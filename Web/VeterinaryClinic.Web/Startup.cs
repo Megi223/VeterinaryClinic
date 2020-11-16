@@ -23,6 +23,8 @@
     using Microsoft.Extensions.Hosting;
     using CloudinaryDotNet;
     using Microsoft.AspNetCore.Authentication.Google;
+    using VeterinaryClinic.Services;
+    using VeterinaryClinic.Services.Data;
 
     public class Startup
     {
@@ -65,7 +67,13 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            ////////////services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<INewsScraperService, NewsScraperService>();
+            services.AddTransient<ISearchService, SearchService>();
+            services.AddTransient<IServiceScraperService, ServiceScraperService>();
+            services.AddTransient<IServicesService, ServicesService>();
+
+
+
 
             Account account = new Account(
                 this.configuration["Cloudinary:AppName"],

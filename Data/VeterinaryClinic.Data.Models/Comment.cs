@@ -12,9 +12,9 @@
         public string Content { get; set; }
 
         [Required]
-        public string DoctorId { get; set; }
+        public string VetId { get; set; }
 
-        public virtual Doctor Doctor { get; set; }
+        public virtual Vet Vet { get; set; }
 
         public string OwnerId { get; set; }
 

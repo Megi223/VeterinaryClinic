@@ -5,9 +5,18 @@
     using VeterinaryClinic.Web.ViewModels;
 
     using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Services;
+    using System.Threading.Tasks;
 
     public class HomeController : BaseController
     {
+        private readonly IServiceScraperService serviceScraperService;
+
+        public HomeController(IServiceScraperService serviceScraperService)
+        {
+            this.serviceScraperService = serviceScraperService;
+        }
+
         public IActionResult Index()
         {
             return this.View();
@@ -34,5 +43,13 @@
         {
             return this.View();
         }
+
+        //TODO: move it later
+        public async Task<IActionResult> AddServices()
+        {
+            await serviceScraperService.PopulateDbWithServices();
+            return this.RedirectToAction("Index");
+        }
+        
     }
 }

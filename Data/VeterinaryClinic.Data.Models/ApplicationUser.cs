@@ -36,6 +36,6 @@ namespace VeterinaryClinic.Data.Models
 
         public virtual Owner Owner { get; set; }
 
-        public virtual Doctor Doctor { get; set; }
+        public virtual Vet Vet { get; set; }
     }
 }

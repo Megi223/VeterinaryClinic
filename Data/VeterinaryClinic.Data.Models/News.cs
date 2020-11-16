@@ -9,12 +9,13 @@
     public class News : BaseDeletableModel<int>
     {
         [Required]
-        public string Content { get; set; }
-
-        public DateTime PublishedOn { get; set; }
+        public string Title { get; set; }
 
         [Required]
-        public string Description { get; set; }
+        public string Content { get; set; }
+
+        [Required]
+        public string Summary { get; set; }
 
         public string ImageUrl { get; set; }
     }
