@@ -17,5 +17,7 @@
         public const int MedicationNameMaxLength = 20;
 
         public const int ReminderContentMaxLength = 100;
+
+        public const int NewsOnOnePage = 6;
     }
 }

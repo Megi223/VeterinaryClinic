@@ -25,6 +25,7 @@
     using Microsoft.AspNetCore.Authentication.Google;
     using VeterinaryClinic.Services;
     using VeterinaryClinic.Services.Data;
+    using Pioneer.Pagination;
 
     public class Startup
     {
@@ -71,6 +72,8 @@
             services.AddTransient<ISearchService, SearchService>();
             services.AddTransient<IServiceScraperService, ServiceScraperService>();
             services.AddTransient<IServicesService, ServicesService>();
+            services.AddTransient<INewsService, NewsService>();
+            services.AddTransient<IPaginatedMetaService, PaginatedMetaService>();
 
 
 
@@ -122,6 +125,7 @@
                 app.UseHsts();
             }
 
+            app.UseStatusCodePagesWithRedirects("Home/StatusCodeError?errorCode={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

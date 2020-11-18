@@ -47,9 +47,19 @@
         //TODO: move it later
         public async Task<IActionResult> AddServices()
         {
-            await serviceScraperService.PopulateDbWithServices();
+            await this.serviceScraperService.PopulateDbWithServices();
             return this.RedirectToAction("Index");
         }
-        
+
+        public async Task<IActionResult> StatusCodeError(int errorCode)
+        {
+            if (errorCode == 404)
+            {
+                return this.View("NotFound");
+            }
+            return this.RedirectToAction("Error", "Home");
+        }
+
+
     }
 }

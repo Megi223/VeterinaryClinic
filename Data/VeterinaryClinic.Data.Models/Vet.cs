@@ -15,6 +15,7 @@ namespace VeterinaryClinic.Data.Models
             this.ChatNotifications = new HashSet<ChatNotification>();
             this.Reminders = new HashSet<Reminder>();
             this.VetsServices = new HashSet<VetsServices>();
+            this.Comments = new HashSet<Comment>();
         }
 
         [Required]
@@ -42,5 +43,8 @@ namespace VeterinaryClinic.Data.Models
         public virtual ICollection<Reminder> Reminders { get; set; }
 
         public virtual ICollection<VetsServices> VetsServices { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
+
     }
 }
