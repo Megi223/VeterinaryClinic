@@ -31,13 +31,6 @@
             return query.To<T>().ToList();
         }
 
-        public T GetById<T>(int id)
-        {
-            var news = this.galleryRepository.All().Where(x => x.Id == id)
-                .To<T>().FirstOrDefault();
-            return news;
-        }
-
         public int GetCount()
         {
             return this.galleryRepository.AllAsNoTracking().Count();

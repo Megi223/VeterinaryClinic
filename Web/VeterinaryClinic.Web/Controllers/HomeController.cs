@@ -45,6 +45,17 @@
             return this.View();
         }
 
+        public IActionResult Contact()
+        {
+            return this.View();
+        }
+
+        //[HttpPost]
+        //public IActionResult Contact()
+        //{
+        //    //this method should receive an input model and then continue with /business /logic
+        //    return this.View();
+        //}
 
         //TODO: move it later
         public async Task<IActionResult> AddServices()

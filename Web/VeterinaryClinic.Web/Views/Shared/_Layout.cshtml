@@ -90,7 +90,7 @@
                     <li class="nav-item"><a class="nav-link" asp-controller="Gallery" asp-action="All">Gallery</a></li>
                     <partial name="_LoginPartial" />
                     <li class="nav-item"><a class="nav-link" asp-controller="News" asp-action="All">News</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -104,60 +104,37 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-                    <h2 class="footer-heading">Petsitting</h2>
-                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                    <ul class="ftco-footer-social p-0">
+                    <h2 class="footer-heading">M&K</h2>
+                    <p>A veterinary clinic in Veliko Tarnovo which has friendly staff and provides good care for your pets.</p>
+                    @*<ul class="ftco-footer-social p-0">
                         <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
                         <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li>
                         <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="fa fa-instagram"></span></a></li>
-                    </ul>
+                    </ul>*@
                 </div>
-                @*<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-            <h2 class="footer-heading">Latest News</h2>
-            <div class="block-21 mb-4 d-flex">
-                <a class="img mr-4 rounded" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684307/image_1_szun8e.jpg);"></a>
-                <div class="text">
-                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                    <div class="meta">
-                        <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                    </div>
-                </div>
-            </div>
-            <div class="block-21 mb-4 d-flex">
-                <a class="img mr-4 rounded" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684307/image_2_miatpf.jpg);"></a>
-                <div class="text">
-                    <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                    <div class="meta">
-                        <div><a href="#"><span class="icon-calendar"></span> April 7, 2020</a></div>
-                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+                
               
                     <vc:news title="Latest news"></vc:news>
                     
                     <div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
                         <h2 class="footer-heading">Quick Links</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">Home</a></li>
-                            <li><a href="#" class="py-2 d-block">About</a></li>
-                            <li><a href="#" class="py-2 d-block">Services</a></li>
-                            <li><a href="#" class="py-2 d-block">Works</a></li>
-                            <li><a href="#" class="py-2 d-block">Blog</a></li>
+                            <li><a asp-controller="Home" asp-action="Index" class="py-2 d-block">Home</a></li>
+                            <li><a asp-controller="Home" asp-action="About" class="py-2 d-block">About</a></li>
+                            <li><a asp-controller="Services" asp-action="All" class="py-2 d-block">Services</a></li>
+                            <li><a href="#" class="py-2 d-block">Veterinarians</a></li>
+                            <li><a asp-controller="News" asp-action="All" class="py-2 d-block">News</a></li>
                             <li><a href="#" class="py-2 d-block">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
-                        <h2 class="footer-heading">Have a Questions?</h2>
+                        <h2 class="footer-heading">Have Questions?</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="icon fa fa-map"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                                <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">info@yourdomain.com</span></a></li>
+                                <li><span class="icon fa fa-map"></span><span class="text">bul.Nezavisimost, Veliko Tarnovo, Bulgaria</span></li>
+                                <li><a asp-controller="Home" asp-action="About"><span class="icon fa fa-phone"></span><span class="text">+359 123 456 789</span></a></li>
+                                <li><a asp-controller="Home" asp-action="About"><span class="icon fa fa-paper-plane"></span><span class="text">office@MKvetclinic.com</span></a></li>
+                                <li><a asp-controller="Home" asp-action="FAQ"><span class="icon fa fa-question-circle"></span><span class="text">FAQ</span></a></li>
                             </ul>
                         </div>
                     </div>

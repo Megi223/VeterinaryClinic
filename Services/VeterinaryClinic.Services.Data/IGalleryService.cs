@@ -6,8 +6,6 @@
     {
         IEnumerable<T> GetAllForAPage<T>(int page);
 
-        T GetById<T>(int id);
-
         int GetCount();
     }
 }
