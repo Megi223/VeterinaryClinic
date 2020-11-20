@@ -74,8 +74,7 @@
             services.AddTransient<IServicesService, ServicesService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IPaginatedMetaService, PaginatedMetaService>();
-
-
+            services.AddTransient<IGalleryService, GalleryService>();
 
 
             Account account = new Account(

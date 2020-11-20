@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public interface INewsService
     {
         IEnumerable<T> GetAllForAPage<T>(int page);

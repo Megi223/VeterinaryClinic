@@ -19,5 +19,8 @@
         public const int ReminderContentMaxLength = 100;
 
         public const int NewsOnOnePage = 6;
+
+        public const int PhotosOnOnePage = 6;
+
     }
 }

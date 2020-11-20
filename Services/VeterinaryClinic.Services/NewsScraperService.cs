@@ -1,17 +1,18 @@
-﻿using AngleSharp;
-using AngleSharp.Dom;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.DTOs;
-
-namespace VeterinaryClinic.Services
+﻿namespace VeterinaryClinic.Services
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using AngleSharp;
+    using AngleSharp.Dom;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.DTOs;
+
     public class NewsScraperService : INewsScraperService
     {
         private readonly IDeletableEntityRepository<News> newsRepository;

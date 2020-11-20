@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class NewsService : INewsService
     {
         private readonly IDeletableEntityRepository<News> newsRepository;

@@ -1,18 +1,19 @@
 ﻿namespace VeterinaryClinic.Web.Controllers
 {
     using System.Diagnostics;
-
-    using VeterinaryClinic.Web.ViewModels;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Common;
     using VeterinaryClinic.Services;
-    using System.Threading.Tasks;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels;
 
     public class HomeController : BaseController
     {
         private readonly IServiceScraperService serviceScraperService;
 
-        public HomeController(IServiceScraperService serviceScraperService)
+        public HomeController(IServiceScraperService serviceScraperService,IGalleryService galleryService)
         {
             this.serviceScraperService = serviceScraperService;
         }
@@ -44,6 +45,7 @@
             return this.View();
         }
 
+
         //TODO: move it later
         public async Task<IActionResult> AddServices()
         {
@@ -59,7 +61,6 @@
             }
             return this.RedirectToAction("Error", "Home");
         }
-
 
     }
 }

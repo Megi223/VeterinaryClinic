@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VeterinaryClinic.Services
+﻿namespace VeterinaryClinic.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public interface IServiceScraperService
     {
         Task PopulateDbWithServices();

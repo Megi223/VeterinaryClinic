@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Services.Data;
-
-namespace VeterinaryClinic.Web.Controllers
+﻿namespace VeterinaryClinic.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Services.Data;
+
     public class SearchController : Controller
     {
         private readonly ISearchService searchService;
@@ -45,9 +46,7 @@ namespace VeterinaryClinic.Web.Controllers
             {
                 return View(this.searchService.SearchNews(""));
             }
-                
 
-            
         }
     }
 }

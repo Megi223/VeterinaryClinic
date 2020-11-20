@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Pioneer.Pagination;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Services;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.News;
-
-namespace VeterinaryClinic.Web.Controllers
+﻿namespace VeterinaryClinic.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using Pioneer.Pagination;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Services;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.News;
+
     public class NewsController : Controller
     {
         private readonly INewsScraperService newsScraperService;

@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Web.ViewModels.News;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewComponents
+﻿namespace VeterinaryClinic.Web.ViewComponents
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.News;
+
     public class NewsViewComponent : ViewComponent
     {
         private readonly IDeletableEntityRepository<News> newsRepository;

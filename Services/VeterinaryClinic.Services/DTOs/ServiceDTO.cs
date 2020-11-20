@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VeterinaryClinic.Services.DTOs
+﻿namespace VeterinaryClinic.Services.DTOs
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class ServiceDTO
     {
         public string Name { get; set; }

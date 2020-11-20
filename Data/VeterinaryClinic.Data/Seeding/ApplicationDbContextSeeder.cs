@@ -28,6 +28,7 @@
                               new RolesSeeder(),
                               new NewsImagesSeeder(),
                               new SettingsSeeder(),
+                              new GallerySeeder(),
                           };
 
             foreach (var seeder in seeders)

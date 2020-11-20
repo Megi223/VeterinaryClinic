@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Services;
-
-namespace VeterinaryClinic.Web.Controllers
+﻿namespace VeterinaryClinic.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Services;
+
     public class ServicesController : Controller
     {
         private readonly IServicesService servicesService;

@@ -10,7 +10,11 @@
 
         <h1>Oops! Our dog has eaten this page!</h1>
         <br />
- 
-        <h5><a class="nav-link" asp-controller="Home" asp-action="Index">Return To Home</a></h5>
+        <form asp-controller="Home" asp-action="Index">
+        <input type="submit" class="btn btn-primary" value="Return To Home"/>
+        </form>
     </div>
 </div>
+
+
+

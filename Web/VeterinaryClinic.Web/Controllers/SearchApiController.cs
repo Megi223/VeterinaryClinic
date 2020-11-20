@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Services.Data;
-
-namespace VeterinaryClinic.Web.Controllers
+﻿namespace VeterinaryClinic.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Services.Data;
+
     [Route("api/[controller]")]
     [ApiController]
     public class SearchApiController : ControllerBase
