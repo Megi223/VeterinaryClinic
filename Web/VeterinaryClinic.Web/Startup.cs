@@ -58,7 +58,7 @@
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();
-
+            services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSingleton(this.configuration);
 
             // Data repositories
@@ -116,7 +116,7 @@
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                app.UseMigrationsEndPoint();
             }
             else
             {
