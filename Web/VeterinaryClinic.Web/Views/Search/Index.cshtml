@@ -1,0 +1,77 @@
+﻿@model VeterinaryClinic.Web.ViewModels.Search.SearchResultsViewModel
+@{ 
+    this.ViewData["Title"] = "Search Results";
+}
+<section class="ftco-section bg-light" style="padding:3em">
+    <br />
+    <div class="container">
+
+        <h1><b>Search Results:</b></h1>
+        <hr style="border-color:black" />
+        <div class="row">
+            <h4 style="color:#00bd56"><b>Found veterinarians: @Model.Vets.Count()</b></h4>
+            <br />
+            <ul class="list-unstyled col-12">
+                @foreach (var item in Model.Vets)
+                {
+                    <li class="media">
+                        <img src="@item.ImageUrl" class="mr-3" alt="Image" style="height:183px;width:275px">
+                        <div class="media-body">
+                            <h5 class="mt-0"><b>@item.FirstName @item.LastName</b></h5>
+                            <p>@item.Services</p>
+                            <a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id">Learn more</a>
+                        </div>
+                    </li>
+                    <br />
+                }
+            </ul>
+        </div>
+
+        <hr style="border-color:black" />
+
+        <div class="row">
+
+            <h4 style="color:#00bd56"><b>Found services: @Model.Services.Count()</b></h4>
+            <br />
+            <ul class="list-unstyled col-12">
+                @foreach (var item in Model.Services)
+                {
+
+                    <li class="media">
+                        <img src="@item.ImageUrl" class="mr-3" alt="Image" style="height:183px;width:275px">
+                        <div class="media-body">
+                            <h5 class="mt-0"><b>@item.Name</b></h5>
+                            <a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id">Learn more</a>
+                        </div>
+                    </li>
+                    <br />
+
+                }
+            </ul>
+        </div>
+
+        <hr style="border-color:black" />
+
+        <div class="row">
+            <h4 style="color:#00bd56"><b>Found news: @Model.News.Count()</b></h4>
+            <br />
+            <ul class="list-unstyled">
+                @foreach (var item in Model.News)
+                {
+
+                    <li class="media">
+                        <img src="@item.ImageUrl" class="mr-3" alt="Image" style="height:183px;width:275px">
+                        <div class="media-body">
+                            <h5 class="mt-0"><b>@item.Title</b></h5>
+                            <h6>@item.CreatedOn.ToString("D")</h6>
+                            <p>@item.Summary</p>
+                            <a asp-controller="News" asp-action="Details" asp-route-id="@item.Id">Learn more</a>
+                        </div>
+                    </li>
+                    <br />
+
+                }
+            </ul>
+        </div>
+    </div>
+</section>

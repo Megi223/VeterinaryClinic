@@ -15,8 +15,8 @@
         public virtual Vet Vet { get; set; }
 
         [Required]
-        public string OwnerId { get; set; }
+        public string ServiceId { get; set; }
 
-        public virtual Owner Owner { get; set; }
+        public virtual Service Service { get; set; }
     }
 }

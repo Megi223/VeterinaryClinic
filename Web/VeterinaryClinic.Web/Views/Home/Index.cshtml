@@ -3,481 +3,430 @@
 }
 
 
+<link rel="stylesheet" href="~/css/autocomplete.css">
 
-    <div class="wrap">
-        <div>
-            <div id="search-dropdown" class="custom-dropdown toggle-holder">
+<div class="wrap">
+    <div>
+        <div id="search-dropdown" class="custom-dropdown toggle-holder">
 
-                <form id="target" method="get" asp-action="Index" asp-controller="Search" class="form-inline align-content-center">
+            <form id="target" method="get" asp-action="Index" asp-controller="Search" class="form-inline align-content-center">
 
-                    <input id="search" class="form-control form-control-sm  ml-3 col-6 search-field" type="text" placeholder="Search..."
-                           aria-label="Search" style="border: 2px solid #4dd0e1" name="search">
+                <input id="search" class="form-control form-control-sm  ml-3 col-6 search-field" type="text" placeholder="Search..."
+                       aria-label="Search" style="border: 2px solid #4dd0e1" name="search">
 
-                    <span style="display:inline-block; width: 10px;"></span>
-                    <button class="btn btn-light btn-group-sm" type="submit"><i class="fa fa-search d-flex justify-content-center block header-search-form-icon"></i></button>
-
-
-
-                    <span style="display:inline-block; width: 10px;"></span>
-
-                    <input type="checkbox"
-                           id="Veterinarians"
-                           value="true"
-                           @*checked*@
-                           name="Veterinarians" />
-                    <span style="display:inline-block; width: 10px;"></span>
-
-                    <label class="checkbox-label" for="Veterinarians" style="color:white">Veterinarians</label>
-
-                    <span style="display:inline-block; width: 10px;"></span>
-
-                    <input type="checkbox"
-                           id="Services"
-                           value="true"
-                           @*checked*@
-                           name="Services" />
-                    <span style="display:inline-block; width: 10px;"></span>
-
-                    <label class="checkbox-label" for="Services" style="color:white">Services</label>
-
-                    <span style="display:inline-block; width: 10px;"></span>
-
-                    <input type="checkbox"
-                           id="News"
-                           value="true"
-                           @*checked*@
-                           name="News" />
-                    <span style="display:inline-block; width: 10px;"></span>
-
-                    <label class="checkbox-label" for="News" style="color:white">News</label>
+                <span style="display:inline-block; width: 10px;"></span>
+                <button class="btn btn-light btn-group-sm" type="submit"><i class="fa fa-search d-flex justify-content-center block header-search-form-icon"></i></button>
 
 
 
+                <span style="display:inline-block; width: 10px;"></span>
+
+                <input type="checkbox"
+                       id="Veterinarians"
+                       data-check="true"
+                       value="true"
+                       checked
+                       name="Veterinarians" />
+                <span style="display:inline-block; width: 10px;"></span>
+
+                <label class="checkbox-label" for="Veterinarians" style="color:white">Veterinarians</label>
+
+                <span style="display:inline-block; width: 10px;"></span>
+
+                <input type="checkbox"
+                       id="Services"
+                       data-check="true"
+                       value="true"
+                       checked
+                       name="Services" />
+                <span style="display:inline-block; width: 10px;"></span>
+
+                <label class="checkbox-label" for="Services" style="color:white">Services</label>
+
+                <span style="display:inline-block; width: 10px;"></span>
+
+                <input type="checkbox"
+                       id="News"
+                       data-check="true"
+                       value="true"
+                       checked
+                       name="News" />
+                <span style="display:inline-block; width: 10px;"></span>
+
+                <label class="checkbox-label" for="News" style="color:white">News</label>
 
 
-                </form>
 
+
+
+
+
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $('#search-dropdown form input:checkbox').click(function (ev) {
+        var checkbox = $(ev.currentTarget);
+        var checkboxValueAsBool = JSON.parse(checkbox.val())
+        checkbox.val(!checkboxValueAsBool);
+    });
+</script>
+
+<div class="hero-wrap js-fullheight" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684306/dog_txelvj.png)" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+            <div class="col-md-11 ftco-animate text-center">
+                <h1 class="mb-4" style="color:black;">Highest Quality Care For Pets You'll Love </h1>
+                <p><a asp-controller="Home" asp-action="About" class="btn btn-primary mr-md-4 py-3 px-4">Learn more <span class="ion-ios-arrow-forward"></span></a></p>
             </div>
-
         </div>
     </div>
+</div>
 
-    <script>
-        $('#search-dropdown form input:checkbox').click(function (ev) {
-            var checkbox = $(ev.currentTarget);
-            var checkboxValueAsBool = JSON.parse(checkbox.val())
-            checkbox.val(!checkboxValueAsBool);
-        });
-    </script>
-
-    <div class="hero-wrap js-fullheight" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684306/dog_txelvj.png);" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
-                <div class="col-md-11 ftco-animate text-center">
-                    <h1 class="mb-4" style="color:black;">Highest Quality Care For Pets You'll Love </h1>
-                    <p><a asp-controller="Home" asp-action="About" class="btn btn-primary mr-md-4 py-3 px-4">Learn more <span class="ion-ios-arrow-forward"></span></a></p>
+<section class="ftco-section bg-light ftco-no-pt ftco-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+                <div class="d-block services active text-center">
+                    <div class="icon d-flex align-items-center justify-content-center">
+                        <span class="flaticon-blind"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">Dog Training</h3>
+                        <p>You don't have time? Or maybe your dog behaves different than normal? Don't worry! You will always find help in M&K. With a trained team of experts you will achieve the desired attitude and create a stronger bond with your pet.</p>
+                        <a asp-controller="Services" asp-action="All" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+                <div class="d-block services text-center">
+                    <div class="icon d-flex align-items-center justify-content-center">
+                        <span class="flaticon-dog-eating"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">Pet Daycare And Medical Checkup</h3>
+                        <p>Here in M&K we have the most caring and trained staff-veterinarians and trainers are always there when you have a problem with your pet. Just book an appointement and you won't regret it!</p>
+                        <a asp-controller="Services" asp-action="All" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+                <div class="d-block services text-center">
+                    <div class="icon d-flex align-items-center justify-content-center">
+                        <span class="flaticon-grooming"></span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="heading">Pet Grooming</h3>
+                        <p>As well as medical services, M&K has a lot to offer when it comes to pet grooming.Shampoo, trimming and shaping fur, clipping nails - whatever you want, whenever you want it!</p>
+                        <a asp-controller="Services" asp-action="All" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-    <section class="ftco-section bg-light ftco-no-pt ftco-intro">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
-                    <div class="d-block services active text-center">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                            <span class="flaticon-blind"></span>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="heading">Dog Training</h3>
-                            <p>You don't have time? Or maybe your dog behaves different than normal? Don't worry! You will always find help in M&K. With a trained team of experts you will achieve the desired attitude and create a stronger bond with your pet.</p>
-                            <a asp-controller="Services" asp-action="All" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+<section class="ftco-section ftco-no-pt ftco-no-pb">
+    <div class="container">
+        <div class="row d-flex no-gutters">
+            <div class="col-md-5 d-flex">
+                <div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/about-1_zbtagc.jpg);">
+                </div>
+            </div>
+            <div class="col-md-7 pl-md-5 py-md-5">
+                <div class="heading-section pt-md-5">
+                    <h2 class="mb-4">Why Choose Us?</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 services-2 w-100 d-flex">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-stethoscope"></span></div>
+                        <div class="text pl-3">
+                            <h4>Care Advices</h4>
+                            <p>Our team of experts will guide you through the right steps of caring for your pet.</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
-                    <div class="d-block services text-center">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                            <span class="flaticon-dog-eating"></span>
-                        </div>
-                        <div class="media-body">
-                            <h3 class="heading">Pet Daycare And Medical Checkup</h3>
-                            <p>Here in M&K we have the most caring and trained staff-veterinarians and trainers are always there when you have a problem with your pet. Just book an appointement and you won't regret it!</p>
-                            <a asp-controller="Services" asp-action="All" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                    <div class="col-md-6 services-2 w-100 d-flex">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-customer-service"></span></div>
+                        <div class="text pl-3">
+                            <h4>Customer Supports</h4>
+                            <p>In M&K you will, by any means, receive help and encouragement.</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
-                    <div class="d-block services text-center">
-                        <div class="icon d-flex align-items-center justify-content-center">
-                            <span class="flaticon-grooming"></span>
+                    <div class="col-md-6 services-2 w-100 d-flex">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-emergency-call"></span></div>
+                        <div class="text pl-3">
+                            <h4>Emergency Services</h4>
+                            <p>Whenever you need us- just call us and we will respond straight away.</p>
                         </div>
-                        <div class="media-body">
-                            <h3 class="heading">Pet Grooming</h3>
-                            <p>As well as medical services, M&K has a lot to offer when it comes to pet grooming.Shampoo, trimming and shaping fur, clipping nails - whatever you want, whenever you want it!</p>
-                            <a asp-controller="Services" asp-action="All" class="btn-custom d-flex align-items-center justify-content-center"><span class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></a>
+                    </div>
+                    <div class="col-md-6 services-2 w-100 d-flex">
+                        <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-veterinarian"></span></div>
+                        <div class="text pl-3">
+                            <h4>Veterinary Help</h4>
+                            <p>We have all sorts of specialists in different fields just when you need us.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="ftco-section ftco-no-pt ftco-no-pb">
-        <div class="container">
-            <div class="row d-flex no-gutters">
-                <div class="col-md-5 d-flex">
-                    <div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/about-1_zbtagc.jpg);">
+<section class="ftco-counter" id="section-counter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 text-center">
+                    <div class="text">
+                        <strong class="number" data-number="120">0</strong>
+                    </div>
+                    <div class="text">
+                        <span>Customers</span>
                     </div>
                 </div>
-                <div class="col-md-7 pl-md-5 py-md-5">
-                    <div class="heading-section pt-md-5">
-                        <h2 class="mb-4">Why Choose Us?</h2>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 text-center">
+                    <div class="text">
+                        <strong class="number" data-number="15">0</strong>
                     </div>
+                    <div class="text">
+                        <span>Professionals</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 text-center">
+                    <div class="text">
+                        <strong class="number" data-number="18">0</strong>
+                    </div>
+                    <div class="text">
+                        <span>Services</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 text-center">
+                    <div class="text">
+                        <strong class="number" data-number="1586">0</strong>
+                    </div>
+                    <div class="text">
+                        <span>Pets Hosted</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+@*TODO: make it dynamic- this should come from the database*@
+<section class="ftco-section testimony-section" style="background-image: url('https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_2_gfdtjt.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row justify-content-center pb-5 mb-3">
+            <div class="col-md-7 heading-section text-center ftco-animate">
+                <h2>Happy Clients &amp; Feedbacks</h2>
+            </div>
+        </div>
+        <div class="row ftco-animate">
+            <div class="col-md-12">
+                <div class="carousel-testimony owl-carousel ftco-owl">
+                    <div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                            <div class="text">
+                                <p class="mb-4">Lakes Vet is amazing. The staff is so caring and wonderful. The vets and vet techs are knowledgeable and loving. I wouldn't go anywhere else.</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684308/person_1_aizgvs.jpg)"></div>
+                                    <div class="pl-3">
+                                        <p class="name">Roger Scott</p>
+                                        <span class="position">Marketing Manager</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                            <div class="text">
+                                <p class="mb-4">Friendly and professional doctors and personnel. We have brought our many cats to Lakes Veterinary clinic for the past 35 years!</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="        background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684308/person_2_vsnbn8.jpg)"></div>
+                                    <div class="pl-3">
+                                        <p class="name">Mike Mayer</p>
+                                        <span class="position">Psychologist</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                            <div class="text">
+                                <p class="mb-4">Always courteous and greeted with a smile and has my pet in their best interest. Great group of people for sure- the best in town actually.</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684308/person_3_wkr1nd.jpg)"></div>
+                                    <div class="pl-3">
+                                        <p class="name">Tom Smith</p>
+                                        <span class="position">Engineer</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                            <div class="text">
+                                <p class="mb-4">They have been excellent in the quality of care they give my animals. Very detail oriented. Caring staff. Exceptional care. Very Satisfied.</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
+                                    <div class="pl-3">
+                                        <p class="name">Tim Vermer</p>
+                                        <span class="position">Sports Manager</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="testimony-wrap py-4">
+                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+                            <div class="text">
+                                <p class="mb-4">Life happens and sometimes it's an emergency. Couldn't have asked for more professional and compassionate care for my dog. Many thanks!</p>
+                                <div class="d-flex align-items-center">
+                                    <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
+                                    <div class="pl-3">
+                                        <p class="name">Bernard Miller</p>
+                                        <span class="position">Marketing Manager</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="ftco-appointment ftco-section ftco-no-pt ftco-no-pb img" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_3_ocmklz.jpg);">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row d-md-flex justify-content-end">
+            <div class="col-md-12 col-lg-6 half p-3 py-5 pl-lg-5 ftco-animate">
+                <h2 class="mb-4">Free Consultation</h2>
+                <form action="#" class="appointment">
                     <div class="row">
-                        <div class="col-md-6 services-2 w-100 d-flex">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-stethoscope"></span></div>
-                            <div class="text pl-3">
-                                <h4>Care Advices</h4>
-                                <p>Our team of experts will guide you through the right steps of caring for your pet.</p>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="form-field">
+                                    <div class="select-wrap">
+                                        <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                                        <select name="" id="" class="form-control">
+                                            <option value="">Select services</option>
+                                            <option value="">Cat Sitting</option>
+                                            <option value="">Dog Walk</option>
+                                            <option value="">Pet Spa</option>
+                                            <option value="">Pet Grooming</option>
+                                            <option value="">Pet Daycare</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 services-2 w-100 d-flex">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-customer-service"></span></div>
-                            <div class="text pl-3">
-                                <h4>Customer Supports</h4>
-                                <p>In M&K you will, by any means, receive help and encouragement.</p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Your Name">
                             </div>
                         </div>
-                        <div class="col-md-6 services-2 w-100 d-flex">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-emergency-call"></span></div>
-                            <div class="text pl-3">
-                                <h4>Emergency Services</h4>
-                                <p>Whenever you need us- just call us and we will respond straight away.</p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Vehicle number">
                             </div>
                         </div>
-                        <div class="col-md-6 services-2 w-100 d-flex">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-veterinarian"></span></div>
-                            <div class="text pl-3">
-                                <h4>Veterinary Help</h4>
-                                <p>We have all sorts of specialists in different fields just when you need us.</p>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-wrap">
+                                    <div class="icon"><span class="fa fa-calendar"></span></div>
+                                    <input type="text" class="form-control appointment_date" placeholder="Date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="input-wrap">
+                                    <div class="icon"><span class="fa fa-clock-o"></span></div>
+                                    <input type="text" class="form-control appointment_time" placeholder="Time">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="submit" value="Send message" class="btn btn-primary py-3 px-4">
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
-    </section>
-
-    <section class="ftco-counter" id="section-counter">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-                    <div class="block-18 text-center">
-                        <div class="text">
-                            <strong class="number" data-number="120">0</strong>
-                        </div>
-                        <div class="text">
-                            <span>Customers</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-                    <div class="block-18 text-center">
-                        <div class="text">
-                            <strong class="number" data-number="15">0</strong>
-                        </div>
-                        <div class="text">
-                            <span>Professionals</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-                    <div class="block-18 text-center">
-                        <div class="text">
-                            <strong class="number" data-number="18">0</strong>
-                        </div>
-                        <div class="text">
-                            <span>Services</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3 d-flex justify-content-center counter-wrap ftco-animate">
-                    <div class="block-18 text-center">
-                        <div class="text">
-                            <strong class="number" data-number="1586">0</strong>
-                        </div>
-                        <div class="text">
-                            <span>Pets Hosted</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-
-    @*TODO: make it dynamic- this should come from the database*@
-    <section class="ftco-section testimony-section" style="background-image: url('https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_2_gfdtjt.jpg');">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row justify-content-center pb-5 mb-3">
-                <div class="col-md-7 heading-section text-center ftco-animate">
-                    <h2>Happy Clients &amp; Feedbacks</h2>
-                </div>
-            </div>
-            <div class="row ftco-animate">
-                <div class="col-md-12">
-                    <div class="carousel-testimony owl-carousel ftco-owl">
-                        <div class="item">
-                            <div class="testimony-wrap py-4">
-                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                                <div class="text">
-                                    <p class="mb-4">Lakes Vet is amazing. The staff is so caring and wonderful. The vets and vet techs are knowledgeable and loving. I wouldn't go anywhere else.</p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="user-img" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684308/person_1_aizgvs.jpg)"></div>
-                                        <div class="pl-3">
-                                            <p class="name">Roger Scott</p>
-                                            <span class="position">Marketing Manager</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap py-4">
-                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                                <div class="text">
-                                    <p class="mb-4">Friendly and professional doctors and personnel. We have brought our many cats to Lakes Veterinary clinic for the past 35 years!</p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="user-img" style="        background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684308/person_2_vsnbn8.jpg)"></div>
-                                        <div class="pl-3">
-                                            <p class="name">Mike Mayer</p>
-                                            <span class="position">Psychologist</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap py-4">
-                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                                <div class="text">
-                                    <p class="mb-4">Always courteous and greeted with a smile and has my pet in their best interest. Great group of people for sure- the best in town actually.</p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="user-img" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684308/person_3_wkr1nd.jpg)"></div>
-                                        <div class="pl-3">
-                                            <p class="name">Tom Smith</p>
-                                            <span class="position">Engineer</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap py-4">
-                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                                <div class="text">
-                                    <p class="mb-4">They have been excellent in the quality of care they give my animals. Very detail oriented. Caring staff. Exceptional care. Very Satisfied.</p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-                                        <div class="pl-3">
-                                            <p class="name">Tim Vermer</p>
-                                            <span class="position">Sports Manager</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="testimony-wrap py-4">
-                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                                <div class="text">
-                                    <p class="mb-4">Life happens and sometimes it's an emergency. Couldn't have asked for more professional and compassionate care for my dog. Many thanks!</p>
-                                    <div class="d-flex align-items-center">
-                                        <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-                                        <div class="pl-3">
-                                            <p class="name">Bernard Miller</p>
-                                            <span class="position">Marketing Manager</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    
-    <section class="ftco-appointment ftco-section ftco-no-pt ftco-no-pb img" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_3_ocmklz.jpg);">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row d-md-flex justify-content-end">
-                <div class="col-md-12 col-lg-6 half p-3 py-5 pl-lg-5 ftco-animate">
-                    <h2 class="mb-4">Free Consultation</h2>
-                    <form action="#" class="appointment">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <div class="form-field">
-                                        <div class="select-wrap">
-                                            <div class="icon"><span class="fa fa-chevron-down"></span></div>
-                                            <select name="" id="" class="form-control">
-                                                <option value="">Select services</option>
-                                                <option value="">Cat Sitting</option>
-                                                <option value="">Dog Walk</option>
-                                                <option value="">Pet Spa</option>
-                                                <option value="">Pet Grooming</option>
-                                                <option value="">Pet Daycare</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Your Name">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Vehicle number">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="input-wrap">
-                                        <div class="icon"><span class="fa fa-calendar"></span></div>
-                                        <input type="text" class="form-control appointment_date" placeholder="Date">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <div class="input-wrap">
-                                        <div class="icon"><span class="fa fa-clock-o"></span></div>
-                                        <input type="text" class="form-control appointment_time" placeholder="Time">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="submit" value="Send message" class="btn btn-primary py-3 px-4">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+</section>
 
 
 @section Scripts {
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    @*<script>
-            $(document).ready(function () {
-                $("#search").autocomplete({
-                    source: 'api/searchapi/search'
-                });
-            });
-        </script>*@
 
-    @*<script>
-        var vets=false;
-        var services=false;
-        var news=false;
-
-            $('#News').change(function () {
-                if ($(this).is(":checked")) {
-                    news = !news;
-                    console.log(news);
-                }
-            });
-
-
-            $('#Veterinarians').change(function () {
-                if ($(this).is(":checked")) {
-                    vets = !vets;
-                    console.log("vets");
-                }
-            });
-
-
-            $('#Services').change(function () {
-                if ($(this).is(":checked")) {
-                    services = !services;
-                    console.log("services");
-                }
-            });
-
-
-        $(document).ready(function () {
-            $("#search").autocomplete({
-                source: 'api/searchapi/search?veterinarians=' + vets + '&services=' + services + '&news=' + news
-            });
-        });
-
-
-
-        </script>
-
-        <script>
-        $("#search").autocomplete({
-                source: 'api/searchapi/search?veterinarians=' + vets + '&services=' + services + '&news=' + news
-            });</script>*@
 
     <script>
-        var vets = false;
-        var services = false;
-        var news = false;
 
-        $(document).ready(function () {
-            $('#News').change(function () {
-                if ($(this).is(":checked")) {
-                    news = !news;
-                    console.log(news);
-                }
-            });
-
-
-            $('#Veterinarians').change(function () {
-                if ($(this).is(":checked")) {
-                    vets = !vets;
-                    console.log("vets");
-                }
-            });
-
-
-            $('#Services').change(function () {
-                if ($(this).is(":checked")) {
-                    services = !services;
-                    console.log("services");
-                }
-            });
-        });
-        
-        $(document).ready(function () {
+        $("input[data-check]").each(function (el) {
             $("#search").autocomplete({
-                source: 'api/searchapi/search?veterinarians=' + vets + '&services=' + services + '&news=' + news
+
+                source: function (request, response) {
+                    $.ajax({
+                        url: 'api/searchapi/',
+                        type: "GET",
+                        dataType: "json",
+
+                        data: {
+                            term: request.term,
+                            veterinarians: $('#Veterinarians').is(':checked'),
+                            services: $('#Services').is(':checked'),
+                            news: $('#News').is(':checked')
+                        },
+                        success: response
+
+
+                    });
+                }
+
             });
+
         });
+
     </script>
-    
+
 
 }
 

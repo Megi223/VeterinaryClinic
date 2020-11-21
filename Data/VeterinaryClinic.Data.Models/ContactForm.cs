@@ -22,12 +22,19 @@
         public Owner Owner { get; set; }
 
         [Required]
-        public string EmailAddress { get; set; }
+        public string PetId { get; set; }
+
+        public Pet Pet { get; set; }
+
+        [Required]
+        public string VetId { get; set; }
+
+        public Vet Vet { get; set; }
 
         [Required]
         [MaxLength(GlobalConstants.ContactFormContentMaxLength)]
         public string Content { get; set; }
 
-        public bool Answered { get; set; }
+        public bool Accepted { get; set; }
     }
 }

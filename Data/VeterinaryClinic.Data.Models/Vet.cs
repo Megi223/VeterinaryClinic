@@ -17,6 +17,7 @@
             this.Reminders = new HashSet<Reminder>();
             this.VetsServices = new HashSet<VetsServices>();
             this.Comments = new HashSet<Comment>();
+            this.Ratings = new HashSet<Rating>();
         }
 
         [Required]
@@ -26,8 +27,6 @@
         [Required]
         [MaxLength(GlobalConstants.NameMaxLength)]
         public string LastName { get; set; }
-
-        public float Rating { get; set; }
 
         public string ProfilePicture { get; set; }
 
@@ -46,6 +45,11 @@
         public virtual ICollection<VetsServices> VetsServices { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public virtual ICollection<Rating> Ratings { get; set; }
+
+
+
 
     }
 }

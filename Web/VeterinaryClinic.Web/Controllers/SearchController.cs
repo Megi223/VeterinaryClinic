@@ -7,6 +7,7 @@
 
     using Microsoft.AspNetCore.Mvc;
     using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Search;
 
     public class SearchController : Controller
     {
@@ -19,34 +20,32 @@
 
         public async Task<IActionResult> Index(string search, bool veterinarians, bool services, bool news)
         {
-            if (search != null)
+            var vetsFound = new List<VetsFoundViewModel>();
+            var servicesFound = new List<ServicesFoundViewModel>();
+            var newsFound = new List<NewsFoundViewModel>();
+            if (veterinarians == true)
             {
-                //var vetsFound = new List<string>();
-                //var servicesFound = new List<string>();
-                //var newsFound = new List<string>();
-                //if (veterinarians == true)
-                //{
-                //    vetsFound = this.searchService.SearchVet(search);
-                //}
-                //if (services == true)
-                //{
-                //    servicesFound = this.searchService.SearchServices(search);
-                //}
-                //if (news == true)
-                //{
-                //    newsFound = this.searchService.SearchNews(search);
-                //}
-                //return this.View(newsFound);
-                var newsFound = new List<string>();
-                newsFound = this.searchService.SearchNews(search);
-                return this.View(newsFound);
-
-            }
-            else
-            {
-                return View(this.searchService.SearchNews(""));
+                vetsFound = this.searchService.SearchVet<VetsFoundViewModel>(search);
             }
 
+            if (services == true)
+            {
+                servicesFound = this.searchService.SearchServices<ServicesFoundViewModel>(search);
+            }
+
+            if (news == true)
+            {
+                newsFound = this.searchService.SearchNews<NewsFoundViewModel>(search);
+            }
+
+            SearchResultsViewModel model = new SearchResultsViewModel
+            {
+                Vets = vetsFound,
+                Services = servicesFound,
+                News = newsFound,
+            };
+
+            return this.View(model);
         }
     }
 }

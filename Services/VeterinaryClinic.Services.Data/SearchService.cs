@@ -8,6 +8,7 @@
 
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
 
     public class SearchService : ISearchService
     {
@@ -38,6 +39,26 @@
         {
             return this.newsRepository.AllAsNoTracking().Where(n => n.Title.ToLower().Contains(term) || n.Summary.ToLower().Contains(term))
                 .Select(n => n.Title).ToList();
+        }
+
+        public List<T> SearchVet<T>(string term)
+        {
+            return this.vetsRepository.AllAsNoTracking()
+                .Where(v => v.FirstName.ToLower().Contains(term) || v.LastName.ToLower().Contains(term))
+                .To<T>()
+                .ToList();
+        }
+
+        public List<T> SearchServices<T>(string term)
+        {
+            return this.servicesRepository.AllAsNoTracking().Where(s => s.Name.ToLower().Contains(term))
+                .To<T>().ToList();
+        }
+
+        public List<T> SearchNews<T>(string term)
+        {
+            return this.newsRepository.AllAsNoTracking().Where(n => n.Title.ToLower().Contains(term) || n.Summary.ToLower().Contains(term))
+                .To<T>().ToList();
         }
     }
 }
