@@ -29,6 +29,7 @@
                               new NewsImagesSeeder(),
                               new SettingsSeeder(),
                               new GallerySeeder(),
+                              new ServicesSeeder(),
                           };
 
             foreach (var seeder in seeders)

@@ -1,5 +1,6 @@
 ﻿namespace VeterinaryClinic.Web.ViewModels.Services
 {
+    using Ganss.XSS;
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -14,5 +15,7 @@
         public string ImageUrl { get; set; }
 
         public string Description { get; set; }
+
+        public string SanitizedDescription => new HtmlSanitizer().Sanitize(this.Description);
     }
 }

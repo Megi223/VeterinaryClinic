@@ -37,7 +37,7 @@
 
             for (int i = 0; i < links.Count; i++)
             {
-                ServiceDTO serviceDTO = await CreateServiceDTO(images, links, i);
+                ServiceDTO serviceDTO = await this.CreateServiceDTO(images, links, i);
                 concurrentBag.Add(serviceDTO);
             }
 
@@ -59,9 +59,7 @@
         {
             var doc2 = await this.context.OpenAsync(links[i]);
             var name = doc2.QuerySelector(".entry-title").TextContent;
-            var description = doc2.QuerySelector(".entry-content").TextContent;
-            //var formattedDescription = description.Replace("\n\t", string.Empty).Replace("\t", string.Empty);
-
+            var description = doc2.QuerySelector(".entry-content").OuterHtml.ToString();
             var formattedDescription = description.Replace("Sofia", "M&K");
 
             ServiceDTO serviceDTO = new ServiceDTO

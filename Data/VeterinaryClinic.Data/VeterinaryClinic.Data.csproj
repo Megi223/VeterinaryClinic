@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\VeterinaryClinic.Services\VeterinaryClinic.Services.csproj" />
     <ProjectReference Include="..\..\VeterinaryClinic.Common\VeterinaryClinic.Common.csproj" />
     <ProjectReference Include="..\VeterinaryClinic.Data.Common\VeterinaryClinic.Data.Common.csproj" />
     <ProjectReference Include="..\VeterinaryClinic.Data.Models\VeterinaryClinic.Data.Models.csproj" />
