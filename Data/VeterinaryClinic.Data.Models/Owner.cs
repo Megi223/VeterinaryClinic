@@ -33,8 +33,6 @@
 
         public string ProfilePicture { get; set; }
 
-        public string Job { get; set; }
-
         [Required]
         public string UserId { get; set; }
 

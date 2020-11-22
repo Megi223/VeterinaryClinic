@@ -27,9 +27,11 @@
                           {
                               new RolesSeeder(),
                               new NewsImagesSeeder(),
-                              new SettingsSeeder(),
                               new GallerySeeder(),
                               new ServicesSeeder(),
+                              new UsersSeeder(),
+                              new OwnersSeeder(),
+                              new VetsSeeder(),
                           };
 
             foreach (var seeder in seeders)

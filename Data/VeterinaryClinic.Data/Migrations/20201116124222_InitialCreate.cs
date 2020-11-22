@@ -249,7 +249,6 @@
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     City = table.Column<string>(nullable: true),
                     ProfilePicture = table.Column<string>(nullable: true),
-                    Job = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>

@@ -6,6 +6,10 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string OwnerRoleName = "Owner";
+
+        public const string VeterinarianRoleName = "Vet";
+
         public const int ChatNotificationContentMaxLength = 100;
 
         public const int CommentContentMaxLength = 200;
