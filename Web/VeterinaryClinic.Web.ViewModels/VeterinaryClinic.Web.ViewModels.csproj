@@ -24,4 +24,8 @@
     <ProjectReference Include="..\..\Services\VeterinaryClinic.Services.Mapping\VeterinaryClinic.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Owners\" />
+  </ItemGroup>
+
 </Project>

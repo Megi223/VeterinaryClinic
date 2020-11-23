@@ -83,13 +83,14 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">About</a></li>
+                    <li class="nav-item active"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li class="nav-item"><a href="vet.html" class="nav-link">Vets</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Services" asp-action="All">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Gallery" asp-action="All">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="News" asp-action="All">News</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Services" asp-action="All">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Gallery" asp-action="All">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="News" asp-action="All">News</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                   
                     <partial name="_LoginPartial" />
                 </ul>
             </div>
@@ -119,11 +120,11 @@
                     <div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
                         <h2 class="footer-heading">Quick Links</h2>
                         <ul class="list-unstyled">
-                            <li><a asp-controller="Home" asp-action="Index" class="py-2 d-block">Home</a></li>
-                            <li><a asp-controller="Home" asp-action="About" class="py-2 d-block">About</a></li>
-                            <li><a asp-controller="Services" asp-action="All" class="py-2 d-block">Services</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index" class="py-2 d-block">Home</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="About" class="py-2 d-block">About</a></li>
+                            <li><a asp-area="" asp-controller="Services" asp-action="All" class="py-2 d-block">Services</a></li>
                             <li><a href="#" class="py-2 d-block">Veterinarians</a></li>
-                            <li><a asp-controller="News" asp-action="All" class="py-2 d-block">News</a></li>
+                            <li><a asp-area="" asp-controller="News" asp-action="All" class="py-2 d-block">News</a></li>
                             <li><a href="#" class="py-2 d-block">Contact</a></li>
                         </ul>
                     </div>
@@ -132,9 +133,9 @@
                         <div class="block-23 mb-3">
                             <ul>
                                 <li><span class="icon fa fa-map"></span><span class="text">bul.Nezavisimost, Veliko Tarnovo, Bulgaria</span></li>
-                                <li><a asp-controller="Home" asp-action="About"><span class="icon fa fa-phone"></span><span class="text">+359 123 456 789</span></a></li>
-                                <li><a asp-controller="Home" asp-action="About"><span class="icon fa fa-paper-plane"></span><span class="text">office@MKvetclinic.com</span></a></li>
-                                <li><a asp-controller="Home" asp-action="FAQ"><span class="icon fa fa-question-circle"></span><span class="text">FAQ</span></a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="About"><span class="icon fa fa-phone"></span><span class="text">+359 123 456 789</span></a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="About"><span class="icon fa fa-paper-plane"></span><span class="text">office@MKvetclinic.com</span></a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="FAQ"><span class="icon fa fa-question-circle"></span><span class="text">FAQ</span></a></li>
                             </ul>
                         </div>
                     </div>

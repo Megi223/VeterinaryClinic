@@ -58,8 +58,4 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Owner\Data\" />
-  </ItemGroup>
 </Project>

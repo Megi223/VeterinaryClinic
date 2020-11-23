@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using VeterinaryClinic.Common;
 using VeterinaryClinic.Data.Models;
 using VeterinaryClinic.Services.Data;
+using VeterinaryClinic.Web.ViewModels.Pets;
 
 namespace VeterinaryClinic.Web.Areas.Owner.Controllers
 {
@@ -28,6 +29,17 @@ namespace VeterinaryClinic.Web.Areas.Owner.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             //var pets = this.petsService.GetPets<AllPetsViewModel>();
+            return this.View();
+        }
+
+        public IActionResult AddPet()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult AddPet(AddPetInputModel model)
+        {
             return this.View();
         }
     }

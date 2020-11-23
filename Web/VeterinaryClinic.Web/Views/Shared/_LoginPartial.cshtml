@@ -9,11 +9,11 @@
     {
     <div class="dropdown show">
         <li class="nav-item">
-            <a class="nav-link text-dark" title="Manage">Hello @(this.User.Identity.Name)!</a>
+            <a class="nav-link text-dark" title="Manage">Hello, @(this.User.Identity.Name)!</a>
         </li>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Manage Your Account</a>
-            <a class="dropdown-item" asp-area="Owners" asp-controller="Owners" asp-action="MyPets">My Pets</a>
+            <a class="dropdown-item" asp-area="Owner" asp-controller="Owner" asp-action="MyPets">My Pets</a>
             <a class="dropdown-item" href="#">Something else here</a>
         </div>
     </div>

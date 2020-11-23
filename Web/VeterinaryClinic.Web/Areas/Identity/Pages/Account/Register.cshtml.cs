@@ -18,6 +18,9 @@ using VeterinaryClinic.Common;
 using VeterinaryClinic.Data.Models;
 using VeterinaryClinic.Services;
 using VeterinaryClinic.Web.Infrastructure.Attributes;
+using VeterinaryClinic.Data.Models;
+using VeterinaryClinic.Services.Data;
+
 
 namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
 {
@@ -29,19 +32,22 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly ICloudinaryService cloudinaryService;
+        private readonly IOwnersService ownersService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender, 
-            ICloudinaryService cloudinaryService)
+            ICloudinaryService cloudinaryService,
+            IOwnersService ownersService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             this.cloudinaryService = cloudinaryService;
+            this.ownersService = ownersService;
         }
 
         [BindProperty]
@@ -83,7 +89,16 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [AllowedExtensions(new string[] { ".jpg", ".png" })]
+            [Display(Name ="Profile Picture")]
             public IFormFile Image { get; set; }
+
+            [Required]
+            public string City { get; set; }
+
+            [Required]
+            [Display(Name ="Phone Number")]
+            [Phone]
+            public string PhoneNumber { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -98,13 +113,14 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email };
+                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, PhoneNumber=Input.PhoneNumber };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
                     await _userManager.AddToRoleAsync(user, GlobalConstants.OwnerRoleName);
-                    string profilePicUrl = await this.cloudinaryService.UploudAsync(this.Input.Image);
+                    string photoUrl = await this.cloudinaryService.UploudAsync(this.Input.Image);
+                    await this.ownersService.CreateOwnerAsync(user,Input.FirstName,Input.LastName,photoUrl,Input.City);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(
