@@ -7,13 +7,17 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using VeterinaryClinic.Common;
 using VeterinaryClinic.Data.Models;
+using VeterinaryClinic.Services;
+using VeterinaryClinic.Web.Infrastructure.Attributes;
 
 namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
 {
@@ -24,17 +28,20 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ICloudinaryService cloudinaryService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender, 
+            ICloudinaryService cloudinaryService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [BindProperty]
@@ -74,6 +81,9 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [AllowedExtensions(new string[] { ".jpg", ".png" })]
+            public IFormFile Image { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -93,7 +103,8 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                    await _userManager.AddToRoleAsync(user, GlobalConstants.OwnerRoleName);
+                    string profilePicUrl = await this.cloudinaryService.UploudAsync(this.Input.Image);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

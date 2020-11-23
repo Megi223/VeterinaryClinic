@@ -75,6 +75,11 @@
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IPaginatedMetaService, PaginatedMetaService>();
             services.AddTransient<IGalleryService, GalleryService>();
+            services.AddTransient<IOwnersService, OwnersService>();
+            services.AddTransient<IPetsService, PetsService>();
+            services.AddTransient<ICloudinaryService, CloudinaryService>();
+
+
 
 
             Account account = new Account(
@@ -137,8 +142,9 @@
             app.UseEndpoints(
                 endpoints =>
                     {
-                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        //TODO:change the order
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
         }
