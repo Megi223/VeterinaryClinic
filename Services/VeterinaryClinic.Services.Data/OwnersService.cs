@@ -18,19 +18,24 @@ namespace VeterinaryClinic.Services.Data
             this.ownersRepository = ownersRepository;
         }
 
-        public async Task CreateOwnerAsync(ApplicationUser user, string firstName,string lastName, string profilePictureUrl, string city)
+        public async Task CreateOwnerAsync(ApplicationUser user, string firstName, string lastName, string profilePictureUrl, string city)
         {
             Owner owner = new Owner()
             {
                 User = user,
-                FirstName=firstName,
-                LastName=lastName,
+                FirstName = firstName,
+                LastName = lastName,
                 ProfilePicture = profilePictureUrl,
                 City = city,
             };
 
             await this.ownersRepository.AddAsync(owner);
             await this.ownersRepository.SaveChangesAsync();
+        }
+
+        public string GetOwnerId(string userId)
+        {
+            return this.ownersRepository.AllAsNoTracking().Where(x => x.UserId == userId).FirstOrDefault().Id;
         }
 
 

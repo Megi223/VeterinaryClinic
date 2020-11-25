@@ -8,6 +8,6 @@ namespace VeterinaryClinic.Web.ViewModels.ContactForm
     public class ContactFormInputModel : IMapFrom<VeterinaryClinic.Data.Models.ContactForm>
     {
         public string Username { get; set; }
-       
+
     }
 }

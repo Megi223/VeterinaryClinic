@@ -12,6 +12,16 @@ namespace VeterinaryClinic.Data.Seeding
     public class VetsSeeder : ISeeder
     {
         private const string VetUserName = "vet@gmail.com";
+        private const string VetFirstName = "Michael";
+        private const string VetLastName = "Dimitrov";
+        private const string VetImageUrl = "https://res.cloudinary.com/dpwroiluv/image/upload/v1604684309/staff-2_sfkmhm.jpg";
+
+
+        private const string VetUserName2 = "vet2@gmail.com";
+        private const string VetFirstName2 = "Ivan";
+        private const string VetLastName2 = "Penev";
+        private const string VetImageUrl2 = "https://res.cloudinary.com/dpwroiluv/image/upload/v1604684309/staff-3_usfgz1.jpg";
+
 
         private UserManager<ApplicationUser> usersManager;
 
@@ -21,11 +31,13 @@ namespace VeterinaryClinic.Data.Seeding
 
             if (!dbContext.Vets.Any())
             {
-                await SeedVetAsync(this.usersManager, VetUserName);
+                await SeedVetAsync(this.usersManager, VetUserName, VetFirstName, VetLastName, VetImageUrl);
+                await SeedVetAsync(this.usersManager, VetUserName2, VetFirstName2, VetLastName2, VetImageUrl2);
             }
+
         }
 
-        private static async Task SeedVetAsync(UserManager<ApplicationUser> userManager, string username)
+        private static async Task SeedVetAsync(UserManager<ApplicationUser> userManager, string username, string firstName, string lastName, string imageUrl)
         {
             var user = await userManager.FindByNameAsync(username);
             if (user != null)
@@ -35,9 +47,9 @@ namespace VeterinaryClinic.Data.Seeding
                     var vet = new Vet
                     {
                         UserId = user.Id,
-                        FirstName = "Michael",
-                        LastName = "Dimitrov",
-                        ProfilePicture= "https://res.cloudinary.com/dpwroiluv/image/upload/v1604684309/staff-2_sfkmhm.jpg",
+                        FirstName = firstName,
+                        LastName = lastName,
+                        ProfilePicture = imageUrl,
                         HireDate = DateTime.UtcNow,
                     };
 

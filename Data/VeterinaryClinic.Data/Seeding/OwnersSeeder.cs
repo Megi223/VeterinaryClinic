@@ -35,9 +35,9 @@ namespace VeterinaryClinic.Data.Seeding
                     {
                         UserId = user.Id,
                         City = "Sofia",
-                        FirstName="Anna",
-                        LastName="Ivanova",
-                        ProfilePicture= "https://res.cloudinary.com/dpwroiluv/image/upload/v1606080381/anna-owner_tb09ym.jpg",
+                        FirstName = "Anna",
+                        LastName = "Ivanova",
+                        ProfilePicture = "https://res.cloudinary.com/dpwroiluv/image/upload/v1606080381/anna-owner_tb09ym.jpg",
                     };
 
                     user.Owner = owner;

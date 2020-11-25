@@ -26,32 +26,32 @@
         {
             try
             {
-               string term = this.HttpContext.Request.Query["term"].ToString();
+                string term = this.HttpContext.Request.Query["term"].ToString();
 
-               var vetsFound = new List<string>();
-               var servicesFound = new List<string>();
-               var newsFound = new List<string>();
-               if (veterinarians == true)
-               {
+                var vetsFound = new List<string>();
+                var servicesFound = new List<string>();
+                var newsFound = new List<string>();
+                if (veterinarians == true)
+                {
                     vetsFound = this.searchService.SearchVet(term);
-               }
+                }
 
-               if (services == true)
+                if (services == true)
                 {
                     servicesFound = this.searchService.SearchServices(term);
-               }
+                }
 
-               if (news == true)
+                if (news == true)
                 {
                     newsFound = this.searchService.SearchNews(term);
                 }
 
-               List<string> found = new List<string>();
-               found.AddRange(vetsFound);
-               found.AddRange(servicesFound);
-               found.AddRange(newsFound);
+                List<string> found = new List<string>();
+                found.AddRange(vetsFound);
+                found.AddRange(servicesFound);
+                found.AddRange(newsFound);
 
-               return this.Ok(found);
+                return this.Ok(found);
             }
             catch
             {

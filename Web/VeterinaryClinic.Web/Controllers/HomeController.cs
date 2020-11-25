@@ -13,7 +13,7 @@
     {
         private readonly IServiceScraperService serviceScraperService;
 
-        public HomeController(IServiceScraperService serviceScraperService,IGalleryService galleryService)
+        public HomeController(IServiceScraperService serviceScraperService, IGalleryService galleryService)
         {
             this.serviceScraperService = serviceScraperService;
         }

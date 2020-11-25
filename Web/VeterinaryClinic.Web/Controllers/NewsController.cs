@@ -59,7 +59,7 @@
             var newsCount = this.newsService.GetCount();
             if (id < 1 || id > newsCount)
             {
-                return RedirectToAction("StatusCodeError","Home", new { errorCode = 404 });
+                return RedirectToAction("StatusCodeError", "Home", new { errorCode = 404 });
             }
             var news = this.newsService.GetById<NewsDetailsViewModel>(id);
             return this.View(news);

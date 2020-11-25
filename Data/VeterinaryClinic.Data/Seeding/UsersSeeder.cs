@@ -15,6 +15,7 @@ namespace VeterinaryClinic.Data.Seeding
         private const string AdminUserName = "admin@abv.com";
         private const string VetUserName = "vet@gmail.com";
         private const string OwnerUserName = "owner@mail.bg";
+        private const string VetUserName2 = "vet2@gmail.com";
 
         private UserManager<ApplicationUser> usersManager;
 
@@ -27,7 +28,9 @@ namespace VeterinaryClinic.Data.Seeding
                 await SeedUserAsync(this.usersManager, AdminUserName);
                 await SeedUserAsync(this.usersManager, VetUserName);
                 await SeedUserAsync(this.usersManager, OwnerUserName);
-            }     
+                await SeedUserAsync(this.usersManager, VetUserName2);
+            }
+
         }
 
         private static async Task SeedUserAsync(UserManager<ApplicationUser> userManager, string username)
@@ -44,6 +47,10 @@ namespace VeterinaryClinic.Data.Seeding
                 IdentityResult result = new IdentityResult();
 
                 if (username == VetUserName)
+                {
+                    result = await userManager.CreateAsync(user, "123456");
+                }
+                else if (username == VetUserName2)
                 {
                     result = await userManager.CreateAsync(user, "123456");
                 }

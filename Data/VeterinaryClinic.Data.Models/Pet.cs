@@ -29,14 +29,14 @@
 
         public string Picture { get; set; }
 
-        public int DiagnoseId { get; set; }
+        public int? DiagnoseId { get; set; }
 
         public virtual Diagnose Diagnose { get; set; }
 
         [Required]
-        public string PassportId { get; set; }
+        public string IdentificationNumber { get; set; }
 
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
 
         [Required]
         public bool Sterilised { get; set; }

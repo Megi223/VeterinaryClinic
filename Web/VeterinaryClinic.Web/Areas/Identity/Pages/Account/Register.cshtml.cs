@@ -38,7 +38,7 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender, 
+            IEmailSender emailSender,
             ICloudinaryService cloudinaryService,
             IOwnersService ownersService)
         {
@@ -89,14 +89,14 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [AllowedExtensions(new string[] { ".jpg", ".png" })]
-            [Display(Name ="Profile Picture")]
+            [Display(Name = "Profile Picture")]
             public IFormFile Image { get; set; }
 
             [Required]
             public string City { get; set; }
 
             [Required]
-            [Display(Name ="Phone Number")]
+            [Display(Name = "Phone Number")]
             [Phone]
             public string PhoneNumber { get; set; }
         }
@@ -113,14 +113,14 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, PhoneNumber=Input.PhoneNumber };
+                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, PhoneNumber = Input.PhoneNumber };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
                     await _userManager.AddToRoleAsync(user, GlobalConstants.OwnerRoleName);
                     string photoUrl = await this.cloudinaryService.UploudAsync(this.Input.Image);
-                    await this.ownersService.CreateOwnerAsync(user,Input.FirstName,Input.LastName,photoUrl,Input.City);
+                    await this.ownersService.CreateOwnerAsync(user, Input.FirstName, Input.LastName, photoUrl, Input.City);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

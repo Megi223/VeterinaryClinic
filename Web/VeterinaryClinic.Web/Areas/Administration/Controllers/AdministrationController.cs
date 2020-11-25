@@ -18,15 +18,15 @@
             this.newsScraperService = newsScraperService;
         }
 
-       //public IActionResult Register()
-       //{
-       //    return this.View();
-       //}
-       //
-       //public IActionResult Login()
-       //{
-       //    return this.View();
-       //}
+        //public IActionResult Register()
+        //{
+        //    return this.View();
+        //}
+        //
+        //public IActionResult Login()
+        //{
+        //    return this.View();
+        //}
 
     }
 }

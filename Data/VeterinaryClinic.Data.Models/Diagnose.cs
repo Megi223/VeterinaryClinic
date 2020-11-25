@@ -19,5 +19,6 @@
         public string Description { get; set; }
 
         public virtual ICollection<Medication> Medications { get; set; }
+
     }
 }
