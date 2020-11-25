@@ -1,0 +1,86 @@
+﻿@model VeterinaryClinic.Web.ViewModels.Pets.PetViewModel
+<link rel="stylesheet" href="~/css/petDetails.css" />
+
+<div class="page-content page-container" id="page-content">
+    <div class="padding" style="height:500px">
+        <div class="row container d-flex justify-content-center" style="height:800px">
+            <div class="col-xl-6 col-md-12" style="max-width:none;flex:none">
+                <div class="card user-card-full">
+                    <div class="row m-l-0 m-r-0">
+                        <div class="col-sm-4 bg-c-lite-green user-profile" style="background: linear-gradient(45deg, #207dff 0%, #00bd55 100%);">
+                            <div class="card-block text-center text-white">
+                                <div class="m-b-25"> <img src="@Model.Picture" class="img-radius" alt="User-Profile-Image" style="width:200px;height:200px"> </div>
+                                <h6 class="f-w-600">@Model.Name</h6>
+                                <p>@Model.TypeAsString</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="card-block">
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <p class="m-b-10 f-w-600">Gender</p>
+                                        <h6 class="text-muted f-w-400">@Model.GenderAsString</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p class="m-b-10 f-w-600">Vet Name</p>
+                                        <h6 class="text-muted f-w-400">@Model.VetName</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p class="m-b-10 f-w-600">Weight</p>
+                                        <h6 class="text-muted f-w-400">@Model.Weight</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p class="m-b-10 f-w-600">Birthday</p>
+                                        <h6 class="text-muted f-w-400">@Model.BirthdayAsString</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p class="m-b-10 f-w-600">Identification Number</p>
+                                        <h6 class="text-muted f-w-400">@Model.IdentificationNumber</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p class="m-b-10 f-w-600">Sterilised</p>
+                                        <h6 class="text-muted f-w-400">@Model.SterilisedAsString</h6>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <p class="m-b-10 f-w-600">Owner Name</p>
+                                        <h6 class="text-muted f-w-400">@Model.OwnerName</h6>
+                                    </div>
+                                </div>
+                                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Additional Information</h6>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="m-b-10 f-w-600">Diagnose</p>
+                                        @if (Model.DiagnoseId == null)
+                                        {
+                                            <h6 class="text-muted f-w-400">Healthy</h6> 
+                                         }
+                                        else
+                                        {
+                                            <h6 class="text-muted f-w-400">@Model.DiagnoseName - @Model.DiagnoseDescription</h6>
+                                        }
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <p class="m-b-10 f-w-600">Medication</p>
+                                        @if (Model.PetsMedications.Count() == 0)
+                                        {
+                                            <h6 class="text-muted f-w-400">None</h6> 
+                                        }
+                                        else
+                                        {
+                                            <h6 class="text-muted f-w-400">@Model.PetsMedicationsAsString</h6>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a asp-area="Owner" asp-controller="Owner" asp-action="MyPets" class="btn btn-primary">Back</a>
+    <br />
+</div>
+<br />
+

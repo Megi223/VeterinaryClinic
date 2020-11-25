@@ -79,6 +79,8 @@
             services.AddTransient<IPetsService, PetsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IVetsService, VetsService>();
+       
+
 
 
 

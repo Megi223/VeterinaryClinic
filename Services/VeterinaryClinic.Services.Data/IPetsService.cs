@@ -10,8 +10,12 @@ namespace VeterinaryClinic.Services.Data
 {
     public interface IPetsService
     {
-        IEnumerable<T> GetPets<T>(string userId);
+        IEnumerable<T> GetAllForAPage<T>(int page, string ownerId);
 
         Task AddPetAsync(string userId, AddPetInputModel model, string photoUrl);
+
+        int GetCount();
+
+        T GetById<T>(string id);
     }
 }

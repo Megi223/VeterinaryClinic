@@ -1,1 +1,61 @@
-﻿<h1>Mypets</h1>
+﻿@model IEnumerable<VeterinaryClinic.Web.ViewModels.Pets.AllPetsViewModel>
+@{ 
+    ViewData["Title"] = "My Pets";
+}
+
+<link rel="stylesheet" href="~/css/customPagination.css" />
+<section class="hero-wrap hero-wrap-2" style="background-image: url('https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_2_gfdtjt.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs mb-2"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>My Pets <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-0 bread"><b>My Pets</b></h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row d-flex">
+            @foreach (var pet in Model)
+            {
+                @*<div class="card col-md-3" style="width: 18rem;margin-left:50px">
+                    <img class="card-img-top embed-responsive" src="@pet.Picture" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@pet.Name</h5>
+                        <p class="card-text">Gender: @pet.Gender</p>
+                        <p class="card-text">Age (in years): @pet.Age</p>
+                        <a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@pet.Id" class="btn btn-primary">More</a>
+                    </div>
+                </div>*@
+            
+                <div class="col-md-4 ftco-animate">
+                    <div class="block-7">
+                        <div class="img" style="background-image: url(@pet.Picture);"></div>
+                        <div class="text-center p-4">
+                            <span class="excerpt d-block">@pet.Name</span>
+
+                            <ul class="pricing-text mb-5">
+                                <li><i class="fa fa-birthday-cake" style="color:#00bd56"></i>  Age (in years): @pet.Age</li>
+                                <li><i class="fa fa-venus-mars" style="color:#00bd56"></i>  Gender: @pet.Gender</li>
+                            </ul>
+
+                            <a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@pet.Id" class="btn btn-primary">More</a>
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col text-center">
+            <div class="block-27">
+                <pioneer-pagination info="@ViewBag.PaginatedMeta" route="/Owner/Owner/MyPets" previous-page-text="<" next-page-text=">"></pioneer-pagination>
+            </div>
+        </div>
+    </div>
+</section>

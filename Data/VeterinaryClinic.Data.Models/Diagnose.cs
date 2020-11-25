@@ -7,18 +7,10 @@
 
     public class Diagnose : BaseDeletableModel<int>
     {
-        public Diagnose()
-        {
-            this.Medications = new HashSet<Medication>();
-        }
-
         [Required]
         public string Name { get; set; }
 
         [Required]
         public string Description { get; set; }
-
-        public virtual ICollection<Medication> Medications { get; set; }
-
     }
 }

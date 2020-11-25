@@ -15,8 +15,6 @@ namespace VeterinaryClinic.Web.ViewModels.Pets
 {
     public class AddPetInputModel : IMapTo<Pet>
     {
-        //make all the necessary validation
-
         [Required]
         [MaxLength(GlobalConstants.NameMaxLength)]
         public string Name { get; set; }
