@@ -9,21 +9,21 @@ namespace VeterinaryClinic.Web.Infrastructure.Attributes
     {
         private DateTime minDate = new DateTime(2000, 1, 1);
 
-        protected override ValidationResult IsValid(
-        object value, ValidationContext validationContext)
+        public override bool IsValid(
+        object value)
         {
             var date = value as DateTime?;
             if (date != null)
             {
                 if (date <= this.minDate || date > DateTime.UtcNow)
                 {
-                    return new ValidationResult(this.GetErrorMessage());
+                    return false;
                 }
 
-                return ValidationResult.Success;
+                return true;
             }
 
-            return new ValidationResult(this.GetErrorMessage());
+            return false;
         }
 
         public string GetErrorMessage()

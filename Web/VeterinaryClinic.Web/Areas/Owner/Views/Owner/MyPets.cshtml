@@ -21,16 +21,6 @@
         <div class="row d-flex">
             @foreach (var pet in Model)
             {
-                @*<div class="card col-md-3" style="width: 18rem;margin-left:50px">
-                    <img class="card-img-top embed-responsive" src="@pet.Picture" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@pet.Name</h5>
-                        <p class="card-text">Gender: @pet.Gender</p>
-                        <p class="card-text">Age (in years): @pet.Age</p>
-                        <a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@pet.Id" class="btn btn-primary">More</a>
-                    </div>
-                </div>*@
-            
                 <div class="col-md-4 ftco-animate">
                     <div class="block-7">
                         <div class="img" style="background-image: url(@pet.Picture);"></div>

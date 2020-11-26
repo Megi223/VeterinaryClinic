@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\Data\VeterinaryClinic.Data.Models\VeterinaryClinic.Data.Models.csproj" />
     <ProjectReference Include="..\..\Web\VeterinaryClinic.Web.ViewModels\VeterinaryClinic.Web.ViewModels.csproj" />
     <ProjectReference Include="..\VeterinaryClinic.Services.Mapping\VeterinaryClinic.Services.Mapping.csproj" />
+    <ProjectReference Include="..\VeterinaryClinic.Services\VeterinaryClinic.Services.csproj" />
   </ItemGroup>
 
 </Project>

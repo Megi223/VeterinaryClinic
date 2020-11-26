@@ -21,19 +21,13 @@ namespace VeterinaryClinic.Web.Areas.Owner.Controllers
     {
         private const int PetsOnOnePage = 3;
         private readonly IPetsService petsService;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly IVetsService vetsService;
         private readonly IOwnersService ownersService;
-        private readonly ICloudinaryService cloudinaryService;
         private readonly IPaginatedMetaService paginatedMetaService;
 
 
-        public OwnerController(IPetsService petsService, IVetsService vetsService,ICloudinaryService cloudinaryService,UserManager<ApplicationUser> userManager, IOwnersService ownersService,IPaginatedMetaService paginatedMetaService)
+        public OwnerController(IPetsService petsService, IOwnersService ownersService,IPaginatedMetaService paginatedMetaService)
         {
             this.petsService = petsService;
-            this.vetsService = vetsService;
-            this.cloudinaryService = cloudinaryService;
-            this.userManager = userManager;
             this.ownersService = ownersService;
             this.paginatedMetaService = paginatedMetaService;
         }
@@ -56,28 +50,6 @@ namespace VeterinaryClinic.Web.Areas.Owner.Controllers
             string ownerId = this.ownersService.GetOwnerId(userId);
             var pets = this.petsService.GetAllForAPage<AllPetsViewModel>(id, ownerId);
             return this.View(pets);
-        }
-
-        public IActionResult AddPet()
-        {
-            var vets = this.vetsService.GetAll<VetDropDown>();
-            var model = new AddPetInputModel();
-            model.Vet = vets;
-            return this.View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddPet(AddPetInputModel model)
-        {
-            string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            string ownerId = this.ownersService.GetOwnerId(currentUserId);
-            string photoUrl = string.Empty;
-            if (model.Picture != null)
-            {
-                photoUrl = await this.cloudinaryService.UploudAsync(model.Picture);
-            }
-            await this.petsService.AddPetAsync(ownerId, model, photoUrl);
-            return this.RedirectToAction("MyPets");
         }
     }
 }

@@ -10,6 +10,7 @@
         <div class="col-md-6 offset-3">
             <h1 style="text-align:center"><b>@ViewData["Title"]</b></h1>
             <form method="post" enctype="multipart/form-data">
+                <h3><strong>@TempData["Message"]</strong></h3>
                 <div>
                     <label asp-for="@Model.Type"></label>
                     <select asp-for="@Model.Type" asp-items="Html.GetEnumSelectList<VeterinaryClinic.Data.Models.Enumerations.TypeOfAnimal>()" class="form-control">

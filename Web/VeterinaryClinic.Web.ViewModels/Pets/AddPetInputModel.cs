@@ -13,7 +13,7 @@ using VeterinaryClinic.Web.Infrastructure.Attributes;
 
 namespace VeterinaryClinic.Web.ViewModels.Pets
 {
-    public class AddPetInputModel : IMapTo<Pet>
+    public class AddPetInputModel
     {
         [Required]
         [MaxLength(GlobalConstants.NameMaxLength)]
@@ -31,13 +31,15 @@ namespace VeterinaryClinic.Web.ViewModels.Pets
         [Range(0.01, 100)]
         public float Weight { get; set; }
 
+        [AllowedExtensions(new string[] { ".jpg", ".png" })]
         public IFormFile Picture { get; set; }
 
+        [Required]
         [RegularExpression("^[a-zA-Z0-9_]+$", ErrorMessage = "Please enter a valid Identification number- it should contain only alphanumerical characters")]
         public string IdentificationNumber { get; set; }
 
         [DataType(DataType.Date)]
-        [MyValidDateAttribute]
+        [MyValidDateAttribute(ErrorMessage ="Invalid date!")]
         public DateTime? Birthday { get; set; }
 
         [Required]
