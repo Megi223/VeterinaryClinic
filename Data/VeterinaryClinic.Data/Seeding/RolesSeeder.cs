@@ -20,7 +20,7 @@
             {
                 await SeedRoleAsync(roleManager, GlobalConstants.AdministratorRoleName);
                 await SeedRoleAsync(roleManager, GlobalConstants.OwnerRoleName);
-                await SeedRoleAsync(roleManager, GlobalConstants.VeterinarianRoleName);
+                await SeedRoleAsync(roleManager, GlobalConstants.VetRoleName);
             }
         }
 

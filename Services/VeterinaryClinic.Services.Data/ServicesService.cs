@@ -32,5 +32,12 @@
                 .To<T>().FirstOrDefault();
             return service;
         }
+
+        public string GetNameById(int id)
+        {
+            var service = this.servicesRepository.All().Where(x => x.Id == id)
+                .FirstOrDefault();
+            return service.Name;
+        }
     }
 }

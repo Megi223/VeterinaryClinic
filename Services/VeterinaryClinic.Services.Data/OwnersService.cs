@@ -13,6 +13,7 @@ namespace VeterinaryClinic.Services.Data
     {
         private readonly IDeletableEntityRepository<Owner> ownersRepository;
 
+
         public OwnersService(IDeletableEntityRepository<Owner> ownersRepository)
         {
             this.ownersRepository = ownersRepository;
@@ -31,6 +32,7 @@ namespace VeterinaryClinic.Services.Data
 
             await this.ownersRepository.AddAsync(owner);
             await this.ownersRepository.SaveChangesAsync();
+
         }
 
         public string GetOwnerId(string userId)

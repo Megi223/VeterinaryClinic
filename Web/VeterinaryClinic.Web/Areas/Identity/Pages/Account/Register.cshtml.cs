@@ -20,7 +20,7 @@ using VeterinaryClinic.Services;
 using VeterinaryClinic.Web.Infrastructure.Attributes;
 using VeterinaryClinic.Data.Models;
 using VeterinaryClinic.Services.Data;
-
+using VeterinaryClinic.Data.Common.Repositories;
 
 namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
 {
@@ -33,6 +33,7 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly ICloudinaryService cloudinaryService;
         private readonly IOwnersService ownersService;
+        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -40,7 +41,7 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             ICloudinaryService cloudinaryService,
-            IOwnersService ownersService)
+            IOwnersService ownersService, IDeletableEntityRepository<ApplicationUser> usersRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -48,6 +49,7 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             this.cloudinaryService = cloudinaryService;
             this.ownersService = ownersService;
+            this.usersRepository = usersRepository;
         }
 
         [BindProperty]
@@ -121,6 +123,7 @@ namespace VeterinaryClinic.Web.Areas.Identity.Pages.Account
                     await _userManager.AddToRoleAsync(user, GlobalConstants.OwnerRoleName);
                     string photoUrl = await this.cloudinaryService.UploudAsync(this.Input.Image);
                     await this.ownersService.CreateOwnerAsync(user, Input.FirstName, Input.LastName, photoUrl, Input.City);
+                    
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
                     var callbackUrl = Url.Page(

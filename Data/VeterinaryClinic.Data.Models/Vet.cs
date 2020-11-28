@@ -31,6 +31,10 @@
         public string ProfilePicture { get; set; }
 
         [Required]
+        [MaxLength(50)]
+        public string Specialization { get; set; }
+
+        [Required]
         public DateTime HireDate { get; set; }
 
         [Required]
@@ -47,9 +51,5 @@
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; }
-
-
-
-
     }
 }

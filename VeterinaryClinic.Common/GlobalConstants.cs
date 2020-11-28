@@ -8,7 +8,7 @@
 
         public const string OwnerRoleName = "Owner";
 
-        public const string VeterinarianRoleName = "Vet";
+        public const string VetRoleName = "Vet";
 
         public const int ChatNotificationContentMaxLength = 100;
 
@@ -25,6 +25,9 @@
         public const int NewsOnOnePage = 6;
 
         public const int PhotosOnOnePage = 6;
+
+        public const int VetsOnOnePage = 6;
+
 
     }
 }

@@ -60,6 +60,10 @@
             services.AddRazorPages();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSingleton(this.configuration);
+            services.AddAntiforgery(options =>
+            {
+                options.HeaderName = "X-CSRF-TOKEN";
+            });
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -79,12 +83,7 @@
             services.AddTransient<IPetsService, PetsService>();
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IVetsService, VetsService>();
-       
-
-
-
-
-
+            services.AddTransient<IRatingService, RatingService>();
 
             Account account = new Account(
                 this.configuration["Cloudinary:AppName"],

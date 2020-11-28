@@ -75,7 +75,7 @@ namespace VeterinaryClinic.Data.Seeding
                     }
                     else
                     {
-                        await userManager.AddToRoleAsync(user, GlobalConstants.VeterinarianRoleName);
+                        await userManager.AddToRoleAsync(user, GlobalConstants.VetRoleName);
                     }
                 }
             }
