@@ -23,7 +23,7 @@
                         </a>
                         <div class="text p-4">
                             <div class="meta mb-2">
-                                <div><a>@news.CreatedOn.ToString("D")</a></div>
+                                <div><a><time datetime="@news.CreatedOn.ToString("O")"></time></a></div>
                             </div>
                             <h3 class="heading"><a asp-controller="News" asp-action="Details" asp-route-id="@news.Id"><b>@news.Title</b></a></h3>
                             <h6>@news.Summary</h6>

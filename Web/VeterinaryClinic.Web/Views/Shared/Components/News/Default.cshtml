@@ -9,7 +9,7 @@
             <div class="text">
                 <h3 class="heading"><a asp-area="" asp-controller="News" asp-action="Details" asp-route-id="@news.Id">@news.Title</a></h3>
                 <div class="meta">
-                    <div><a href="#"><span class="icon-calendar"></span>@news.CreatedOn.ToString("D")</a></div>
+                    <div><a href="#"><span class="icon-calendar"></span><time datetime="@news.CreatedOn.ToString("D")"></time></a></div>
                 </div>
             </div>
         </div>

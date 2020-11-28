@@ -56,16 +56,16 @@
             <h4 style="color:#00bd56"><b>Found news: @Model.News.Count()</b></h4>
             <br />
             <ul class="list-unstyled">
-                @foreach (var item in Model.News)
+                @foreach (var news in Model.News)
                 {
 
                     <li class="media">
-                        <img src="@item.ImageUrl" class="mr-3" alt="Image" style="height:183px;width:275px">
+                        <img src="@news.ImageUrl" class="mr-3" alt="Image" style="height:183px;width:275px">
                         <div class="media-body">
-                            <h5 class="mt-0"><b>@item.Title</b></h5>
-                            <h6>@item.CreatedOn.ToString("D")</h6>
-                            <p>@item.Summary</p>
-                            <a asp-controller="News" asp-action="Details" asp-route-id="@item.Id">Learn more</a>
+                            <h5 class="mt-0"><b>@news.Title</b></h5>
+                            <h6><time datetime="@news.CreatedOn.ToString("O")"></time></h6>
+                            <p>@news.Summary</p>
+                            <a asp-controller="News" asp-action="Details" asp-route-id="@news.Id">Learn more</a>
                         </div>
                     </li>
                     <br />

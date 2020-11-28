@@ -24,8 +24,6 @@ namespace VeterinaryClinic.Web.ViewModels.Vets
 
         public DateTime HireDate { get; set; }
 
-        public string HireDateAsString => this.HireDate.ToShortDateString();
-
         public float AverageRating { get; set; }
 
         public string Services { get; set; }

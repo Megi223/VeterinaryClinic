@@ -27,7 +27,7 @@
                             <div class="media-body mb5">
                                 <h5 class="media-heading mbn">
                                     @comment.OwnerFirstName
-                                    <small> - @comment.CreatedOn.ToLongDateString()</small>
+                                    <small> - <time datetime="@comment.CreatedOn.ToString("O")"></time></small>
 
                                 </h5>
                                 <p>@Html.Raw(comment.SanitizedContent)</p>
@@ -103,7 +103,7 @@
                                 <td>
                                     Hire Date
                                 </td>
-                                <td>@Model.HireDateAsString</td>
+                                <td><time datetime="@Model.HireDate.ToString("O")"></time></td>
 
                             </tr>
                             <tr>
