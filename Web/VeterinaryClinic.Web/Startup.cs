@@ -84,6 +84,8 @@
             services.AddTransient<ICloudinaryService, CloudinaryService>();
             services.AddTransient<IVetsService, VetsService>();
             services.AddTransient<IRatingService, RatingService>();
+            services.AddTransient<ICommentsService, CommentsService>();
+
 
             Account account = new Account(
                 this.configuration["Cloudinary:AppName"],

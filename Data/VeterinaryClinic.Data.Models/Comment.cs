@@ -16,8 +16,13 @@
 
         public virtual Vet Vet { get; set; }
 
+        [Required]
         public string OwnerId { get; set; }
 
         public virtual Owner Owner { get; set; }
+
+        public int? ParentId { get; set; }
+
+        public virtual Comment Parent { get; set; }
     }
 }

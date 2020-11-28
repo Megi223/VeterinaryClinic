@@ -30,6 +30,8 @@ namespace VeterinaryClinic.Web.ViewModels.Vets
 
         public string Services { get; set; }
 
+        public IEnumerable<VetCommentViewModel> Comments { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Vet, VetViewModel>()
