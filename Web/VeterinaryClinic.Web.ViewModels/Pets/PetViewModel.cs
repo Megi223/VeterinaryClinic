@@ -1,13 +1,12 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Models.Enumerations;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.Pets
+﻿namespace VeterinaryClinic.Web.ViewModels.Pets
 {
+    using System;
+    using System.Collections.Generic;
+
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Models.Enumerations;
+    using VeterinaryClinic.Services.Mapping;
+
     public class PetViewModel : IMapFrom<Pet>
     {
         public string Name { get; set; }

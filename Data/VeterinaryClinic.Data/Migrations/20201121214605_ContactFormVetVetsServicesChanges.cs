@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace VeterinaryClinic.Data.Migrations
+﻿namespace VeterinaryClinic.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class ContactFormVetVetsServicesChanges : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,7 +44,7 @@ namespace VeterinaryClinic.Data.Migrations
                 table: "VetsServices",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "",
+                defaultValue: string.Empty,
                 oldClrType: typeof(int),
                 oldType: "int",
                 oldNullable: true);
@@ -60,14 +60,14 @@ namespace VeterinaryClinic.Data.Migrations
                 table: "ContactForms",
                 type: "nvarchar(450)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.AddColumn<string>(
                 name: "VetId",
                 table: "ContactForms",
                 type: "nvarchar(450)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.CreateIndex(
                 name: "IX_VetsServices_ServiceId1",
@@ -165,7 +165,7 @@ namespace VeterinaryClinic.Data.Migrations
                 table: "VetsServices",
                 type: "nvarchar(450)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.AddColumn<float>(
                 name: "Rating",
@@ -179,7 +179,7 @@ namespace VeterinaryClinic.Data.Migrations
                 table: "ContactForms",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.CreateIndex(
                 name: "IX_VetsServices_OwnerId",

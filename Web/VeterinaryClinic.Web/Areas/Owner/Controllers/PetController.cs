@@ -1,18 +1,19 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Services;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Pets;
-
-namespace VeterinaryClinic.Web.Areas.Owner.Controllers
+﻿namespace VeterinaryClinic.Web.Areas.Owner.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Services;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Pets;
+
     [Authorize(Roles = GlobalConstants.OwnerRoleName)]
     [Area("Owner")]
     public class PetController : Controller
@@ -51,15 +52,16 @@ namespace VeterinaryClinic.Web.Areas.Owner.Controllers
             if (!this.ModelState.IsValid)
             {
                 IEnumerable<ModelError> allErrors = this.ModelState.Values.SelectMany(v => v.Errors);
-                return this.View("ModelStateError",allErrors);
+                return this.View("ModelStateError", allErrors);
             }
+
             string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             string ownerId = this.ownersService.GetOwnerId(currentUserId);
             string photoUrl = await this.petsService.DeterminePhotoUrl(model.Picture, model.Type);
             try
             {
                 await this.petsService.AddPetAsync(ownerId, model, photoUrl);
-                return this.RedirectToAction("MyPets","Owner");
+                return this.RedirectToAction("MyPets", "Owner");
             }
             catch (ArgumentException ex)
             {

@@ -2,17 +2,7 @@
 {
     using System.Reflection;
 
-    using VeterinaryClinic.Data;
-    using VeterinaryClinic.Data.Common;
-    using VeterinaryClinic.Data.Common.Repositories;
-    using VeterinaryClinic.Data.Models;
-    using VeterinaryClinic.Data.Repositories;
-    using VeterinaryClinic.Data.Seeding;
-    //using VeterinaryClinic.Services.Data;
-    using VeterinaryClinic.Services.Mapping;
-    using VeterinaryClinic.Services.Messaging;
-    using VeterinaryClinic.Web.ViewModels;
-
+    using CloudinaryDotNet;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -21,11 +11,20 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using CloudinaryDotNet;
-    using Microsoft.AspNetCore.Authentication.Google;
+    using Pioneer.Pagination;
+    using VeterinaryClinic.Data;
+    using VeterinaryClinic.Data.Common;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Repositories;
+    using VeterinaryClinic.Data.Seeding;
     using VeterinaryClinic.Services;
     using VeterinaryClinic.Services.Data;
-    using Pioneer.Pagination;
+
+    // using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Services.Messaging;
+    using VeterinaryClinic.Web.ViewModels;
 
     public class Startup
     {
@@ -86,7 +85,6 @@
             services.AddTransient<IRatingService, RatingService>();
             services.AddTransient<ICommentsService, CommentsService>();
 
-
             Account account = new Account(
                 this.configuration["Cloudinary:AppName"],
                 this.configuration["Cloudinary:AppKey"],
@@ -107,7 +105,6 @@
                 googleOptions.ClientId = this.configuration["GoogleSignIn:ClientID"];
                 googleOptions.ClientSecret = this.configuration["GoogleSignIn:ClientAppSecret"];
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

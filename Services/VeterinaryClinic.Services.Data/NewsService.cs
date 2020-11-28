@@ -1,9 +1,7 @@
 ﻿namespace VeterinaryClinic.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
 
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Common.Repositories;
@@ -21,7 +19,6 @@
 
         public IEnumerable<T> GetAllForAPage<T>(int page)
         {
-
             IQueryable<News> query =
                 this.newsRepository.All()
             .Skip((page - 1) * GlobalConstants.NewsOnOnePage)

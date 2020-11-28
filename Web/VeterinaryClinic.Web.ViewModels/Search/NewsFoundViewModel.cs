@@ -1,8 +1,9 @@
-﻿using System;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.Search
+﻿namespace VeterinaryClinic.Web.ViewModels.Search
 {
+    using System;
+
+    using VeterinaryClinic.Services.Mapping;
+
     public class NewsFoundViewModel : IMapFrom<VeterinaryClinic.Data.Models.News>
     {
         public int Id { get; set; }

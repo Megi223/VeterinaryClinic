@@ -1,18 +1,15 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-using VeterinaryClinic.Web.Infrastructure.Attributes;
-//using System.Web.Mvc;
+﻿// using System.Web.Mvc;
 
 namespace VeterinaryClinic.Web.ViewModels.Pets
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Web.Infrastructure.Attributes;
+
     public class AddPetInputModel
     {
         [Required]
@@ -23,7 +20,7 @@ namespace VeterinaryClinic.Web.ViewModels.Pets
         public string Type { get; set; }
 
         [Required]
-        [Display(Name="Vet")]
+        [Display(Name = "Vet")]
         public string VetId { get; set; }
 
         public IEnumerable<VetDropDown> Vet { get; set; }
@@ -39,7 +36,7 @@ namespace VeterinaryClinic.Web.ViewModels.Pets
         public string IdentificationNumber { get; set; }
 
         [DataType(DataType.Date)]
-        [MyValidDateAttribute(ErrorMessage ="Invalid date!")]
+        [MyValidDateAttribute(ErrorMessage = "Invalid date!")]
         public DateTime? Birthday { get; set; }
 
         [Required]

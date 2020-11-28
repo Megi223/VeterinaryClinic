@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Pioneer.Pagination;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Gallery;
-
-namespace VeterinaryClinic.Web.Controllers
+﻿namespace VeterinaryClinic.Web.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
+    using Pioneer.Pagination;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Gallery;
+
     public class GalleryController : Controller
     {
         private readonly IGalleryService galleryService;
@@ -34,6 +30,7 @@ namespace VeterinaryClinic.Web.Controllers
             {
                 return this.RedirectToAction("All", new { id = allPagesCount });
             }
+
             var viewModel = this.galleryService.GetAllForAPage<GalleryAllViewModel>(id);
             this.ViewBag.PaginatedMeta = this.paginatedMetaService.GetMetaData(photosCount, id, photosOnPage);
             return this.View(viewModel);

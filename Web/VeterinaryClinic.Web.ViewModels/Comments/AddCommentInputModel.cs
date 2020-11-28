@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VeterinaryClinic.Web.ViewModels.Comments
+﻿namespace VeterinaryClinic.Web.ViewModels.Comments
 {
     public class AddCommentInputModel
     {

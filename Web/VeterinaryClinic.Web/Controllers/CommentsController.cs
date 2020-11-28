@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Comments;
-
-namespace VeterinaryClinic.Web.Controllers
+﻿namespace VeterinaryClinic.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Comments;
+
     [Authorize(Roles = GlobalConstants.OwnerRoleName + "," + GlobalConstants.VetRoleName)]
     public class CommentsController : Controller
     {
@@ -42,14 +40,14 @@ namespace VeterinaryClinic.Web.Controllers
             {
                 if (!this.commentsService.IsInCorrectVetId(parentId.Value, input.VetId))
                 {
-                    return this.RedirectToAction("Error", "Home", new { area = "" });
+                    return this.RedirectToAction("Error", "Home", new { area = string.Empty });
                 }
             }
 
             var userId = this.userManager.GetUserId(this.User);
             var ownerId = this.ownersService.GetOwnerId(userId);
             await this.commentsService.AddAsync(input.VetId, ownerId, input.Content, parentId);
-            return this.RedirectToAction("Details", "Vet", new { id = input.VetId, area="Vet" });
+            return this.RedirectToAction("Details", "Vet", new { id = input.VetId, area = "Vet" });
         }
     }
 }

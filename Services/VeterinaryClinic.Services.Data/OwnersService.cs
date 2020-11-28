@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+
     public class OwnersService : IOwnersService
     {
         private readonly IDeletableEntityRepository<Owner> ownersRepository;
@@ -32,14 +29,11 @@ namespace VeterinaryClinic.Services.Data
 
             await this.ownersRepository.AddAsync(owner);
             await this.ownersRepository.SaveChangesAsync();
-
         }
 
         public string GetOwnerId(string userId)
         {
             return this.ownersRepository.AllAsNoTracking().Where(x => x.UserId == userId).FirstOrDefault().Id;
         }
-
-
     }
 }

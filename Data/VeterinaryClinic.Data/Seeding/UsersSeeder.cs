@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Models;
-
-namespace VeterinaryClinic.Data.Seeding
+﻿namespace VeterinaryClinic.Data.Seeding
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Models;
+
     public class UsersSeeder : ISeeder
     {
         private const string AdminUserName = "admin@abv.com";
@@ -30,7 +29,6 @@ namespace VeterinaryClinic.Data.Seeding
                 await SeedUserAsync(this.usersManager, OwnerUserName);
                 await SeedUserAsync(this.usersManager, VetUserName2);
             }
-
         }
 
         private static async Task SeedUserAsync(UserManager<ApplicationUser> userManager, string username)

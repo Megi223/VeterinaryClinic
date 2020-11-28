@@ -1,12 +1,11 @@
-﻿using Ganss.XSS;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.Vets
+﻿namespace VeterinaryClinic.Web.ViewModels.Vets
 {
+    using System;
+
+    using Ganss.XSS;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class VetCommentViewModel : IMapFrom<Comment>
     {
         public int Id { get; set; }

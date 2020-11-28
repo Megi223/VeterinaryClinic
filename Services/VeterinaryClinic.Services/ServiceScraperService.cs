@@ -1,10 +1,8 @@
 ﻿namespace VeterinaryClinic.Services
 {
-    using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using AngleSharp;
@@ -52,7 +50,6 @@
                 await this.servicesRepository.AddAsync(service);
                 await this.servicesRepository.SaveChangesAsync();
             }
-
         }
 
         private async Task<ServiceDTO> CreateServiceDTO(List<string> images, List<string> links, int i)

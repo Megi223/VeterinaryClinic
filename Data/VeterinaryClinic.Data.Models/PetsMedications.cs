@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using VeterinaryClinic.Data.Common.Models;
-
-namespace VeterinaryClinic.Data.Models
+﻿namespace VeterinaryClinic.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using VeterinaryClinic.Data.Common.Models;
+
     public class PetsMedications : BaseDeletableModel<int>
     {
         public int MedicationId { get; set; }
@@ -16,6 +14,5 @@ namespace VeterinaryClinic.Data.Models
         public string PetId { get; set; }
 
         public virtual Pet Pet { get; set; }
-
     }
 }

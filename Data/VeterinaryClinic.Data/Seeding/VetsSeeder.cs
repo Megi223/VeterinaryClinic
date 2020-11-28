@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Models;
-
-namespace VeterinaryClinic.Data.Seeding
+﻿namespace VeterinaryClinic.Data.Seeding
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.DependencyInjection;
+    using VeterinaryClinic.Data.Models;
+
     public class VetsSeeder : ISeeder
     {
         private const string VetUserName = "vet@gmail.com";
@@ -34,13 +33,12 @@ namespace VeterinaryClinic.Data.Seeding
 
             if (!dbContext.Vets.Any())
             {
-                await SeedVetAsync(this.usersManager, VetUserName, VetFirstName, VetLastName, VetImageUrl,VetSpecialization);
-                await SeedVetAsync(this.usersManager, VetUserName2, VetFirstName2, VetLastName2, VetImageUrl2,VetSpecialization2);
+                await SeedVetAsync(this.usersManager, VetUserName, VetFirstName, VetLastName, VetImageUrl, VetSpecialization);
+                await SeedVetAsync(this.usersManager, VetUserName2, VetFirstName2, VetLastName2, VetImageUrl2, VetSpecialization2);
             }
-
         }
 
-        private static async Task SeedVetAsync(UserManager<ApplicationUser> userManager, string username, string firstName, string lastName, string imageUrl,string vetSpecialization)
+        private static async Task SeedVetAsync(UserManager<ApplicationUser> userManager, string username, string firstName, string lastName, string imageUrl, string vetSpecialization)
         {
             var user = await userManager.FindByNameAsync(username);
             if (user != null)
@@ -54,7 +52,7 @@ namespace VeterinaryClinic.Data.Seeding
                         LastName = lastName,
                         ProfilePicture = imageUrl,
                         HireDate = DateTime.UtcNow,
-                        Specialization=vetSpecialization,
+                        Specialization = vetSpecialization,
                     };
 
                     user.Vet = vet;

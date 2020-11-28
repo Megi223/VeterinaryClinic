@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
-using System.Linq;
-
-namespace VeterinaryClinic.Web.Infrastructure.Attributes
+﻿namespace VeterinaryClinic.Web.Infrastructure.Attributes
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.IO;
+    using System.Linq;
+
+    using Microsoft.AspNetCore.Http;
+
     public class AllowedExtensionsAttribute : ValidationAttribute
     {
-        private readonly string[] _extensions;
+        private readonly string[] extensions;
+
         public AllowedExtensionsAttribute(string[] extensions)
         {
-            _extensions = extensions;
+            this.extensions = extensions;
+        }
+
+        public string GetErrorMessage()
+        {
+            return $"This photo extension is not allowed!";
         }
 
         protected override ValidationResult IsValid(
@@ -23,18 +28,13 @@ namespace VeterinaryClinic.Web.Infrastructure.Attributes
             if (file != null)
             {
                 var extension = Path.GetExtension(file.FileName);
-                if (!_extensions.Contains(extension.ToLower()))
+                if (!this.extensions.Contains(extension.ToLower()))
                 {
-                    return new ValidationResult(GetErrorMessage());
+                    return new ValidationResult(this.GetErrorMessage());
                 }
             }
 
             return ValidationResult.Success;
-        }
-
-        public string GetErrorMessage()
-        {
-            return $"This photo extension is not allowed!";
         }
     }
 }

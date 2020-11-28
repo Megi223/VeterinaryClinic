@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Pioneer.Pagination;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Vets;
-
-namespace VeterinaryClinic.Web.Areas.Vet.Controllers
+﻿namespace VeterinaryClinic.Web.Areas.Vet.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Pioneer.Pagination;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Vets;
+
     [Authorize(Roles = GlobalConstants.VetRoleName)]
     [Area("Vet")]
     public class VetController : Controller
@@ -37,11 +33,13 @@ namespace VeterinaryClinic.Web.Areas.Vet.Controllers
             {
                 return this.RedirectToAction("All", new { id = allPagesCount });
             }
+
             var viewModel = this.vetsService.GetAllForAPage<VetsAllViewModel>(id);
             foreach (var vetModel in viewModel)
             {
                 vetModel.Services = this.vetsService.GetServices(vetModel.Id);
             }
+
             this.ViewBag.PaginatedMeta = this.paginatedMetaService.GetMetaData(vetsCount, id, GlobalConstants.VetsOnOnePage);
             return this.View(viewModel);
         }
@@ -51,7 +49,7 @@ namespace VeterinaryClinic.Web.Areas.Vet.Controllers
         {
             var viewModel = this.vetsService.GetById<VetViewModel>(id);
             viewModel.Services = this.vetsService.GetServices(viewModel.Id);
-            
+
             return this.View(viewModel);
         }
     }

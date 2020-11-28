@@ -6,12 +6,10 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using VeterinaryClinic.Data.Common.Models;
-    using VeterinaryClinic.Data.Models;
-
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using System.Runtime.CompilerServices;
+    using VeterinaryClinic.Data.Common.Models;
+    using VeterinaryClinic.Data.Models;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {

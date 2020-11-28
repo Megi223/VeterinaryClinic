@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VeterinaryClinic.Services
+﻿namespace VeterinaryClinic.Services
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Http;
+
     public interface ICloudinaryService
     {
         Task<string> UploudAsync(IFormFile file);

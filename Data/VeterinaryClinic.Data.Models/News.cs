@@ -1,7 +1,5 @@
 ﻿namespace VeterinaryClinic.Data.Models
 {
-    using System;
-
     using System.ComponentModel.DataAnnotations;
 
     using VeterinaryClinic.Data.Common.Models;

@@ -1,20 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Pioneer.Pagination;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Pets;
-
-namespace VeterinaryClinic.Web.Areas.Owner.Controllers
+﻿namespace VeterinaryClinic.Web.Areas.Owner.Controllers
 {
+    using System.Security.Claims;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Pioneer.Pagination;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Pets;
+
     [Authorize(Roles = GlobalConstants.OwnerRoleName)]
     [Area("Owner")]
     public class OwnerController : Controller
@@ -26,7 +22,7 @@ namespace VeterinaryClinic.Web.Areas.Owner.Controllers
         private readonly UserManager<ApplicationUser> userManager;
 
 
-        public OwnerController(IPetsService petsService, IOwnersService ownersService,IPaginatedMetaService paginatedMetaService, UserManager<ApplicationUser> userManager)
+        public OwnerController(IPetsService petsService, IOwnersService ownersService, IPaginatedMetaService paginatedMetaService, UserManager<ApplicationUser> userManager)
         {
             this.petsService = petsService;
             this.ownersService = ownersService;

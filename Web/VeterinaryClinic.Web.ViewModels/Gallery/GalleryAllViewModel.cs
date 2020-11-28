@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.Gallery
+﻿namespace VeterinaryClinic.Web.ViewModels.Gallery
 {
+    using VeterinaryClinic.Services.Mapping;
+
     public class GalleryAllViewModel : IMapFrom<VeterinaryClinic.Data.Models.Gallery>
     {
         public string Title { get; set; }

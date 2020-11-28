@@ -1,8 +1,5 @@
 ﻿namespace VeterinaryClinic.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
@@ -27,7 +24,7 @@
 
         public IActionResult Index()
         {
-            return View();
+            return this.View();
         }
 
         public async Task<IActionResult> Add()
@@ -49,6 +46,7 @@
             {
                 return this.RedirectToAction("All", new { id = allPagesCount });
             }
+
             var viewModel = this.newsService.GetAllForAPage<NewsAllViewModel>(id);
             this.ViewBag.PaginatedMeta = this.paginatedMetaService.GetMetaData(newsCount, id, newsOnPage);
             return this.View(viewModel);
@@ -59,8 +57,9 @@
             var newsCount = this.newsService.GetCount();
             if (id < 1 || id > newsCount)
             {
-                return RedirectToAction("StatusCodeError", "Home", new { errorCode = 404 });
+                return this.RedirectToAction("StatusCodeError", "Home", new { errorCode = 404 });
             }
+
             var news = this.newsService.GetById<NewsDetailsViewModel>(id);
             return this.View(news);
         }

@@ -5,6 +5,11 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
     using VeterinaryClinic.Data;
     using VeterinaryClinic.Data.Common;
     using VeterinaryClinic.Data.Common.Repositories;
@@ -13,13 +18,6 @@
     using VeterinaryClinic.Data.Seeding;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Services.Messaging;
-
-    using CommandLine;
-
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
 
     public static class Program
     {

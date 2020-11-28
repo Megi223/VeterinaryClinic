@@ -1,12 +1,9 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.Pets
+﻿namespace VeterinaryClinic.Web.ViewModels.Pets
 {
+    using AutoMapper;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class VetDropDown : IMapFrom<Vet>, IHaveCustomMappings
     {
         public string Id { get; set; }

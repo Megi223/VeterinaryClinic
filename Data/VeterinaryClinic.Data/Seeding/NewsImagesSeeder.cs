@@ -1,13 +1,9 @@
 ﻿namespace VeterinaryClinic.Data.Seeding
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
-    using VeterinaryClinic.Data.Common.Repositories;
-    using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Services;
 
     public class NewsImagesSeeder : ISeeder

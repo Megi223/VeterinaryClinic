@@ -1,5 +1,5 @@
-﻿//namespace VeterinaryClinic.Web.Areas.Administration.Controllers
-//{
+﻿// namespace VeterinaryClinic.Web.Areas.Administration.Controllers
+// {
 //    //using VeterinaryClinic.Services.Data;
 //    using VeterinaryClinic.Web.ViewModels.Administration.Dashboard;
 //
@@ -12,7 +12,7 @@
 //
 //        public DashboardController(INewsScraperService newsScraperService) : base//(newsScraperService)
 //        {
-//            
+//
 //        }
 //        //private readonly ISettingsService settingsService;
 //        //
@@ -32,6 +32,6 @@
 //            return this.View();
 //        }
 //
-//        
+//
 //    }
-//}
+// }

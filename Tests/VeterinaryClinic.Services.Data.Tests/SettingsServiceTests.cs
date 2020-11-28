@@ -4,15 +4,12 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+    using Moq;
     using VeterinaryClinic.Data;
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Data.Repositories;
-
-    using Microsoft.EntityFrameworkCore;
-
-    using Moq;
-
     using Xunit;
 
     public class SettingsServiceTests

@@ -1,8 +1,8 @@
 ﻿namespace VeterinaryClinic.Data.Configurations
 {
-    using VeterinaryClinic.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using VeterinaryClinic.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

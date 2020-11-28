@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    using VeterinaryClinic.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using VeterinaryClinic.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

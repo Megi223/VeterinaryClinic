@@ -4,11 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using VeterinaryClinic.Common;
-    using VeterinaryClinic.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Models;
 
     internal class RolesSeeder : ISeeder
     {

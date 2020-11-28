@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace VeterinaryClinic.Data.Migrations
+﻿namespace VeterinaryClinic.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AlterVetTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -11,7 +11,7 @@ namespace VeterinaryClinic.Data.Migrations
                 table: "Vets",
                 type: "nvarchar(50)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

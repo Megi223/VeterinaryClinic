@@ -1,6 +1,5 @@
 ﻿namespace VeterinaryClinic.Data.Models
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using VeterinaryClinic.Data.Common.Models;

@@ -1,20 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Models.Enumerations;
-using VeterinaryClinic.Services.Mapping;
-using VeterinaryClinic.Web.ViewModels.Pets;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Http;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Models.Enumerations;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.Pets;
+
     public class PetsService : IPetsService
     {
-        private const int PetsOnOnePage= 3;
+        private const int PetsOnOnePage = 3;
         private const string DogDefaultPhotoUrl = "https://res.cloudinary.com/dpwroiluv/image/upload/v1606324362/dog_gxboja.png";
         private const string CatDefaultPhotoUrl = "https://res.cloudinary.com/dpwroiluv/image/upload/v1606324384/cat_y8yj67.png";
         private const string RabbitDefaultPhotoUrl = "https://res.cloudinary.com/dpwroiluv/image/upload/v1606324403/rabbit_mfqxtl.png";
@@ -24,15 +24,14 @@ namespace VeterinaryClinic.Services.Data
 
         private readonly IDeletableEntityRepository<Pet> petsRepository;
         private readonly ICloudinaryService cloudinaryService;
-        
 
-        public PetsService(IDeletableEntityRepository<Pet> petsRepository,ICloudinaryService cloudinaryService)
+        public PetsService(IDeletableEntityRepository<Pet> petsRepository, ICloudinaryService cloudinaryService)
         {
             this.petsRepository = petsRepository;
             this.cloudinaryService = cloudinaryService;
         }
 
-        public async Task<string> DeterminePhotoUrl(IFormFile inputImage,string typeOfAnimal)
+        public async Task<string> DeterminePhotoUrl(IFormFile inputImage, string typeOfAnimal)
         {
             string photoUrl = string.Empty;
             if (inputImage != null)
@@ -51,16 +50,18 @@ namespace VeterinaryClinic.Services.Data
                     case "6": photoUrl = HamsterDefaultPhotoUrl; break;
                 }
             }
+
             return photoUrl;
         }
 
-        public async Task AddPetAsync(string ownerId,AddPetInputModel model,string photoUrl)
+        public async Task AddPetAsync(string ownerId, AddPetInputModel model, string photoUrl)
         {
             bool isIdentificationNumberValid = this.IsIdentificationNumberValid(model.IdentificationNumber);
             if (!isIdentificationNumberValid)
             {
                 throw new ArgumentException("Invalid identification number!");
             }
+
             Pet pet = new Pet
             {
                 Name = model.Name,
@@ -86,7 +87,6 @@ namespace VeterinaryClinic.Services.Data
 
         public IEnumerable<T> GetAllForAPage<T>(int page, string ownerId)
         {
-
             IQueryable<Pet> query =
                 this.petsRepository.All().Where(p => p.OwnerId == ownerId)
             .Skip((page - 1) * PetsOnOnePage)

@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
-    using VeterinaryClinic.Common;
     using VeterinaryClinic.Services;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels;
@@ -50,14 +49,14 @@
             return this.View();
         }
 
-        //[HttpPost]
-        //public IActionResult Contact()
-        //{
+        // [HttpPost]
+        // public IActionResult Contact()
+        // {
         //    //this method should receive an input model and then continue with /business /logic
         //    return this.View();
-        //}
+        // }
 
-        //TODO: move it later
+        // TODO: move it later
         public async Task<IActionResult> AddServices()
         {
             await this.serviceScraperService.PopulateDbWithServices();
@@ -70,8 +69,8 @@
             {
                 return this.View("NotFound");
             }
+
             return this.RedirectToAction("Error", "Home");
         }
-
     }
 }

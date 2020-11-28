@@ -1,19 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Ratings;
-
-namespace VeterinaryClinic.Web.Controllers
+﻿namespace VeterinaryClinic.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Ratings;
+
     [Route("api/[controller]")]
     [ApiController]
     public class RatingsController : ControllerBase
@@ -31,7 +27,7 @@ namespace VeterinaryClinic.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles=GlobalConstants.OwnerRoleName)]
+        [Authorize(Roles = GlobalConstants.OwnerRoleName)]
         [Route("/api/Ratings")]
         public async Task<ActionResult<PostRatingResponseModel>> Post(PostRatingInputModel input)
         {

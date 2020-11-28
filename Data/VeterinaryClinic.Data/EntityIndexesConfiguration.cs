@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using VeterinaryClinic.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using VeterinaryClinic.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

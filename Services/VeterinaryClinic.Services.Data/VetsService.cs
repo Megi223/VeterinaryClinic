@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class VetsService : IVetsService
     {
         private readonly IDeletableEntityRepository<Vet> vetsRepository;
@@ -25,7 +24,6 @@ namespace VeterinaryClinic.Services.Data
 
         public IEnumerable<T> GetAllForAPage<T>(int page)
         {
-
             IQueryable<Vet> query =
                 this.vetsRepository.All()
             .Skip((page - 1) * GlobalConstants.VetsOnOnePage)
@@ -63,6 +61,7 @@ namespace VeterinaryClinic.Services.Data
                 string serviceName = this.servicesService.GetNameById(int.Parse(serviceId));
                 serviceNames.Add(serviceName);
             }
+
             return string.Join(", ", serviceNames);
         }
     }
