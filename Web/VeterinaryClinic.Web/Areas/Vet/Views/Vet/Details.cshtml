@@ -19,14 +19,14 @@
                 <h2 class="media-heading" style="padding-left:50px">
                     @Model.Name
                 </h2>
-                @*<div style="padding-left:50px;padding-top:50px">*@
+                <div style="padding-left:50px;padding-top:50px">
                 <span class="fa fa-star checked" data-vote="1"></span>
                 <span class="fa fa-star checked" data-vote="2"></span>
                 <span class="fa fa-star checked" data-vote="3"></span>
                 <span class="fa fa-star" data-vote="4"></span>
                 <span class="fa fa-star" data-vote="5"></span>
                 <span id="averageRatingValue">   @Model.AverageRating.ToString("0.0")</span><span> / 5</span>
-                @*</div>*@
+                </div>
             </div>
         </div>
     </div>
@@ -57,9 +57,7 @@
                                     Specialization
                                 </td>
                                 <td>@Model.Specialization</td>
-                                @*<td>
-                                        <i class="fa fa-caret-down text-danger pr10"></i>$349,712
-                                    </td>*@
+                               
                             </tr>
 
                         </tbody>
@@ -71,74 +69,25 @@
                     <span class="panel-icon">
                         <i class="fa fa-trophy"></i>
                     </span>
-                    <span class="panel-title"> My Skills</span>
+                    <span class="panel-title"> Services</span>
                 </div>
                 <div class="panel-body pb5">
-                    <span class="label label-warning mr5 mb10 ib lh15">Default</span>
-                    <span class="label label-primary mr5 mb10 ib lh15">Primary</span>
-                    <span class="label label-info mr5 mb10 ib lh15">Success</span>
-                    <span class="label label-success mr5 mb10 ib lh15">Info</span>
-                    <span class="label label-alert mr5 mb10 ib lh15">Warning</span>
-                    <span class="label label-system mr5 mb10 ib lh15">Danger</span>
-                    <span class="label label-info mr5 mb10 ib lh15">Success</span>
-                    <span class="label label-success mr5 mb10 ib lh15">Ui Design</span>
-                    <span class="label label-primary mr5 mb10 ib lh15">Primary</span>
+      
+                    <span class="label label-warning mr5 mb10 ib lh15">@Model.Services</span>
+                   
 
                 </div>
             </div>
-            <div class="panel">
-                <div class="panel-heading">
-                    <span class="panel-icon">
-                        <i class="fa fa-pencil"></i>
-                    </span>
-                    <span class="panel-title">About Me</span>
-                </div>
-                <div class="panel-body pb5">
-
-                    <h6>Experience</h6>
-
-                    <h4>Facebook Internship</h4>
-                    <p class="text-muted">
-                        University of Missouri, Columbia
-                        <br> Student Health Center, June 2010 - 2012
-                    </p>
-
-                    <hr class="short br-lighter">
-
-                    <h6>Education</h6>
-
-                    <h4>Bachelor of Science, PhD</h4>
-                    <p class="text-muted">
-                        University of Missouri, Columbia
-                        <br> Student Health Center, June 2010 through Aug 2011
-                    </p>
-
-                    <hr class="short br-lighter">
-
-                    <h6>Accomplishments</h6>
-
-                    <h4>Successful Business</h4>
-                    <p class="text-muted pb10">
-                        University of Missouri, Columbia
-                        <br> Student Health Center, June 2010 through Aug 2011
-                    </p>
-
-                </div>
-            </div>
+            
         </div>
         <div class="col-md-8">
 
             <div class="tab-block">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#tab1" data-toggle="tab">Activity</a>
+                        <a href="#tab1" data-toggle="tab">Comments</a>
                     </li>
-                    <li>
-                        <a href="#tab1" data-toggle="tab">Social</a>
-                    </li>
-                    <li>
-                        <a href="#tab1" data-toggle="tab">Media</a>
-                    </li>
+                    
                 </ul>
                 <div class="tab-content p30" style="height: 730px;">
                     <div id="tab1" class="tab-pane active">
@@ -233,38 +182,8 @@
         </div>
     </div>
 </section>
-
+<br />
 <form method="post" id="antiForgeryForm"></form>
-
-<li class="single-meta">
-    <ul class="item-rating">
-        <li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
-        <li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
-        <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
-        <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
-        <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
-        <li><span id="averageRatingValue">@Model.AverageRating.ToString("0.0")</span><span> / 5</span> </li>
-    </ul>
-</li>
-
-
-
-        <div class="col-xl-9 col-12">
-            <ul class="entry-meta">
-                
-                <li class="single-meta">
-                    <ul class="item-rating">
-                        <li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
-                        <li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
-                        <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
-                        <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
-                        <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
-                        <li><span id="averageRatingValue">@Model.AverageRating.ToString("0.0")</span><span> / 5</span> </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
 
     @section Scripts {
         <script>
@@ -282,8 +201,8 @@
                         'X-CSRF-TOKEN': antiForgeryToken
                     },
                     success: function (data) {
-                    /*$('#averageRatingValue').html(data.averageRating.toFixed(1));*/
-                        console.log("success")
+                    $('#averageRatingValue').html(data.averageRating.toFixed(1));
+                        
                     },
                     contentType: 'application/json',
                 });

@@ -50,6 +50,8 @@ namespace VeterinaryClinic.Web.Areas.Vet.Controllers
         public IActionResult Details(string id)
         {
             var viewModel = this.vetsService.GetById<VetViewModel>(id);
+            viewModel.Services = this.vetsService.GetServices(viewModel.Id);
+            
             return this.View(viewModel);
         }
     }

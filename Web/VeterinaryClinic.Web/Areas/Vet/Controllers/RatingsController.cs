@@ -19,12 +19,15 @@ namespace VeterinaryClinic.Web.Controllers
     public class RatingsController : ControllerBase
     {
         private readonly IRatingService ratingService;
+        private readonly IOwnersService ownersService;
+
         private readonly UserManager<ApplicationUser> userManager;
 
-        public RatingsController(IRatingService ratingService, UserManager<ApplicationUser> userManager)
+        public RatingsController(IRatingService ratingService, UserManager<ApplicationUser> userManager, IOwnersService ownersService)
         {
             this.ratingService = ratingService;
             this.userManager = userManager;
+            this.ownersService = ownersService;
         }
 
         [HttpPost]
@@ -33,7 +36,7 @@ namespace VeterinaryClinic.Web.Controllers
         public async Task<ActionResult<PostRatingResponseModel>> Post(PostRatingInputModel input)
         {
             var currentUser = await this.userManager.GetUserAsync(this.User);
-            var ownerId = currentUser.Owner.Id;
+            var ownerId = this.ownersService.GetOwnerId(currentUser.Id);
             await this.ratingService.SetRatingAsync(input.VetId, ownerId, input.Score);
             var averageRatings = this.ratingService.GetAverageRatings(input.VetId);
             return new PostRatingResponseModel { AverageRating = averageRatings };

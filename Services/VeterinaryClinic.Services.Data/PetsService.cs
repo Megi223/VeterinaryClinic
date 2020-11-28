@@ -79,9 +79,9 @@ namespace VeterinaryClinic.Services.Data
             await this.petsRepository.SaveChangesAsync();
         }
 
-        public int GetCount()
+        public int GetCountForOwner(string ownerId)
         {
-            return this.petsRepository.AllAsNoTracking().Count();
+            return this.petsRepository.AllAsNoTracking().Where(p => p.OwnerId == ownerId).Count();
         }
 
         public IEnumerable<T> GetAllForAPage<T>(int page, string ownerId)

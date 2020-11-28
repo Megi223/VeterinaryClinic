@@ -23,18 +23,22 @@ namespace VeterinaryClinic.Web.Areas.Owner.Controllers
         private readonly IPetsService petsService;
         private readonly IOwnersService ownersService;
         private readonly IPaginatedMetaService paginatedMetaService;
+        private readonly UserManager<ApplicationUser> userManager;
 
 
-        public OwnerController(IPetsService petsService, IOwnersService ownersService,IPaginatedMetaService paginatedMetaService)
+        public OwnerController(IPetsService petsService, IOwnersService ownersService,IPaginatedMetaService paginatedMetaService, UserManager<ApplicationUser> userManager)
         {
             this.petsService = petsService;
             this.ownersService = ownersService;
             this.paginatedMetaService = paginatedMetaService;
+            this.userManager = userManager;
         }
 
         public IActionResult MyPets(int id = 1)
         {
-            var petsCount = this.petsService.GetCount();
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string ownerId = this.ownersService.GetOwnerId(userId);
+            var petsCount = this.petsService.GetCountForOwner(ownerId);
             var allPagesCount = (petsCount / PetsOnOnePage) + 1;
             if (id < 1)
             {
@@ -46,8 +50,6 @@ namespace VeterinaryClinic.Web.Areas.Owner.Controllers
             }
 
             this.ViewBag.PaginatedMeta = this.paginatedMetaService.GetMetaData(petsCount, id, PetsOnOnePage);
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            string ownerId = this.ownersService.GetOwnerId(userId);
             var pets = this.petsService.GetAllForAPage<AllPetsViewModel>(id, ownerId);
             return this.View(pets);
         }

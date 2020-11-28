@@ -15,7 +15,7 @@ namespace VeterinaryClinic.Services.Data
 
         Task AddPetAsync(string userId, AddPetInputModel model, string photoUrl);
 
-        int GetCount();
+        int GetCountForOwner(string ownerId);
 
         T GetById<T>(string id);
 
