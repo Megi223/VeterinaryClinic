@@ -27,5 +27,8 @@
         public const int PhotosOnOnePage = 6;
 
         public const int VetsOnOnePage = 6;
+
+        public const int ReviewsOnOnePage = 6;
+
     }
 }

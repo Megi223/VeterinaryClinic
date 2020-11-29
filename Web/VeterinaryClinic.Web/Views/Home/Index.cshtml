@@ -4,7 +4,12 @@
 
 
 <link rel="stylesheet" href="~/css/autocomplete.css">
-
+@if (TempData["Message"] != null)
+{
+<div class="alert alert-success" role="alert">
+    @TempData["Message"]
+</div>
+}
 <div class="wrap">
     <div>
         <div id="search-dropdown" class="custom-dropdown toggle-holder">
@@ -93,7 +98,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
-                <div class="d-block services active text-center">
+                <div class="d-block services text-center">
                     <div class="icon d-flex align-items-center justify-content-center">
                         <span class="flaticon-blind"></span>
                     </div>
@@ -240,81 +245,11 @@
         <div class="row ftco-animate">
             <div class="col-md-12">
                 <div class="carousel-testimony owl-carousel ftco-owl">
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">Lakes Vet is amazing. The staff is so caring and wonderful. The vets and vet techs are knowledgeable and loving. I wouldn't go anywhere else.</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684308/person_1_aizgvs.jpg)"></div>
-                                    <div class="pl-3">
-                                        <p class="name">Roger Scott</p>
-                                        <span class="position">Marketing Manager</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">Friendly and professional doctors and personnel. We have brought our many cats to Lakes Veterinary clinic for the past 35 years!</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img" style="        background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684308/person_2_vsnbn8.jpg)"></div>
-                                    <div class="pl-3">
-                                        <p class="name">Mike Mayer</p>
-                                        <span class="position">Psychologist</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">Always courteous and greeted with a smile and has my pet in their best interest. Great group of people for sure- the best in town actually.</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img" style="background-image: url(https://res.cloudinary.com/dpwroiluv/image/upload/v1604684308/person_3_wkr1nd.jpg)"></div>
-                                    <div class="pl-3">
-                                        <p class="name">Tom Smith</p>
-                                        <span class="position">Engineer</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">They have been excellent in the quality of care they give my animals. Very detail oriented. Caring staff. Exceptional care. Very Satisfied.</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-                                    <div class="pl-3">
-                                        <p class="name">Tim Vermer</p>
-                                        <span class="position">Sports Manager</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimony-wrap py-4">
-                            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
-                            <div class="text">
-                                <p class="mb-4">Life happens and sometimes it's an emergency. Couldn't have asked for more professional and compassionate care for my dog. Many thanks!</p>
-                                <div class="d-flex align-items-center">
-                                    <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-                                    <div class="pl-3">
-                                        <p class="name">Bernard Miller</p>
-                                        <span class="position">Marketing Manager</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <vc:reviews></vc:reviews>
+                </div>
+                <div style="padding-left:500px">
+                    <br />
+                    <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="AllReviews">View All</a>
                 </div>
             </div>
         </div>

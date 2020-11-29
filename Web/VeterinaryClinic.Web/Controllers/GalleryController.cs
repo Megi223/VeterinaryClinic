@@ -17,7 +17,7 @@
             this.paginatedMetaService = paginatedMetaService;
         }
 
-        public IActionResult All(int id)
+        public IActionResult All(int id = 1)
         {
             var photosCount = this.galleryService.GetCount();
             var photosOnPage = GlobalConstants.PhotosOnOnePage;

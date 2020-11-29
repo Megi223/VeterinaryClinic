@@ -4,17 +4,25 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
+    using Pioneer.Pagination;
+    using VeterinaryClinic.Common;
     using VeterinaryClinic.Services;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels;
+    using VeterinaryClinic.Web.ViewModels.Reviews;
 
     public class HomeController : BaseController
     {
         private readonly IServiceScraperService serviceScraperService;
+        private readonly IReviewsService reviewsService;
+        private readonly IPaginatedMetaService paginatedMetaService;
 
-        public HomeController(IServiceScraperService serviceScraperService, IGalleryService galleryService)
+        public HomeController(IServiceScraperService serviceScraperService,
+            IReviewsService reviewsService, IPaginatedMetaService paginatedMetaService)
         {
             this.serviceScraperService = serviceScraperService;
+            this.reviewsService = reviewsService;
+            this.paginatedMetaService = paginatedMetaService;
         }
 
         public IActionResult Index()
@@ -71,6 +79,24 @@
             }
 
             return this.RedirectToAction("Error", "Home");
+        }
+
+        public IActionResult AllReviews(int id = 1)
+        {
+            var reviewsCount = this.reviewsService.GetCount();
+            var allPagesCount = (reviewsCount / GlobalConstants.ReviewsOnOnePage) + 1;
+            if (id < 1)
+            {
+                return this.RedirectToAction("All", new { id = 1 });
+            }
+            else if (id > allPagesCount)
+            {
+                return this.RedirectToAction("All", new { id = allPagesCount });
+            }
+
+            var viewModel = this.reviewsService.GetAllForAPage<AllReviewsViewModel>(id);
+            this.ViewBag.PaginatedMeta = this.paginatedMetaService.GetMetaData(reviewsCount, id, GlobalConstants.ReviewsOnOnePage);
+            return this.View(viewModel);
         }
     }
 }

@@ -1,0 +1,64 @@
+﻿@model VeterinaryClinic.Web.ViewModels.Reviews.ReviewInputModel
+@{
+    ViewData["Title"] = "Write A Review";
+}
+<br />
+@if (this.TempData["Info"] != null)
+{
+    <div class="alert alert-info" role="alert">
+        @TempData["Info"]
+    </div>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <h1 style="text-align:center"><b>@ViewData["Title"]</b></h1>
+            <form method="post" asp-area="Owner" asp-controller="Owner" asp-action="WriteReview">
+                <div class="form-group">
+                    <label asp-for="@Model.Content"></label>
+                    <textarea asp-for="@Model.Content" class="form-control" id="review" maxlength="100"></textarea>
+                    <p id="message"></p>
+                </div>
+                <button id="reviewSubmit" type="submit" class="btn btn-primary" onclick="submitForm()">Post Review</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+
+@section Scripts {
+    <script src="/lib/tinymce/tinymce.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: "textarea",
+            plugins: ["image paste table link code media"]
+        });
+    </script>
+    <script>
+        function submitForm() {
+            // Check if the user has entered more than 150 characters
+            if (tinymce.get("review").getContent({ format: "text" }).length > 151) {
+                alert("The typed in content is too long!");
+                return;
+            }
+        }
+
+    </script>
+    <script>
+        var message = document.getElementById("message");
+        var maxLength = 151;
+        var checkLength = function () {
+            if (tinymce.get("review").getContent({ format: "text" }).length <= maxLength) {
+                message.innerHTML = (maxLength - tinymce.get("review").getContent({ format: "text" }).length) + " characters remaining";
+            }
+            else {
+                var errorMessage = "Sorry, but your review is too long, please type in shorter text"
+                message.innerHTML = errorMessage.fontcolor("red");
+            }
+        }
+        setInterval(checkLength, 100);
+    </script>
+
+
+}
+

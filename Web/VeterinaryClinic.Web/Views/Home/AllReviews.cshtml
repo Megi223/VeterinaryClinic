@@ -1,0 +1,62 @@
+﻿@model IEnumerable<VeterinaryClinic.Web.ViewModels.Reviews.AllReviewsViewModel>
+
+@{
+    ViewData["Title"] = "All Reviews";
+}
+
+
+<link rel="stylesheet" href="~/css/customPagination.css" />
+
+<section class="hero-wrap hero-wrap-2" style="background-image: url('https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_2_gfdtjt.jpg');" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-end">
+            <div class="col-md-9 ftco-animate pb-5">
+                <p class="breadcrumbs mb-2"><span class="mr-2"><a asp-area="" asp-controller="Home" asp-action="Index">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Reviews <i class="ion-ios-arrow-forward"></i></span></p>
+                <h1 class="mb-0 bread"><b>Reviews</b></h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-degree-bg" style="padding-top:0px;padding-bottom:0px">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 ftco-animate">
+                <div class="pt-5 mt-5 col-md-10 offset-1">
+                    <ul class="comment-list">
+                        @foreach (var review in Model)
+                        {
+                            <li class="comment">
+                                <div class="vcard bio">
+                                    <img src="@review.OwnerProfilePicture" alt="Profile picture">
+                                </div>
+                                <div class="comment-body">
+                                    <h3>@review.OwnerFullName</h3>
+                                    <div class="meta"><time datetime="@review.CreatedOn.ToString("O")"></time></div>
+                                    <p>@Html.Raw(review.SanitizedContent)</p>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+
+                    <a class="btn btn-primary" asp-area="Owner" asp-controller="Owner" asp-action="WriteReview">Write A Review</a>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col text-center">
+            <div class="block-27">
+                <pioneer-pagination info="@ViewBag.PaginatedMeta" route="/Home/AllReviews" previous-page-text="<" next-page-text=">"></pioneer-pagination>
+            </div>
+        </div>
+    </div>
+</section>
+<br />
+
+
+

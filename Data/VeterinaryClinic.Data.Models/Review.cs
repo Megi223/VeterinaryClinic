@@ -7,7 +7,11 @@
     public class Review : BaseDeletableModel<int>
     {
         [Required]
-        [MaxLength(100)]
         public string Content { get; set; }
+
+        [Required]
+        public string OwnerId { get; set; }
+
+        public Owner Owner { get; set; }
     }
 }

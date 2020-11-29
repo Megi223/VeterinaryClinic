@@ -1,0 +1,20 @@
+﻿@model VeterinaryClinic.Web.ViewModels.Reviews.ReviewViewModel
+
+@foreach (var review in Model.Reviews)
+{
+    <div class="item">
+        <div class="testimony-wrap py-4" style="height:251px">
+            <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div>
+            <div class="text">
+                <p class="mb-4">@Html.Raw(review.SanitizedContent)</p>
+                <div class="d-flex align-items-center">
+                    <div class="user-img" style="background-image: url(@review.OwnerProfilePicture)"></div>
+                    <div class="pl-3">
+                        <p class="name">@review.OwnerFullName</p>
+                        <span class="position">@review.OwnerCity</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

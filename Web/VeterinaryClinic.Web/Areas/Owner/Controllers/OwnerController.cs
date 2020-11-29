@@ -1,7 +1,7 @@
 ﻿namespace VeterinaryClinic.Web.Areas.Owner.Controllers
 {
     using System.Security.Claims;
-
+    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -10,6 +10,7 @@
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels.Pets;
+    using VeterinaryClinic.Web.ViewModels.Reviews;
 
     [Authorize(Roles = GlobalConstants.OwnerRoleName)]
     [Area("Owner")]
@@ -48,6 +49,27 @@
             this.ViewBag.PaginatedMeta = this.paginatedMetaService.GetMetaData(petsCount, id, PetsOnOnePage);
             var pets = this.petsService.GetAllForAPage<AllPetsViewModel>(id, ownerId);
             return this.View(pets);
+        }
+
+        public IActionResult WriteReview()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> WriteReview(ReviewInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.TempData["Info"] = "Please write your review again!";
+                return this.RedirectToAction("WriteReview");
+            }
+
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string ownerId = this.ownersService.GetOwnerId(userId);
+            await this.ownersService.WriteReviewAsync(ownerId, input);
+            this.TempData["Message"] = "Thank You for Your feedback!";
+            return this.RedirectToAction("AllReviews", "Home", new { area= string.Empty });
         }
     }
 }
