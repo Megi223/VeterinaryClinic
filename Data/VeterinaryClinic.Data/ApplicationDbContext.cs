@@ -33,8 +33,6 @@
 
         public DbSet<Diagnose> Diagnoses { get; set; }
 
-        public DbSet<ContactForm> ContactForms { get; set; }
-
         public DbSet<News> News { get; set; }
 
         public DbSet<Rating> Ratings { get; set; }

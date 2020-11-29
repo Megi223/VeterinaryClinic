@@ -1,6 +1,7 @@
 ﻿namespace VeterinaryClinic.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,8 @@
     using VeterinaryClinic.Services;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels;
+    using VeterinaryClinic.Web.ViewModels.Appointments;
+    using VeterinaryClinic.Web.ViewModels.Pets;
     using VeterinaryClinic.Web.ViewModels.Reviews;
 
     public class HomeController : BaseController
@@ -16,13 +19,21 @@
         private readonly IServiceScraperService serviceScraperService;
         private readonly IReviewsService reviewsService;
         private readonly IPaginatedMetaService paginatedMetaService;
+        private readonly IVetsService vetsService;
+        private readonly IOwnersService ownersService;
+        private readonly IPetsService petsService;
+
+
 
         public HomeController(IServiceScraperService serviceScraperService,
-            IReviewsService reviewsService, IPaginatedMetaService paginatedMetaService)
+            IReviewsService reviewsService, IPaginatedMetaService paginatedMetaService, IVetsService vetsService, IOwnersService ownersService, IPetsService petsService)
         {
             this.serviceScraperService = serviceScraperService;
             this.reviewsService = reviewsService;
             this.paginatedMetaService = paginatedMetaService;
+            this.vetsService = vetsService;
+            this.ownersService = ownersService;
+            this.petsService = petsService;
         }
 
         public IActionResult Index()
@@ -54,15 +65,20 @@
 
         public IActionResult Contact()
         {
-            return this.View();
-        }
+            if (this.User.Identity.IsAuthenticated)
+            {
+                var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                string ownerId = this.ownersService.GetOwnerId(userId);
+                var viewModel = new RequestAppointmentViewModel();
+                var vets = this.vetsService.GetAll<VetDropDown>();
+                viewModel.Vets = vets;
+                var pets = this.petsService.GetPets<PetDropDown>(ownerId);
+                viewModel.Pets = pets;
+                return this.View("ContactAuthenticated",viewModel);
+            }
 
-        // [HttpPost]
-        // public IActionResult Contact()
-        // {
-        //    //this method should receive an input model and then continue with /business /logic
-        //    return this.View();
-        // }
+            return this.View("Contact");
+        }
 
         // TODO: move it later
         public async Task<IActionResult> AddServices()

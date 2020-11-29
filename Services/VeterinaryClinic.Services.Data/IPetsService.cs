@@ -17,5 +17,7 @@
         T GetById<T>(string id);
 
         Task<string> DeterminePhotoUrl(IFormFile inputImage, string typeOfAnimal);
+
+        IEnumerable<T> GetPets<T>(string ownerId);
     }
 }

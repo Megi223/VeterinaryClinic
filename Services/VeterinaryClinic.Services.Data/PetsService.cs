@@ -113,5 +113,13 @@
 
             return true;
         }
+
+        public IEnumerable<T> GetPets<T>(string ownerId)
+        {
+            IQueryable<Pet> query =
+                this.petsRepository.All().Where(x => x.OwnerId == ownerId);
+
+            return query.To<T>().ToList();
+        }
     }
 }

@@ -14,7 +14,7 @@
 
         public const int CommentContentMaxLength = 200;
 
-        public const int ContactFormContentMaxLength = 500;
+        public const int AppointmentSubjectMaxLength = 50;
 
         public const int NameMaxLength = 50;
 
@@ -29,6 +29,8 @@
         public const int VetsOnOnePage = 6;
 
         public const int ReviewsOnOnePage = 6;
+
+
 
     }
 }
