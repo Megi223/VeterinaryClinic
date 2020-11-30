@@ -34,9 +34,9 @@
 
         public T GetById<T>(string id)
         {
-            var vets = this.vetsRepository.All().Where(x => x.Id == id)
+            var vet = this.vetsRepository.All().Where(x => x.Id == id)
                 .To<T>().FirstOrDefault();
-            return vets;
+            return vet;
         }
 
         public int GetCount()
@@ -63,6 +63,11 @@
             }
 
             return string.Join(", ", serviceNames);
+        }
+
+        public string GetVetId(string userId)
+        {
+            return this.vetsRepository.AllAsNoTracking().Where(x => x.UserId == userId).FirstOrDefault().Id;
         }
     }
 }

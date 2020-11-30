@@ -6,7 +6,7 @@
         }
 
         const time = moment.utc(dateTimeValue).local();
-        $(e).html(time.format("ll"));
+        $(e).html(time.format("llll"));
         $(e).attr("title", $(e).attr("datetime"));
     });
 });

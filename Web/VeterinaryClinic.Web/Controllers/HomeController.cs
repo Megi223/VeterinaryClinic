@@ -3,10 +3,11 @@
     using System.Diagnostics;
     using System.Security.Claims;
     using System.Threading.Tasks;
-
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Pioneer.Pagination;
     using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Services;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels;
@@ -22,11 +23,12 @@
         private readonly IVetsService vetsService;
         private readonly IOwnersService ownersService;
         private readonly IPetsService petsService;
+        private readonly UserManager<ApplicationUser> userManager;
 
 
 
         public HomeController(IServiceScraperService serviceScraperService,
-            IReviewsService reviewsService, IPaginatedMetaService paginatedMetaService, IVetsService vetsService, IOwnersService ownersService, IPetsService petsService)
+            IReviewsService reviewsService, IPaginatedMetaService paginatedMetaService, IVetsService vetsService, IOwnersService ownersService, IPetsService petsService, UserManager<ApplicationUser> userManager)
         {
             this.serviceScraperService = serviceScraperService;
             this.reviewsService = reviewsService;
@@ -34,6 +36,7 @@
             this.vetsService = vetsService;
             this.ownersService = ownersService;
             this.petsService = petsService;
+            this.userManager = userManager;
         }
 
         public IActionResult Index()
@@ -65,7 +68,7 @@
 
         public IActionResult Contact()
         {
-            if (this.User.Identity.IsAuthenticated)
+            if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.OwnerRoleName))
             {
                 var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 string ownerId = this.ownersService.GetOwnerId(userId);

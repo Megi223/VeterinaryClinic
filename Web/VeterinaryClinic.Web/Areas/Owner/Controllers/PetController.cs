@@ -14,7 +14,7 @@
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels.Pets;
 
-    [Authorize(Roles = GlobalConstants.OwnerRoleName)]
+    [Authorize(Roles = GlobalConstants.OwnerRoleName + ", " + GlobalConstants.VetRoleName)]
     [Area("Owner")]
     public class PetController : Controller
     {
@@ -38,6 +38,7 @@
             return this.View(model);
         }
 
+        [Authorize(Roles = GlobalConstants.OwnerRoleName)]
         public IActionResult AddPet()
         {
             var vets = this.vetsService.GetAll<VetDropDown>();
@@ -47,6 +48,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = GlobalConstants.OwnerRoleName)]
         public async Task<IActionResult> AddPet(AddPetInputModel model)
         {
             if (!this.ModelState.IsValid)

@@ -6,9 +6,15 @@
 <link rel="stylesheet" href="~/css/autocomplete.css">
 @if (TempData["Message"] != null)
 {
-<div class="alert alert-success" role="alert">
-    @TempData["Message"]
-</div>
+    <div class="alert alert-success" role="alert">
+        @TempData["Message"]
+    </div>
+}
+@if (this.TempData["SuucessfulRequest"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @this.TempData["SuucessfulRequest"]
+    </div>
 }
 <div class="wrap">
     <div>

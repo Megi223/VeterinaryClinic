@@ -17,7 +17,13 @@
             {
                 <a class="dropdown-item" asp-area="Owner" asp-controller="Owner" asp-action="MyPets">My Pets</a>
                 <a class="dropdown-item" asp-area="Owner" asp-controller="Pet" asp-action="AddPet">Add Pet</a>
-                <a class="dropdown-item"  asp-area="Owner" asp-controller="Owner" asp-action="WriteReview">Write A Review</a>
+                <a class="dropdown-item" asp-area="Owner" asp-controller="Owner" asp-action="WriteReview">Write A Review</a>
+            }
+            @if (this.User.IsInRole(GlobalConstants.VetRoleName))
+            {
+                <a class="dropdown-item" asp-area="Vet" asp-controller="Appointments" asp-action="Pending">Pending Appointments</a>
+                <a class="dropdown-item" asp-area="Vet" asp-controller="Appointments" asp-action="Upcoming">Upcoming Appointments</a>
+
             }
         </div>
     </div>

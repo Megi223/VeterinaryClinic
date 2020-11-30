@@ -31,10 +31,17 @@ namespace VeterinaryClinic.Web.Areas.Owner.Controllers
         [HttpPost]
         public async Task<IActionResult> RequestAppointment(RequestAppointmentViewModel input)
         {
+            var startTime = new DateTime(input.Date.Year, input.Date.Month, input.Date.Day, input.Time.Hour, input.Time.Minute, input.Time.Second);
+            if (startTime.ToUniversalTime() <= DateTime.UtcNow)
+            {
+                this.TempData["InvalidDate"] = "Please select a valid date";
+                return this.RedirectToAction("Contact", "Home", new { area = string.Empty });
+            }
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             string ownerId = this.ownersService.GetOwnerId(userId);
 
             await this.appointmentsService.CreateAppointmentAsync(input, ownerId);
+            this.TempData["SuucessfulRequest"] = "You have successfully requested an appointment";
             return this.RedirectToAction("Index","Home",new { area = "" });
         }
     }

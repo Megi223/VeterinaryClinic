@@ -13,5 +13,7 @@
         IEnumerable<T> GetAll<T>();
 
         string GetServices(string vetId);
+
+        string GetVetId(string userId);
     }
 }

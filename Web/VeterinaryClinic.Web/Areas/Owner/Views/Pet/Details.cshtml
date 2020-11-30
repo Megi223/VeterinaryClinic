@@ -79,8 +79,11 @@
             </div>
         </div>
     </div>
-    <a asp-area="Owner" asp-controller="Owner" asp-action="MyPets" class="btn btn-primary">Back</a>
-    <br />
+    @if (this.User.IsInRole(VeterinaryClinic.Common.GlobalConstants.OwnerRoleName))
+    {
+        <a asp-area="Owner" asp-controller="Owner" asp-action="MyPets" class="btn btn-primary">Back</a>
+        <br />
+    }
 </div>
 <br />
 

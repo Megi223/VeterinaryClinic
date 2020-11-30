@@ -1,0 +1,49 @@
+﻿@model IEnumerable<VeterinaryClinic.Web.ViewModels.Appointments.UpcomingAppointmentViewModel>
+@{
+    ViewData["Title"] = "Upcoming Appointments";
+}
+
+<br />
+
+@if (Model.Count() == 0)
+{
+    <h3 style="text-align:center"><b>No upcoming appointments</b></h3>
+    <br />
+}
+else
+{
+    <div class="container">
+        <h3 style="text-align:center"><b>@ViewData["Title"]</b></h3>
+        <br />
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Owner</th>
+                    <th scope="col">Pet</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">Start</th>
+                    <th scope="col">Cancel</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in Model)
+                {
+                    <tr>
+                        <th scope="row">@appointment.OwnerFullName</th>
+                        <td><a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@appointment.PetId">@appointment.PetName</a></td>
+                        <td>@appointment.Subject</td>
+                        <td><time datetime="@appointment.StartTime.ToString("O")"></time></td>
+                        <td>
+                            <a class="btn btn-primary" asp-area="Vet" asp-controller="Appointments" asp-action="Start" asp-route-id="@appointment.Id"><i class="fa fa-check"></i>Start</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" asp-area="Vet" asp-controller="Appointments" asp-action="Cancel" asp-route-id="@appointment.Id"><i class="fa fa-times"></i>Cancel</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <br />
+}
