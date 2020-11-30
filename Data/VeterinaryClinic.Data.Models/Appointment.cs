@@ -47,6 +47,5 @@
         public bool IsCancelledByOwner { get; set; }
 
         public bool IsAcceptedByVet { get; set; }
-
     }
 }

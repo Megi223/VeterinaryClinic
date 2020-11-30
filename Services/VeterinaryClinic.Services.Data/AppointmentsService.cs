@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-using VeterinaryClinic.Web.ViewModels.Appointments;
-using VeterinaryClinic.Data.Models.Enumerations;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Models.Enumerations;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.Appointments;
+
     public class AppointmentsService : IAppointmentsService
     {
         private readonly IDeletableEntityRepository<Appointment> appointmentsRepository;
@@ -39,7 +39,7 @@ namespace VeterinaryClinic.Services.Data
 
         public IEnumerable<T> GetVetPendingAppointments<T>(string vetId)
         {
-            IQueryable<Appointment> pendingAppointments= this.appointmentsRepository.AllAsNoTracking().Where(x => x.VetId == vetId && x.IsAcceptedByVet == false);
+            IQueryable<Appointment> pendingAppointments = this.appointmentsRepository.AllAsNoTracking().Where(x => x.VetId == vetId && x.IsAcceptedByVet == false);
 
             return pendingAppointments.To<T>().ToList();
         }
@@ -62,6 +62,12 @@ namespace VeterinaryClinic.Services.Data
                 this.appointmentsRepository.All().Where(x => x.VetId == vetId && x.IsAcceptedByVet == true && x.IsCancelledByOwner == false && x.Status == Status.Upcoming);
 
             return query.To<T>().ToList();
+        }
+
+        public async Task CancelAsync(string appointmentId)
+        {
+            this.appointmentsRepository.All().Where(x => x.Id == appointmentId).FirstOrDefault().IsDeleted = true;
+            await this.appointmentsRepository.SaveChangesAsync();
         }
     }
 }

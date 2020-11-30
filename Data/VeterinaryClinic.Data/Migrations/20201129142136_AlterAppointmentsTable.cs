@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace VeterinaryClinic.Data.Migrations
+﻿namespace VeterinaryClinic.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AlterAppointmentsTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

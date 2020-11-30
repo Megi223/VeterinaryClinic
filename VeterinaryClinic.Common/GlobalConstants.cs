@@ -29,8 +29,5 @@
         public const int VetsOnOnePage = 6;
 
         public const int ReviewsOnOnePage = 6;
-
-
-
     }
 }

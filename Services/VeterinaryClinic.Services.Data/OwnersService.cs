@@ -1,19 +1,16 @@
 ﻿namespace VeterinaryClinic.Services.Data
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
-    using VeterinaryClinic.Services.Mapping;
     using VeterinaryClinic.Web.ViewModels.Reviews;
 
     public class OwnersService : IOwnersService
     {
         private readonly IDeletableEntityRepository<Owner> ownersRepository;
         private readonly IDeletableEntityRepository<Review> reviewsRepository;
-
 
         public OwnersService(IDeletableEntityRepository<Owner> ownersRepository, IDeletableEntityRepository<Review> reviewsRepository)
         {

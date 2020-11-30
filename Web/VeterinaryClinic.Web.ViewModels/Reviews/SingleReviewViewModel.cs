@@ -1,12 +1,9 @@
-﻿using Ganss.XSS;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.Reviews
+﻿namespace VeterinaryClinic.Web.ViewModels.Reviews
 {
+    using Ganss.XSS;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class SingleReviewViewModel : IMapFrom<Review>
     {
         public string Content { get; set; }

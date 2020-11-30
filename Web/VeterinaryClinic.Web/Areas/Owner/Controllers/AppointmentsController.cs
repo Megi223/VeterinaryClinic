@@ -1,18 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Appointments;
-
-namespace VeterinaryClinic.Web.Areas.Owner.Controllers
+﻿namespace VeterinaryClinic.Web.Areas.Owner.Controllers
 {
+    using System;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Appointments;
+
     [Authorize(Roles = GlobalConstants.OwnerRoleName)]
     [Area("Owner")]
     public class AppointmentsController : Controller
@@ -20,12 +17,10 @@ namespace VeterinaryClinic.Web.Areas.Owner.Controllers
         private readonly IAppointmentsService appointmentsService;
         private readonly IOwnersService ownersService;
 
-
         public AppointmentsController(IAppointmentsService appointmentsService, IOwnersService ownersService)
         {
             this.appointmentsService = appointmentsService;
             this.ownersService = ownersService;
-
         }
 
         [HttpPost]
@@ -42,7 +37,7 @@ namespace VeterinaryClinic.Web.Areas.Owner.Controllers
 
             await this.appointmentsService.CreateAppointmentAsync(input, ownerId);
             this.TempData["SuucessfulRequest"] = "You have successfully requested an appointment";
-            return this.RedirectToAction("Index","Home",new { area = "" });
+            return this.RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }

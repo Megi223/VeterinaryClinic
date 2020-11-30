@@ -16,14 +16,11 @@
         private const string VetImageUrl = "https://res.cloudinary.com/dpwroiluv/image/upload/v1604684309/staff-2_sfkmhm.jpg";
         private const string VetSpecialization = "Cardiology";
 
-
-
         private const string VetUserName2 = "vet2@gmail.com";
         private const string VetFirstName2 = "Ivan";
         private const string VetLastName2 = "Penev";
         private const string VetImageUrl2 = "https://res.cloudinary.com/dpwroiluv/image/upload/v1604684309/staff-3_usfgz1.jpg";
         private const string VetSpecialization2 = "Dermatology";
-
 
         private UserManager<ApplicationUser> usersManager;
 

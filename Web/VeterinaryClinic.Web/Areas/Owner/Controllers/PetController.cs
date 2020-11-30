@@ -23,7 +23,6 @@
         private readonly IVetsService vetsService;
         private readonly ICloudinaryService cloudinaryService;
 
-
         public PetController(IPetsService petsService, IOwnersService ownersService, IVetsService vetsService, ICloudinaryService cloudinaryService)
         {
             this.petsService = petsService;

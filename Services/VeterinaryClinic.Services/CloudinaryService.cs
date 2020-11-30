@@ -48,7 +48,6 @@
             return url;
         }
 
-
         public bool IsFileValid(IFormFile file)
         {
             if (file == null)

@@ -22,7 +22,6 @@
         private readonly IPaginatedMetaService paginatedMetaService;
         private readonly UserManager<ApplicationUser> userManager;
 
-
         public OwnerController(IPetsService petsService, IOwnersService ownersService, IPaginatedMetaService paginatedMetaService, UserManager<ApplicationUser> userManager)
         {
             this.petsService = petsService;
@@ -69,9 +68,7 @@
             string ownerId = this.ownersService.GetOwnerId(userId);
             await this.ownersService.WriteReviewAsync(ownerId, input);
             this.TempData["Message"] = "Thank You for Your feedback!";
-            return this.RedirectToAction("AllReviews", "Home", new { area= string.Empty });
+            return this.RedirectToAction("AllReviews", "Home", new { area = string.Empty });
         }
-
-
     }
 }

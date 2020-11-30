@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Appointments;
-
-namespace VeterinaryClinic.Web.Areas.Vet.Controllers
+﻿namespace VeterinaryClinic.Web.Areas.Vet.Controllers
 {
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Appointments;
+
     [Authorize(Roles = GlobalConstants.VetRoleName)]
     [Area("Vet")]
     public class AppointmentsController : Controller
@@ -50,6 +48,12 @@ namespace VeterinaryClinic.Web.Areas.Vet.Controllers
             string vetId = this.vetsService.GetVetId(userId);
             var viewModel = this.appointmentsService.GetVetUpcomingAppointments<UpcomingAppointmentViewModel>(vetId);
             return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> Cancel(string id)
+        {
+            await this.appointmentsService.CancelAsync(id);
+            return this.RedirectToAction("Upcoming");
         }
     }
 }

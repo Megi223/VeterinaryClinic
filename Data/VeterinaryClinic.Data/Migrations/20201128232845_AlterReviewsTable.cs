@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace VeterinaryClinic.Data.Migrations
+﻿namespace VeterinaryClinic.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AlterReviewsTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

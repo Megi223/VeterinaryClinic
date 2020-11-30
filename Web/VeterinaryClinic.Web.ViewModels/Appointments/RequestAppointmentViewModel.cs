@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Web.ViewModels.Pets;
-
-namespace VeterinaryClinic.Web.ViewModels.Appointments
+﻿namespace VeterinaryClinic.Web.ViewModels.Appointments
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Web.ViewModels.Pets;
+
     public class RequestAppointmentViewModel
     {
         [Required]

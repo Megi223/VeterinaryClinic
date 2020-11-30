@@ -25,8 +25,6 @@
         private readonly IPetsService petsService;
         private readonly UserManager<ApplicationUser> userManager;
 
-
-
         public HomeController(IServiceScraperService serviceScraperService,
             IReviewsService reviewsService, IPaginatedMetaService paginatedMetaService, IVetsService vetsService, IOwnersService ownersService, IPetsService petsService, UserManager<ApplicationUser> userManager)
         {
@@ -77,7 +75,7 @@
                 viewModel.Vets = vets;
                 var pets = this.petsService.GetPets<PetDropDown>(ownerId);
                 viewModel.Pets = pets;
-                return this.View("ContactAuthenticated",viewModel);
+                return this.View("ContactAuthenticated", viewModel);
             }
 
             return this.View("Contact");
