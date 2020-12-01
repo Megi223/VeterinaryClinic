@@ -69,5 +69,23 @@
             this.appointmentsRepository.All().Where(x => x.Id == appointmentId).FirstOrDefault().IsDeleted = true;
             await this.appointmentsRepository.SaveChangesAsync();
         }
+
+        public async Task StartAsync(string appointmentId)
+        {
+            this.appointmentsRepository.All().Where(x => x.Id == appointmentId).FirstOrDefault().Status = Status.InProgress;
+            await this.appointmentsRepository.SaveChangesAsync();
+        }
+
+        public int GetAppointmentsInProgressCount(string vetId)
+        {
+            var appointmentsInProgress = this.appointmentsRepository.All().Where(x => x.VetId == vetId && x.Status == Status.InProgress).ToList();
+
+            return appointmentsInProgress.Count();
+        }
+
+        public T GetAppointmentInProgress<T>(string vetId)
+        {
+            return this.appointmentsRepository.All().Where(x => x.VetId == vetId && x.Status == Status.InProgress).To<T>().FirstOrDefault();
+        }
     }
 }

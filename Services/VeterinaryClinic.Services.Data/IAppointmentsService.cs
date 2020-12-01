@@ -18,5 +18,11 @@
         Task DeclineAsync(string appointmentId);
 
         Task CancelAsync(string appointmentId);
+
+        Task StartAsync(string appointmentId);
+
+        int GetAppointmentsInProgressCount(string vetId);
+
+        T GetAppointmentInProgress<T>(string vetId);
     }
 }

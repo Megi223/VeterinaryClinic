@@ -15,11 +15,14 @@
     {
         private readonly IAppointmentsService appointmentsService;
         private readonly IVetsService vetsService;
+        private readonly IPetsService petsService;
 
-        public AppointmentsController(IAppointmentsService appointmentsService, IVetsService vetsService)
+
+        public AppointmentsController(IAppointmentsService appointmentsService, IVetsService vetsService, IPetsService petsService)
         {
             this.appointmentsService = appointmentsService;
             this.vetsService = vetsService;
+            this.petsService = petsService;
         }
 
         public IActionResult Pending()
@@ -54,6 +57,30 @@
         {
             await this.appointmentsService.CancelAsync(id);
             return this.RedirectToAction("Upcoming");
+        }
+
+        public async Task<IActionResult> Start(string id)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string vetId = this.vetsService.GetVetId(userId);
+            var appointmentsInProgressCount = this.appointmentsService.GetAppointmentsInProgressCount(vetId);
+            if (appointmentsInProgressCount == 1)
+            {
+                this.TempData["AppointmentProgress"] = "You are already in an appointment. You cannot start new one!";
+                var viewModel = this.appointmentsService.GetAppointmentInProgress<AppointmentInProgressViewModel>(vetId);
+                return this.View(viewModel);
+            }
+            await this.appointmentsService.StartAsync(id);
+            var model = this.appointmentsService.GetAppointmentInProgress<AppointmentInProgressViewModel>(vetId);
+            return this.View(model);
+
+        }
+
+        public async Task<IActionResult> Diagnose(AppointmentInProgressViewModel model)
+        {
+            await this.petsService.SetDiagnoseAsync(model.PetDiagnoseDescription,model.PetDiagnoseName,model.PetId);
+            var viewModel = this.appointmentsService.GetAppointmentInProgress<AppointmentInProgressViewModel>(model.VetId);
+            return this.View("Start",viewModel);
         }
     }
 }

@@ -23,12 +23,15 @@
         private const string ParrotDefaultPhotoUrl = "https://res.cloudinary.com/dpwroiluv/image/upload/v1606324468/parrot_ajr3j3.png";
 
         private readonly IDeletableEntityRepository<Pet> petsRepository;
+        private readonly IDeletableEntityRepository<Diagnose> diagnoseRepository;
+
         private readonly ICloudinaryService cloudinaryService;
 
-        public PetsService(IDeletableEntityRepository<Pet> petsRepository, ICloudinaryService cloudinaryService)
+        public PetsService(IDeletableEntityRepository<Pet> petsRepository, ICloudinaryService cloudinaryService, IDeletableEntityRepository<Diagnose> diagnoseRepository)
         {
             this.petsRepository = petsRepository;
             this.cloudinaryService = cloudinaryService;
+            this.diagnoseRepository = diagnoseRepository;
         }
 
         public async Task<string> DeterminePhotoUrl(IFormFile inputImage, string typeOfAnimal)
@@ -120,6 +123,18 @@
                 this.petsRepository.All().Where(x => x.OwnerId == ownerId);
 
             return query.To<T>().ToList();
+        }
+
+        public async Task SetDiagnoseAsync(string diagnoseDescription, string diagnoseName, string petId)
+        {
+            Diagnose diagnose = new Diagnose { Name = diagnoseName, Description = diagnoseDescription };
+
+            await this.diagnoseRepository.AddAsync(diagnose);
+            await this.diagnoseRepository.SaveChangesAsync();
+
+            this.petsRepository.All().Where(x => x.Id == petId).FirstOrDefault().Diagnose = diagnose;
+
+            await this.petsRepository.SaveChangesAsync();
         }
     }
 }

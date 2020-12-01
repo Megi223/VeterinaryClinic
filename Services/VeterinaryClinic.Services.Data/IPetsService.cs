@@ -19,5 +19,7 @@
         Task<string> DeterminePhotoUrl(IFormFile inputImage, string typeOfAnimal);
 
         IEnumerable<T> GetPets<T>(string ownerId);
+
+        Task SetDiagnoseAsync(string diagnoseDescription, string diagnoseName, string petId);
     }
 }
