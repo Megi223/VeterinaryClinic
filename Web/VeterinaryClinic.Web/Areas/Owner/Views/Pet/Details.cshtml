@@ -68,7 +68,11 @@
                                         }
                                         else
                                         {
-                                            <h6 class="text-muted f-w-400">@Model.PetsMedicationsAsString</h6>
+                                            foreach (var medication in Model.PetsMedications)
+                                            {
+                                                <h6 class="text-muted f-w-400">@medication.MedicationName - @medication.MedicationNumberOfDosesPerServing</h6>
+
+                                            }
                                         }
                                     </div>
                                 </div>

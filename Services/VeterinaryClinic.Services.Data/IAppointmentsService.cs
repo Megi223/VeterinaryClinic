@@ -24,5 +24,7 @@
         int GetAppointmentsInProgressCount(string vetId);
 
         T GetAppointmentInProgress<T>(string vetId);
+
+        Task EndAsync(string appointmentId);
     }
 }

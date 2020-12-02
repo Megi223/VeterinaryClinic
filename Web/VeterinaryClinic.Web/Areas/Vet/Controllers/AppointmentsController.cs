@@ -16,13 +16,16 @@
         private readonly IAppointmentsService appointmentsService;
         private readonly IVetsService vetsService;
         private readonly IPetsService petsService;
+        private readonly IPetsMedicationsService petsMedicationsService;
 
 
-        public AppointmentsController(IAppointmentsService appointmentsService, IVetsService vetsService, IPetsService petsService)
+
+        public AppointmentsController(IAppointmentsService appointmentsService, IVetsService vetsService, IPetsService petsService, IPetsMedicationsService petsMedicationsService)
         {
             this.appointmentsService = appointmentsService;
             this.vetsService = vetsService;
             this.petsService = petsService;
+            this.petsMedicationsService = petsMedicationsService;
         }
 
         public IActionResult Pending()
@@ -81,6 +84,30 @@
             await this.petsService.SetDiagnoseAsync(model.PetDiagnoseDescription,model.PetDiagnoseName,model.PetId);
             var viewModel = this.appointmentsService.GetAppointmentInProgress<AppointmentInProgressViewModel>(model.VetId);
             return this.View("Start",viewModel);
+        }
+
+        public async Task<IActionResult> End(string id)
+        {
+            await this.appointmentsService.EndAsync(id);
+            return this.RedirectToAction("Pending");
+        }
+
+        public IActionResult Medication(string id)
+        {
+            var model = new PrescribeMedicationViewModel();
+            model.PetId = id;
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Medication(PrescribeMedicationViewModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+            await this.petsMedicationsService.PrescribeMedication(model);
+            return this.RedirectToAction("Upcoming");
         }
     }
 }

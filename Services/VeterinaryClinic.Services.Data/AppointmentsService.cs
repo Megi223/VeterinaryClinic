@@ -87,5 +87,12 @@
         {
             return this.appointmentsRepository.All().Where(x => x.VetId == vetId && x.Status == Status.InProgress).To<T>().FirstOrDefault();
         }
+
+        public async Task EndAsync(string appointmentId)
+        {
+            this.appointmentsRepository.All().Where(x => x.Id == appointmentId).FirstOrDefault().Status = Status.Finished;
+
+            await this.appointmentsRepository.SaveChangesAsync();
+        }
     }
 }

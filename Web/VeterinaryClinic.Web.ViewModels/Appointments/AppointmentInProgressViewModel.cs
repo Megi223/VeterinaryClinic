@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using VeterinaryClinic.Data.Models;
 using VeterinaryClinic.Services.Mapping;
@@ -26,10 +28,22 @@ namespace VeterinaryClinic.Web.ViewModels.Appointments
 
         public DateTime StartTime { get; set; }
 
+        [Display(Name = "Description")]
+        [Required]
         public string PetDiagnoseDescription { get; set; }
 
+        [Display(Name = "Name")]
+        [Required]
         public string PetDiagnoseName { get; set; }
 
-        // Add medications
+        //public PetsMedicationsInputModel PetPetsMedications { get;set; }
+
+        //public void CreateMappings(IProfileExpression configuration)
+        //{
+        //    configuration.CreateMap<PetsMedications, PetsMedicationsInputModel>()
+        //        .ForMember(x => x.PetId, opt => opt.MapFrom(y => y.PetId))
+        //        .ForMember(x => x.MedicationName, opt => opt.MapFrom(y => y.Medication.Name))
+        //        .ForMember(x => x.MedicationNumberOfDosesPerServing, opt => opt.MapFrom(y => y.Medication.NumberOfDosesPerServing));
+        //}
     }
 }

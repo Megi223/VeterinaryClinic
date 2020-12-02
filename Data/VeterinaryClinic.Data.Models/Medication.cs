@@ -18,7 +18,8 @@
         [MaxLength(GlobalConstants.MedicationNameMaxLength)]
         public string Name { get; set; }
 
-        public int NumberOfDosesPerServing { get; set; }
+        [Required]
+        public string NumberOfDosesPerServing { get; set; }
 
         public virtual ICollection<DosingTime> DosingTimes { get; set; }
 

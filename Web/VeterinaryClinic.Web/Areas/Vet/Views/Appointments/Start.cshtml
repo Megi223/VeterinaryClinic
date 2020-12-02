@@ -10,45 +10,125 @@
     </div>
 }
 <br />
-<h3>
-    <b>
-        You are currently in an appointment with @Model.OwnerFullName and pet:
-        <a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@Model.PetId">
-            @Model.PetName
-        </a>
-    </b>
-</h3>
-<div class="px-4 pt-3"> <button type="button" class="btn btn-primary float-right" onclick="showAddDiagnoseForm()"><i class="fa fa-hand-holding-medical"></i>&nbsp; Diagnose</button> </div>
-<div class="clearfix"></div>
-<div>
-    <form asp-area="Vet" asp-controller="Appointments" asp-action="Diagnose" method="post" id="AddDiagnoseForm" style="display: none">
+<div class="container">
+    <h3>
+        <b>
+            You are currently in an appointment with @Model.OwnerFullName and pet
+            <a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@Model.PetId">
+                @Model.PetName
+            </a>
+        </b>
+    </h3>
+    <h4>Subject: @Model.Subject</h4>
+    <div class="px-4 pt-3"> <button type="button" class="btn btn-primary float-right" onclick="showAddDiagnoseForm()"><i class="fa fa-hand-holding-medical"></i>&nbsp; Diagnose</button> </div>
+    <br />
+    <a class="btn btn-primary" asp-area="Vet" asp-controller="Appointments" asp-action="Medication" asp-route-id="@Model.PetId">Medication</a>
+
+    <div class="clearfix"></div>
+    <div>
+        <form asp-area="Vet" asp-controller="Appointments" asp-action="Diagnose" method="post" id="AddDiagnoseForm" style="display: none">
+            <input type="hidden" asp-for="@Model.PetId" value="@Model.PetId" />
+            <input type="hidden" asp-for="@Model.VetId" value="@Model.VetId" />
+            <h4>Write Diagnosis</h4>
+            <div class="col-md-6">
+                <label asp-for="@Model.PetDiagnoseName"></label>
+                <input asp-for="@Model.PetDiagnoseName" class="form-control" />
+                <span asp-validation-for="@Model.PetDiagnoseName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="@Model.PetDiagnoseDescription"></label>
+                <textarea asp-for="@Model.PetDiagnoseDescription" class="form-control"></textarea>
+                <span asp-validation-for="@Model.PetDiagnoseDescription" class="text-danger"></span>
+            </div>
+            <div>
+                <br />
+                <input type="submit" class="btn btn-primary" value="Diagnose" />
+            </div>
+            <br />
+        </form>
+    </div>
+
+    @*<form asp-area="Vet" asp-controller="Appointments" asp-action="Medication" method="post" id="AddMedicationForm" style="display: none">
         <input type="hidden" asp-for="@Model.PetId" value="@Model.PetId" />
         <input type="hidden" asp-for="@Model.VetId" value="@Model.VetId" />
-        <h4>Write Diagnosis</h4>
+        <h4>Prescribe Medication</h4>
+        <div id="MedicationsContainer">
+            <label asp-for="@Model.PetPetsMedications"></label>
+            <a class="btn btn-success" onclick="AddMedication()">+</a>
+        </div>
         <div class="col-md-6">
-            <label asp-for="@Model.PetDiagnoseName"></label>
+            <label asp-for="@Model.PetPetsMedications."></label>
             <input asp-for="@Model.PetDiagnoseName" class="form-control" />
             <span asp-validation-for="@Model.PetDiagnoseName" class="text-danger"></span>
         </div>
         <div class="col-md-6">
-            <label asp-for="@Model.PetDiagnoseDescription"></label>
-            <textarea asp-for="@Model.PetDiagnoseDescription" class="form-control"></textarea>
-            <span asp-validation-for="@Model.PetDiagnoseDescription" class="text-danger"></span>
+            <label asp-for="@Model.PetPetsMedications"></label>
+            <input asp-for="@Model.PetDiagnoseName" class="form-control" />
+            <span asp-validation-for="@Model.PetDiagnoseName" class="text-danger"></span>
         </div>
         <div>
-            <input type="submit" class="btn btn-primary" value="Diagnose" />
+            <br />
+            <input type="submit" class="btn btn-primary" value="Prescribe" />
         </div>
-    </form>
+        <br />
+    </form>*@
+
+    @*<partial name="_AddMedicationPartial" model="Model.PetPetsMedications"/>*@
+
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#End">End</button>
+
+    <!-- Modal -->
+    <div id="End" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="fa fa-exclamation-triangle fa-3x"></i>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are You sure You want to end this appointment?</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-success" asp-area="Vet" asp-controller="Appointments" asp-action="End" asp-route-id="@Model.Id">Yes</a>
+                    <a class="btn btn-danger" data-dismiss="modal" style="color:white">No</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br />
 </div>
 
-
+<br />
 @section Scripts{
     <script>
         function showAddDiagnoseForm() {
-            $("#AddDiagnoseForm").show();
+            $("#AddDiagnoseForm").toggle();
             $([document.documentElement, document.body]).animate({
                 scrollTop: $("#AddDiagnoseForm").offset().top
             }, 1000);
+        }
+    </script>
+
+    <script>
+        function showAddMedicationForm() {
+            $("#AddMedicationForm").toggle();
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#AddMedicationForm").offset().top
+            }, 1000);
+        }
+    </script>
+
+    <script>
+        var medicationIndex = 0;
+        function AddMedication() {
+            $("#MedicationsContainer").
+                
+                //append("<div class='form-control'>Name: <input type='text' name='PetsMedication[" + medicationIndex + "].MedicationName' /> Quantity: <input type='text' name='PetsMedication[" + ingredientIndex + "].MedicationNumberOfDosesPerServing' /></div>");
+            medicationIndex++;
         }
     </script>
 }

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Linq;
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Data.Models.Enumerations;
     using VeterinaryClinic.Services.Mapping;
@@ -49,8 +49,9 @@
 
         public string OwnerName => this.Owner.FirstName + " " + this.Owner.LastName;
 
-        public ICollection<PetsMedications> PetsMedications { get; set; }
+        public ICollection<PetsMedicationsViewModel> PetsMedications { get; set; }
 
-        public string PetsMedicationsAsString => string.Join(", ", this.PetsMedications);
+
+       
     }
 }

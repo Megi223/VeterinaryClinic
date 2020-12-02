@@ -1,0 +1,30 @@
+﻿@model VeterinaryClinic.Web.ViewModels.Appointments.PrescribeMedicationViewModel
+
+<form asp-area="Vet" asp-controller="Appointments" asp-action="Medication" method="post" id="AddMedicationForm" style="display: block">
+    <input type="hidden" asp-for="@Model.PetId" value="@Model.PetId" />
+    <h4>Prescribe Medication</h4>
+    <div id="MedicationsContainer">
+
+        <h5>Click here to be able to add medications</h5>
+        <a class="btn btn-success" onclick="AddMedication()" style="color:white">+</a>
+
+    </div>
+    <div>
+        <br />
+        <input type="submit" class="btn btn-primary" value="Prescribe" />
+    </div>
+    <br />
+</form>
+
+
+
+@section Scripts {
+    <script>
+        var medicationsIndex = 0;
+        function AddMedication() {
+            $("#MedicationsContainer").
+                append("<div class='form-control'>Name: <input type='text' name='Medications[" + medicationsIndex + "].MedicationName' /> Number of doses per serving: <input type='text' name='Medications[" + medicationsIndex + "].MedicationNumberOfDosesPerServing' /></div>");
+            medicationsIndex++;
+        }
+    </script>
+}
