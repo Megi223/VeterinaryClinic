@@ -36,14 +36,6 @@ namespace VeterinaryClinic.Web.ViewModels.Appointments
         [Required]
         public string PetDiagnoseName { get; set; }
 
-        //public PetsMedicationsInputModel PetPetsMedications { get;set; }
-
-        //public void CreateMappings(IProfileExpression configuration)
-        //{
-        //    configuration.CreateMap<PetsMedications, PetsMedicationsInputModel>()
-        //        .ForMember(x => x.PetId, opt => opt.MapFrom(y => y.PetId))
-        //        .ForMember(x => x.MedicationName, opt => opt.MapFrom(y => y.Medication.Name))
-        //        .ForMember(x => x.MedicationNumberOfDosesPerServing, opt => opt.MapFrom(y => y.Medication.NumberOfDosesPerServing));
-        //}
+        public ICollection<PetsMedicationsViewModel> PetPetsMedications { get; set; }
     }
 }

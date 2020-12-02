@@ -1,22 +1,31 @@
 ﻿@model VeterinaryClinic.Web.ViewModels.Appointments.PrescribeMedicationViewModel
 
-<form asp-area="Vet" asp-controller="Appointments" asp-action="Medication" method="post" id="AddMedicationForm" style="display: block">
-    <input type="hidden" asp-for="@Model.PetId" value="@Model.PetId" />
-    <h4>Prescribe Medication</h4>
-    <div id="MedicationsContainer">
+@if (this.TempData["InvalidMedication"] != null)
+{
+<div class="alert alert-danger" role="alert">
+    @this.TempData["InvalidMedication"]
+</div>
+}
+<br />
+<div class="container">
+    <form asp-area="Vet" asp-controller="Appointments" asp-action="Medication" method="post" id="AddMedicationForm" style="display: block">
+        <input type="hidden" asp-for="@Model.PetId" value="@Model.PetId" />
+        <h4>Prescribe Medication</h4>
+        <div id="MedicationsContainer">
 
-        <h5>Click here to be able to add medications</h5>
-        <a class="btn btn-success" onclick="AddMedication()" style="color:white">+</a>
+            <h5>Click here to be able to add medications</h5>
+            <a class="btn btn-success" onclick="AddMedication()" style="color:white">+</a>
 
-    </div>
-    <div>
+        </div>
+        <div>
+            <br />
+            <input type="submit" class="btn btn-primary" value="Prescribe" />
+        </div>
         <br />
-        <input type="submit" class="btn btn-primary" value="Prescribe" />
-    </div>
-    <br />
-</form>
-
-
+    </form>
+    <a class="btn btn-outline-success" asp-area="Vet" asp-controller="Appointments" asp-action="Current">Back</a>
+</div>
+<br />
 
 @section Scripts {
     <script>

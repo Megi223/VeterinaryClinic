@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 using VeterinaryClinic.Data.Models;
 using VeterinaryClinic.Services.Mapping;
 
 namespace VeterinaryClinic.Web.ViewModels.Appointments
 {
-    public class PetsMedicationsInputModel 
+    public class PetsMedicationsViewModel : IMapFrom<PetsMedications>
     {
-        [Required]
+        public int Id { get; set; }
+
         public string MedicationName { get; set; }
-        [Required]
+
         public string MedicationNumberOfDosesPerServing { get; set; }
     }
 }

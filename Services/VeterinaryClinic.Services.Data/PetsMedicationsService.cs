@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VeterinaryClinic.Data.Common.Repositories;
@@ -20,7 +21,18 @@ namespace VeterinaryClinic.Services.Data
             this.medicationsRepository = medicationsRepository;
         }
 
-        public async Task PrescribeMedication(PrescribeMedicationViewModel model)
+        public async Task EndMedicationAsync(int id)
+        {
+            var petsMedicationsTarget = this.petsMedicationsRepository.All().Where(x => x.Id == id).FirstOrDefault();
+            var medicationIdTarget = this.petsMedicationsRepository.All().Where(x => x.Id == id).FirstOrDefault().MedicationId;
+            var medicationTarget = this.medicationsRepository.All().FirstOrDefault(x => x.Id == medicationIdTarget);
+            this.petsMedicationsRepository.Delete(petsMedicationsTarget);
+            this.medicationsRepository.Delete(medicationTarget);
+            await this.petsMedicationsRepository.SaveChangesAsync();
+            await this.medicationsRepository.SaveChangesAsync();
+        }
+
+        public async Task PrescribeMedicationAsync(PrescribeMedicationViewModel model)
         {
             foreach (var medicationModel in model.Medications)
             {
@@ -33,13 +45,15 @@ namespace VeterinaryClinic.Services.Data
 
                 await this.medicationsRepository.AddAsync(medication);
                 await this.medicationsRepository.SaveChangesAsync();
+                ;
                 PetsMedications petsMedications = new PetsMedications
                 {
                     PetId = model.PetId,
-                    Medication = medication,
+                    MedicationId = medication.Id,
                 };
                 await this.petsMedicationsRepository.AddAsync(petsMedications);
                 await this.petsMedicationsRepository.SaveChangesAsync();
+                ;
             }
         }
     }

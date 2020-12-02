@@ -8,6 +8,8 @@ namespace VeterinaryClinic.Services.Data
 {
     public interface IPetsMedicationsService
     {
-        Task PrescribeMedication(PrescribeMedicationViewModel model);
+        Task PrescribeMedicationAsync(PrescribeMedicationViewModel model);
+
+        Task EndMedicationAsync(int id);
     }
 }
