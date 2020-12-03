@@ -15,11 +15,11 @@
                 @foreach (var item in Model.Vets)
                 {
                     <li class="media">
-                        <img src="@item.ImageUrl" class="mr-3" alt="Image" style="height:183px;width:275px">
+                        <img src="@item.ProfilePicture" class="mr-3" alt="Image" style="height:260px;width:275px">
                         <div class="media-body">
                             <h5 class="mt-0"><b>@item.FirstName @item.LastName</b></h5>
-                            <p>@item.Services</p>
-                            <a asp-controller="Services" asp-action="Details" asp-route-id="@item.Id">Learn more</a>
+                            <p>Services: @(item.Services != null ? item.Services : "none")</p>
+                            <a asp-area="Vet" asp-controller="Vet" asp-action="Details" asp-route-id="@item.Id">Learn more</a>
                         </div>
                     </li>
                     <br />

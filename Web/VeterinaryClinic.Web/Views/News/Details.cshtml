@@ -23,8 +23,10 @@
                     <p>@Model.Content</p>
 
                 </div>
-               
-                        <vc:news></vc:news>
+                <cache expires-after="TimeSpan.FromMinutes(10)">
+                    <vc:news></vc:news>
+                </cache>
+                       
                     
                 
             </div>

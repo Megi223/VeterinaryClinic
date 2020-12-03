@@ -10,10 +10,12 @@
     public class SearchController : Controller
     {
         private readonly ISearchService searchService;
+        private readonly IVetsService vetsService;
 
-        public SearchController(ISearchService searchService)
+        public SearchController(ISearchService searchService, IVetsService vetsService)
         {
             this.searchService = searchService;
+            this.vetsService = vetsService;
         }
 
         public async Task<IActionResult> Index(string search, bool veterinarians, bool services, bool news)
@@ -24,6 +26,10 @@
             if (veterinarians == true)
             {
                 vetsFound = this.searchService.SearchVet<VetsFoundViewModel>(search);
+                foreach (var vetModel in vetsFound)
+                {
+                    vetModel.Services = this.vetsService.GetServices(vetModel.Id);
+                }
             }
 
             if (services == true)

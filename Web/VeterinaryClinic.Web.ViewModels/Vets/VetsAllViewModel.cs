@@ -19,14 +19,6 @@
 
         public string Services { get; set; }
 
-        // public ICollection<VetsServices> VetsServices { get; set; }
-
-        /* public void CreateMappings(IProfileExpression configuration)
-         {
-             //var vetsServices = this.VetsServices.Where(x => x.VetId == this.Id).Select(x => x.Service.Name);
-             //TODO: Check this logic here
-             configuration.CreateMap<Vet, VetsAllViewModel>()
-                 .ForMember(x => x.Services, opt => opt.MapFrom(v => string.Join(", ", this.VetsServices.Select(x => x.Service.Name).ToList())));
-         }*/
+        
     }
 }
