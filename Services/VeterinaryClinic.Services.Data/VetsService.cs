@@ -1,25 +1,31 @@
 ﻿namespace VeterinaryClinic.Services.Data
 {
+    using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.Vets;
 
     public class VetsService : IVetsService
     {
+        private const string DefaultImageUrl = "https://res.cloudinary.com/dpwroiluv/image/upload/v1606144918/default-profile-icon-16_vbh95n.png";
+
         private readonly IDeletableEntityRepository<Vet> vetsRepository;
         private readonly IDeletableEntityRepository<VetsServices> vetsServicesRepository;
+        private readonly ICloudinaryService cloudinaryService;
 
         private readonly IServicesService servicesService;
 
-        public VetsService(IDeletableEntityRepository<Vet> vetsRepository, IDeletableEntityRepository<VetsServices> vetsServicesRepository, IServicesService servicesService)
+        public VetsService(IDeletableEntityRepository<Vet> vetsRepository, IDeletableEntityRepository<VetsServices> vetsServicesRepository, IServicesService servicesService, ICloudinaryService cloudinaryService)
         {
             this.vetsRepository = vetsRepository;
             this.vetsServicesRepository = vetsServicesRepository;
             this.servicesService = servicesService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public IEnumerable<T> GetAllForAPage<T>(int page)
@@ -68,6 +74,37 @@
         public string GetVetId(string userId)
         {
             return this.vetsRepository.AllAsNoTracking().Where(x => x.UserId == userId).FirstOrDefault().Id;
+        }
+
+        public async Task<string> DeterminePhotoUrl(IFormFile input)
+        {
+            string photoUrl = string.Empty;
+            if (input != null)
+            {
+                photoUrl = await this.cloudinaryService.UploudAsync(input);
+            }
+            else
+            {
+                photoUrl = DefaultImageUrl;
+            }
+
+            return photoUrl;
+        }
+
+        public async Task AddVetAsync(string userId, AddVetInputModel model, string photoUrl)
+        {
+            Vet vet = new Vet
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                ProfilePicture = photoUrl,
+                HireDate = model.HireDate,
+                Specialization = model.Specialization,
+                UserId = userId,
+            };
+
+            await this.vetsRepository.AddAsync(vet);
+            await this.vetsRepository.SaveChangesAsync();
         }
     }
 }

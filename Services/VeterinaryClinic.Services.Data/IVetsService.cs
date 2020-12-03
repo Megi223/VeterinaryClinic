@@ -1,6 +1,9 @@
 ﻿namespace VeterinaryClinic.Services.Data
 {
+    using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using VeterinaryClinic.Web.ViewModels.Vets;
 
     public interface IVetsService
     {
@@ -15,5 +18,9 @@
         string GetServices(string vetId);
 
         string GetVetId(string userId);
+
+        Task<string> DeterminePhotoUrl(IFormFile input);
+
+        Task AddVetAsync(string userId, AddVetInputModel model, string photoUrl);
     }
 }

@@ -14,6 +14,8 @@
 
         public const int CommentContentMaxLength = 200;
 
+        public const int SpecializationMaxLength = 50;
+
         public const int AppointmentSubjectMaxLength = 50;
 
         public const int NameMaxLength = 50;

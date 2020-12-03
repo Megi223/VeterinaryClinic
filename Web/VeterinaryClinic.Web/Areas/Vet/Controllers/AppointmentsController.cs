@@ -1,5 +1,6 @@
 ﻿namespace VeterinaryClinic.Web.Areas.Vet.Controllers
 {
+    using System.Diagnostics;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -17,7 +18,6 @@
         private readonly IVetsService vetsService;
         private readonly IPetsService petsService;
         private readonly IPetsMedicationsService petsMedicationsService;
-
 
 
         public AppointmentsController(IAppointmentsService appointmentsService, IVetsService vetsService, IPetsService petsService, IPetsMedicationsService petsMedicationsService)

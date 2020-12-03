@@ -1,4 +1,12 @@
-﻿<section class="hero-wrap hero-wrap-2" style="background-image: url('https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_2_gfdtjt.jpg');" data-stellar-background-ratio="0.5">
+﻿@{ 
+    this.ViewData["Title"] = "Contact";
+}
+<style>
+    #label {
+        color:white;
+    }
+</style>
+<section class="hero-wrap hero-wrap-2" style="background-image: url('https://res.cloudinary.com/dpwroiluv/image/upload/v1604684305/bg_2_gfdtjt.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text align-items-end">
@@ -28,62 +36,58 @@
         <div class="row d-md-flex justify-content-end">
             <div class="col-md-12 col-lg-6 half p-3 py-5 pl-lg-5 ftco-animate">
                 <h2 class="mb-4">Consultation</h2>
-                <form action="#" class="appointment">
+                <form method="post" class="appointment" asp-area="" asp-controller="Home" asp-action="Contact">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <div class="form-field">
-                                    <div class="select-wrap">
-                                        <div class="icon"><span class="fa fa-chevron-down"></span></div>
-                                        <select name="" id="" class="form-control">
-                                            <option value="">Select services</option>
-                                            <option value="">Cat Sitting</option>
-                                            <option value="">Dog Walk</option>
-                                            <option value="">Pet Spa</option>
-                                            <option value="">Pet Grooming</option>
-                                            <option value="">Pet Daycare</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                <label id="label">Subject</label>
+                                <input name="subject" class="form-control" />
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Your Name">
+                                <label id="label">Username</label>
+                                <input type="text" class="form-control" placeholder="Your name" name="username"/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Vehicle number">
+                                <label id="label">Pet name</label>
+                                <input type="text" class="form-control" placeholder="Your pet name" name="petname"/>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label id="label">Vet name</label>
+                                <input type="text" class="form-control" placeholder="Vet name" name="vetname"/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label id="label">Date</label>
                                 <div class="input-wrap">
                                     <div class="icon"><span class="fa fa-calendar"></span></div>
-                                    <input type="text" class="form-control appointment_date" placeholder="Date">
+                                    <input type="text" class="form-control appointment_date" placeholder="Date" name="date">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
+                                <label id="label">Time</label>
                                 <div class="input-wrap">
                                     <div class="icon"><span class="fa fa-clock-o"></span></div>
-                                    <input type="text" class="form-control appointment_time" placeholder="Time">
+                                    <input type="text" class="form-control appointment_time" placeholder="Time" name="time">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="submit" value="Send message" class="btn btn-primary py-3 px-4">
+
+                                <button type="submit" class="btn btn-primary">Request An Appointment</button>
                             </div>
                         </div>
                     </div>
+                    
                 </form>
             </div>
         </div>

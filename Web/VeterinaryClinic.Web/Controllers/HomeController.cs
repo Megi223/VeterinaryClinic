@@ -3,6 +3,7 @@
     using System.Diagnostics;
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Pioneer.Pagination;
@@ -79,6 +80,13 @@
             }
 
             return this.View("Contact");
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Contact(string subject,string name,string petname,string vetname,string date,string time)
+        {
+            return this.RedirectToAction("Contact");
         }
 
         // TODO: move it later

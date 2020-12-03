@@ -68,6 +68,18 @@ else
         {
             <h3>Medications: none</h3>
         }
+
+        @*<hr />
+        <div id="chronoExample">
+            <div class="values" style="color:black;text-align:center;text-decoration:overline;text-decoration-color:#28a745;font-size:100px">00:00:00</div>
+            <div style="justify-content:center;display:flex">
+                <button class="startButton btn btn-success" id="startButton">Start</button>
+                <span style="display:inline-block; width: 10px;"></span>
+                <button class="pauseButton btn btn-info">Pause</button>
+                <span style="display:inline-block; width: 10px;"></span>
+                <button class="stopButton btn btn-danger">Stop</button>
+            </div>
+        </div>*@
         <hr />
         <br />
         <div><h6>Click the button to be able to write diagnose to the pet.</h6> <button type="button" class="btn btn-primary" onclick="showAddDiagnoseForm()"><i class="fa fa-hand-holding-medical"></i>&nbsp; Diagnose</button> </div>
@@ -78,7 +90,7 @@ else
 
         <h6>Click the button to be able to prescribe medication to the pet.</h6>
         <a class="btn btn-primary" asp-area="Vet" asp-controller="Appointments" asp-action="Medication" asp-route-id="@Model.PetId">Medication</a>
-
+        
         <div class="clearfix"></div>
         <br />
 
@@ -136,6 +148,11 @@ else
     </div>
 
     <br />
+
+
+    
+
+
 }
 
 @section Scripts{
@@ -147,25 +164,39 @@ else
             }, 1000);
         }
     </script>
-
+  
+    @*<script src="https://cdn.jsdelivr.net/npm/easytimer@1.1.1/dist/easytimer.min.js" asp-append-version="true"></script>
     <script>
-        function showAddMedicationForm() {
-            $("#AddMedicationForm").toggle();
-            $([document.documentElement, document.body]).animate({
-                scrollTop: $("#AddMedicationForm").offset().top
-            }, 1000);
-        }
-    </script>
 
-    <script>
-        var medicationIndex = 0;
-        function AddMedication() {
-            $("#MedicationsContainer").
 
-                //append("<div class='form-control'>Name: <input type='text' name='PetsMedication[" + medicationIndex + "].MedicationName' /> Quantity: <input type='text' name='PetsMedication[" + ingredientIndex + "].MedicationNumberOfDosesPerServing' /></div>");
-                medicationIndex++;
-        }
-    </script>
+
+        var timer = new Timer();
+
+        $('#chronoExample .startButton').click(function () {
+            timer.start();
+        });
+
+        $('#chronoExample .pauseButton').click(function () {
+            timer.pause();
+        });
+
+        $('#chronoExample .stopButton').click(function () {
+            timer.stop();
+        });
+
+        timer.addEventListener('secondsUpdated', function (e) {
+            $('#chronoExample .values').html(timer.getTimeValues().toString());
+            
+        });
+
+        timer.addEventListener('started', function (e) {
+            $('#chronoExample .values').html(timer.getTimeValues().toString());
+        });
+
+
+
+
+    </script>*@
 }
 
 

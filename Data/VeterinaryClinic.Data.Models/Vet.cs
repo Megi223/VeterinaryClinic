@@ -30,7 +30,7 @@
         public string ProfilePicture { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(GlobalConstants.SpecializationMaxLength)]
         public string Specialization { get; set; }
 
         [Required]

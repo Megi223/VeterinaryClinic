@@ -33,7 +33,7 @@ else
                         <th scope="row">@appointment.OwnerFullName</th>
                         <td><a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@appointment.PetId">@appointment.PetName</a></td>
                         <td>@appointment.Subject</td>
-                        <td><time datetime="@appointment.StartTime.ToString("O")"></time></td>
+                        <td><time appTime="@appointment.StartTime.ToString("O")"></time></td>
                         <td>
                             <a class="btn btn-primary" asp-area="Vet" asp-controller="Appointments" asp-action="Accept" asp-route-id="@appointment.Id"><i class="fa fa-check"></i>Accept</a>
                         </td>
@@ -46,5 +46,22 @@ else
         </table>
     </div>
     <br />
+}
+
+@section Scripts{ 
+    <script>
+        $(function () {
+            $("time").each(function (i, e) {
+                const dateTimeValue = $(e).attr("appTime");
+                if (!dateTimeValue) {
+                    return;
+                }
+
+                const time = moment.utc(dateTimeValue).local();
+                $(e).html(time.format("llll"));
+                $(e).attr("title", $(e).attr("appTime"));
+            });
+        });
+    </script>
 }
 
