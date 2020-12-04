@@ -3,8 +3,10 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Pioneer.Pagination;
+    using System.Security.Claims;
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Pets;
     using VeterinaryClinic.Web.ViewModels.Vets;
 
     [Authorize(Roles = GlobalConstants.VetRoleName)]
@@ -50,6 +52,26 @@
             var viewModel = this.vetsService.GetById<VetViewModel>(id);
             viewModel.Services = this.vetsService.GetServices(viewModel.Id);
 
+            return this.View(viewModel);
+        }
+
+        public IActionResult MyPatients(int id = 1)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string vetId = this.vetsService.GetVetId(userId);
+            var vetsPatientsCount = this.vetsService.GetPatientsCount(vetId);
+            var allPagesCount = (vetsPatientsCount / GlobalConstants.VetsPatientsOnOnePage) + 1;
+            if (id < 1)
+            {
+                return this.RedirectToAction("All", new { id = 1 });
+            }
+            else if (id > allPagesCount)
+            {
+                return this.RedirectToAction("All", new { id = allPagesCount });
+            }
+
+            var viewModel = this.vetsService.GetVetsPatientsForAPage<AllPetsViewModel>(vetId,id);
+            this.ViewBag.PaginatedMeta = this.paginatedMetaService.GetMetaData(vetsPatientsCount, id, GlobalConstants.VetsPatientsOnOnePage);
             return this.View(viewModel);
         }
     }

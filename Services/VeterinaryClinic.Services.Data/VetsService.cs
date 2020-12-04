@@ -16,16 +16,18 @@
 
         private readonly IDeletableEntityRepository<Vet> vetsRepository;
         private readonly IDeletableEntityRepository<VetsServices> vetsServicesRepository;
+        private readonly IDeletableEntityRepository<Pet> petsRepository;
         private readonly ICloudinaryService cloudinaryService;
 
         private readonly IServicesService servicesService;
 
-        public VetsService(IDeletableEntityRepository<Vet> vetsRepository, IDeletableEntityRepository<VetsServices> vetsServicesRepository, IServicesService servicesService, ICloudinaryService cloudinaryService)
+        public VetsService(IDeletableEntityRepository<Vet> vetsRepository, IDeletableEntityRepository<VetsServices> vetsServicesRepository, IServicesService servicesService, ICloudinaryService cloudinaryService, IDeletableEntityRepository<Pet> petsRepository)
         {
             this.vetsRepository = vetsRepository;
             this.vetsServicesRepository = vetsServicesRepository;
             this.servicesService = servicesService;
             this.cloudinaryService = cloudinaryService;
+            this.petsRepository = petsRepository;
         }
 
         public IEnumerable<T> GetAllForAPage<T>(int page)
@@ -105,6 +107,19 @@
 
             await this.vetsRepository.AddAsync(vet);
             await this.vetsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetVetsPatientsForAPage<T>(string vetId, int page)
+        {
+            return this.petsRepository.AllAsNoTracking().Where(x => x.VetId == vetId)
+                .OrderBy(x => x.Name).Skip((page - 1) * GlobalConstants.VetsPatientsOnOnePage)
+                .Take(GlobalConstants.VetsPatientsOnOnePage).To<T>().ToList();
+        }
+
+        public int GetPatientsCount(string vetId)
+        {
+            return this.petsRepository.AllAsNoTracking().Where(x => x.VetId == vetId)
+                .ToList().Count;
         }
     }
 }

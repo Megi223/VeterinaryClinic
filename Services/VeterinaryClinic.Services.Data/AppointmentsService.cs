@@ -59,7 +59,8 @@
         public IEnumerable<T> GetVetUpcomingAppointments<T>(string vetId)
         {
             IQueryable<Appointment> query =
-                this.appointmentsRepository.All().Where(x => x.VetId == vetId && x.IsAcceptedByVet == true && x.IsCancelledByOwner == false && x.Status == Status.Upcoming);
+                this.appointmentsRepository.All().Where(x => x.VetId == vetId && x.IsAcceptedByVet == true && x.IsCancelledByOwner == false && x.Status == Status.Upcoming)
+                .OrderBy(x => x.StartTime);
 
             return query.To<T>().ToList();
         }
@@ -73,6 +74,7 @@
         public async Task StartAsync(string appointmentId)
         {
             this.appointmentsRepository.All().Where(x => x.Id == appointmentId).FirstOrDefault().Status = Status.InProgress;
+            this.appointmentsRepository.All().Where(x => x.Id == appointmentId).FirstOrDefault().ActualStartTime = DateTime.UtcNow;
             await this.appointmentsRepository.SaveChangesAsync();
         }
 
@@ -88,20 +90,28 @@
             return this.appointmentsRepository.All().Where(x => x.VetId == vetId && x.Status == Status.InProgress).To<T>().FirstOrDefault();
         }
 
-        public async Task EndAsync(string appointmentId)
+        public async Task EndAsync(string appointmentId, DateTime endTime)
         {
             this.appointmentsRepository.All().Where(x => x.Id == appointmentId).FirstOrDefault().Status = Status.Finished;
-
+            this.appointmentsRepository.All().Where(x => x.Id == appointmentId).FirstOrDefault().EndTime = endTime;
             await this.appointmentsRepository.SaveChangesAsync();
         }
 
         public T GetById<T>(string id)
         {
-            var appointment = this.appointmentsRepository.All().Where(x => x.Id == id);
-                var sth=appointment
+            var appointment = this.appointmentsRepository.All().Where(x => x.Id == id)
                 .To<T>().FirstOrDefault();
 
-            return sth;
+            return appointment;
+        }
+
+        public IEnumerable<T> GetVetPastAppointments<T>(string vetId)
+        {
+            IQueryable<Appointment> query =
+               this.appointmentsRepository.All().Where(x => x.VetId == vetId && x.Status == Status.Finished)
+               .OrderBy(x => x.EndTime);
+
+            return query.To<T>().ToList();
         }
     }
 }

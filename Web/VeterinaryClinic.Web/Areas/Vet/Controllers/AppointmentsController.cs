@@ -116,7 +116,7 @@
 
         public async Task<IActionResult> End(string id)
         {
-            await this.appointmentsService.EndAsync(id);
+            await this.appointmentsService.EndAsync(id,DateTime.UtcNow);
             return this.RedirectToAction("Upcoming");
         }
 
@@ -151,6 +151,14 @@
         {
             await this.petsMedicationsService.EndMedicationAsync(id);
             return this.RedirectToAction("Current");
+        }
+
+        public IActionResult Past()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string vetId = this.vetsService.GetVetId(userId);
+            var viewModel = this.appointmentsService.GetVetPastAppointments<PastAppointmentViewModel>(vetId);
+            return this.View(viewModel);
         }
     }
 }

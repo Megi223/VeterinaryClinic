@@ -27,6 +27,8 @@
 
         public DateTime StartTime { get; set; }
 
+        public DateTime? ActualStartTime { get; set; }
+
         public DateTime? EndTime { get; set; }
 
         [Required]

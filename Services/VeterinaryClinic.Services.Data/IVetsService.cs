@@ -22,5 +22,9 @@
         Task<string> DeterminePhotoUrl(IFormFile input);
 
         Task AddVetAsync(string userId, AddVetInputModel model, string photoUrl);
+
+        IEnumerable<T> GetVetsPatientsForAPage<T>(string vetId, int page);
+
+        int GetPatientsCount(string vetId);
     }
 }

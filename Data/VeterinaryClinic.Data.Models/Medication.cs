@@ -10,7 +10,6 @@
     {
         public Medication()
         {
-            this.DosingTimes = new HashSet<DosingTime>();
             this.PetsMedications = new HashSet<PetsMedications>();
         }
 
@@ -20,8 +19,6 @@
 
         [Required]
         public string NumberOfDosesPerServing { get; set; }
-
-        public virtual ICollection<DosingTime> DosingTimes { get; set; }
 
         public virtual ICollection<PetsMedications> PetsMedications { get; set; }
     }

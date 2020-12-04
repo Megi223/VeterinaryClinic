@@ -1,5 +1,6 @@
 ﻿namespace VeterinaryClinic.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -25,8 +26,10 @@
 
         T GetAppointmentInProgress<T>(string vetId);
 
-        Task EndAsync(string appointmentId);
+        Task EndAsync(string appointmentId, DateTime endTime);
 
         T GetById<T>(string id);
+
+        IEnumerable<T> GetVetPastAppointments<T>(string vetId);
     }
 }
