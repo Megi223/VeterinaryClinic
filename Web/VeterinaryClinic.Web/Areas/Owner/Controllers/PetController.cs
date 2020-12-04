@@ -31,6 +31,7 @@
             this.cloudinaryService = cloudinaryService;
         }
 
+        
         public IActionResult Details(string id)
         {
             var model = this.petsService.GetById<PetViewModel>(id);
@@ -78,6 +79,38 @@
             {
                 return this.View("Error");
             }
+        }
+
+        [Authorize(Roles = GlobalConstants.OwnerRoleName)]
+        public IActionResult Edit(string id)
+        {
+            var vets = this.vetsService.GetAll<VetDropDown>();
+            var model = this.petsService.GetById<EditPetViewModel>(id);
+            model.Vet = vets;
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.OwnerRoleName)]
+        public async Task<IActionResult> Edit(EditPetViewModel edit)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                var vets = this.vetsService.GetAll<VetDropDown>();
+                edit.Vet = vets;
+                return this.View(edit);
+            }
+            await this.petsService.EditAsync(edit);
+            return this.RedirectToAction("MyPets", "Owner", new { area = "Owner" });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.OwnerRoleName)]
+        public async Task<IActionResult> Delete(string id)
+        {
+            await this.petsService.DeleteAsync(id);
+            this.TempData["SuccessfulDeletion"] = "Successful deletion";
+            return this.RedirectToAction("MyPets", "Owner", new { area = "Owner" });
         }
     }
 }

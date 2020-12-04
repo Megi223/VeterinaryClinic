@@ -21,5 +21,9 @@
         IEnumerable<T> GetPets<T>(string ownerId);
 
         Task SetDiagnoseAsync(string diagnoseDescription, string diagnoseName, string petId);
+
+        Task EditAsync(EditPetViewModel edit);
+
+        Task DeleteAsync(string id);
     }
 }

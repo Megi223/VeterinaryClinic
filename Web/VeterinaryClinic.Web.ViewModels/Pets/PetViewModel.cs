@@ -9,6 +9,8 @@
 
     public class PetViewModel : IMapFrom<Pet>
     {
+        public string Id { get; set; }
+
         public string Name { get; set; }
 
         public TypeOfAnimal Type { get; set; }

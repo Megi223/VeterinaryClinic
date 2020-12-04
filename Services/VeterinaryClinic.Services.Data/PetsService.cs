@@ -136,5 +136,26 @@
 
             await this.petsRepository.SaveChangesAsync();
         }
+
+        public async Task EditAsync(EditPetViewModel edit)
+        {
+            var pet = this.petsRepository.All().FirstOrDefault(x => x.Id == edit.Id);
+            pet.Name = edit.Name;
+            pet.Sterilised = bool.Parse(edit.Sterilised);
+            pet.Weight = edit.Weight;
+            pet.VetId = edit.VetId;
+            if (edit.NewPicture != null)
+            {
+                pet.Picture= await this.cloudinaryService.UploudAsync(edit.NewPicture);
+            }
+            await this.petsRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(string id)
+        {
+            var targetPet = this.petsRepository.All().FirstOrDefault(x => x.Id == id);
+            this.petsRepository.Delete(targetPet);
+            await this.petsRepository.SaveChangesAsync();
+        }
     }
 }
