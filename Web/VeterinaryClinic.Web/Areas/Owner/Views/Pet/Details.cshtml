@@ -93,7 +93,13 @@
                                 <div class="clearfix"></div>
                                 
                         </div>
-                    }
+     }
+    else if (this.User.IsInRole(VeterinaryClinic.Common.GlobalConstants.VetRoleName))
+    {
+        <a asp-area="Vet" asp-controller="Appointments" asp-action="Current" class="btn btn-primary">Back</a>
+        <br />
+                        
+     }
 </div>
 <br />
 

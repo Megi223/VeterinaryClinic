@@ -94,5 +94,14 @@
 
             await this.appointmentsRepository.SaveChangesAsync();
         }
+
+        public T GetById<T>(string id)
+        {
+            var appointment = this.appointmentsRepository.All().Where(x => x.Id == id);
+                var sth=appointment
+                .To<T>().FirstOrDefault();
+
+            return sth;
+        }
     }
 }

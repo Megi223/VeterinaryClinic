@@ -26,5 +26,7 @@
         T GetAppointmentInProgress<T>(string vetId);
 
         Task EndAsync(string appointmentId);
+
+        T GetById<T>(string id);
     }
 }
