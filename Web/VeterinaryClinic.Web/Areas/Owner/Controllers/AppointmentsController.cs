@@ -39,5 +39,21 @@
             this.TempData["SuucessfulRequest"] = "You have successfully requested an appointment";
             return this.RedirectToAction("Index", "Home", new { area = "" });
         }
+
+        public IActionResult MyAppointments()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string ownerId = this.ownersService.GetOwnerId(userId);
+            var viewModel = this.appointmentsService.GetOwnerUpcomingAppointments<OwnerAppointmentViewModel>(ownerId);
+            return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> Cancel(string id)
+        {
+            await this.appointmentsService.CancelAsync(id);
+
+            // TODO: Send notification to vet
+            return this.RedirectToAction("MyAppointments");
+        }
     }
 }

@@ -31,5 +31,7 @@
         T GetById<T>(string id);
 
         IEnumerable<T> GetVetPastAppointments<T>(string vetId);
+
+        IEnumerable<T> GetOwnerUpcomingAppointments<T>(string ownerId);
     }
 }

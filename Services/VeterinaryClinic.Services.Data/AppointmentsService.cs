@@ -113,5 +113,12 @@
 
             return query.To<T>().ToList();
         }
+
+        public IEnumerable<T> GetOwnerUpcomingAppointments<T>(string ownerId)
+        {
+            IQueryable<Appointment> query = this.appointmentsRepository.AllAsNoTracking().Where(x => x.OwnerId == ownerId && x.Status == Status.Upcoming && x.IsAcceptedByVet == true && x.IsCancelledByOwner == false).OrderBy(x => x.StartTime);
+
+            return query.To<T>().ToList();
+        }
     }
 }

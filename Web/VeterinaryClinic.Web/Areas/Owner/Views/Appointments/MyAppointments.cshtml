@@ -1,0 +1,62 @@
+﻿@model IEnumerable<VeterinaryClinic.Web.ViewModels.Appointments.OwnerAppointmentViewModel>
+@{
+    this.ViewData["Title"] = "My Appointments";
+}
+
+<br />
+
+@if (Model.Count() == 0)
+{
+    <h3 style="text-align:center"><b>No appointments</b></h3>
+    <br />
+}
+else
+{
+    <div class="container">
+        <h3 style="text-align:center"><b>@ViewData["Title"]</b></h3>
+        <br />
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Pet</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Vet Name</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">Cancel</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var appointment in Model)
+                {
+                <tr>
+                    <td><a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@appointment.PetId">@appointment.PetName</a></td>
+                    <td>@appointment.Subject</td>
+                    <th scope="row">@appointment.VetFullName</th>
+                    <td><time appTime="@appointment.StartTime.ToString("O")"></time></td>
+                    <td>
+                        <a class="btn btn-danger" asp-area="Owner" asp-controller="Appointments" asp-action="Cancel" asp-route-id="@appointment.Id"><i class="fa fa-times"></i>Cancel</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <br />
+}
+
+@section Scripts{
+    <script>
+        $(function () {
+            $("time").each(function (i, e) {
+                const dateTimeValue = $(e).attr("appTime");
+                if (!dateTimeValue) {
+                    return;
+                }
+
+                const time = moment.utc(dateTimeValue).local();
+                $(e).html(time.format("llll"));
+                $(e).attr("title", $(e).attr("appTime"));
+            });
+        });
+    </script>
+}
