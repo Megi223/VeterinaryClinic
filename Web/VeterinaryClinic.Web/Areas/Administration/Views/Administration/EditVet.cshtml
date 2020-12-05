@@ -1,0 +1,42 @@
+﻿@model VeterinaryClinic.Web.ViewModels.Vets.EditVetInputModel
+
+@{
+    ViewData["Title"] = "Edit Vet";
+}
+
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <h1 style="text-align:center"><b>@ViewData["Title"]</b></h1>
+            <form method="post" enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label asp-for="@Model.Specialization"></label>
+                    <input asp-for="@Model.Specialization" class="form-control" />
+                    <span asp-validation-for="@Model.Specialization" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="@Model.Picture"></label>
+                    <input asp-for="@Model.Picture" class="form-control" />
+                    <span asp-validation-for="@Model.Picture" class="text-danger"></span>
+                    <span class="text-info">Note: If you do not upload a new image, the old one will be used.</span>
+                </div>
+                @foreach (var service in Model.Services)
+                {
+            <div class="form-group">
+                <input id="service_@service.ServiceId"
+                       type="checkbox"
+                       name="ServicesInput"
+                       value="@service.ServiceId"
+                       class="form-control custom-control-input" checked/>
+                <label class="custom-control-label" for="service_@service.ServiceId">@service.ServiceName</label>
+            </div>
+                }
+
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />

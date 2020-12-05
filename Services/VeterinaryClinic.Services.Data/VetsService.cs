@@ -15,19 +15,21 @@
         private const string DefaultImageUrl = "https://res.cloudinary.com/dpwroiluv/image/upload/v1606144918/default-profile-icon-16_vbh95n.png";
 
         private readonly IDeletableEntityRepository<Vet> vetsRepository;
+        private readonly IDeletableEntityRepository<Service> servicesRepository;
         private readonly IDeletableEntityRepository<VetsServices> vetsServicesRepository;
         private readonly IDeletableEntityRepository<Pet> petsRepository;
         private readonly ICloudinaryService cloudinaryService;
 
         private readonly IServicesService servicesService;
 
-        public VetsService(IDeletableEntityRepository<Vet> vetsRepository, IDeletableEntityRepository<VetsServices> vetsServicesRepository, IServicesService servicesService, ICloudinaryService cloudinaryService, IDeletableEntityRepository<Pet> petsRepository)
+        public VetsService(IDeletableEntityRepository<Vet> vetsRepository, IDeletableEntityRepository<VetsServices> vetsServicesRepository, IServicesService servicesService, ICloudinaryService cloudinaryService, IDeletableEntityRepository<Pet> petsRepository, IDeletableEntityRepository<Service> servicesRepository)
         {
             this.vetsRepository = vetsRepository;
             this.vetsServicesRepository = vetsServicesRepository;
             this.servicesService = servicesService;
             this.cloudinaryService = cloudinaryService;
             this.petsRepository = petsRepository;
+            this.servicesRepository = servicesRepository;
         }
 
         public IEnumerable<T> GetAllForAPage<T>(int page)
@@ -126,6 +128,71 @@
         {
             var vet = this.vetsRepository.AllAsNoTracking().FirstOrDefault(x => x.Id == vetId);
             return vet.FirstName + " " + vet.LastName;
+        }
+
+        public async Task DeleteVet(string vetId)
+        {
+            var vet = this.vetsRepository.All().FirstOrDefault(x => x.Id == vetId);
+            this.vetsRepository.Delete(vet);
+            await this.vetsRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetServices<T>(string vetId)
+        {
+            var vetsServices = this.vetsServicesRepository.All().Where(vs => vs.VetId == vetId);
+            return vetsServices.To<T>().ToList();
+        }
+
+        public async Task EditVet(EditVetInputModel input)
+        {
+            var vet = this.vetsRepository.All().FirstOrDefault(x => x.Id == input.Id);
+            if (input.Picture != null)
+            {
+                vet.ProfilePicture = await this.cloudinaryService.UploudAsync(input.Picture);
+            }
+
+            vet.Specialization = input.Specialization;
+            if(input.ServicesInput == null)
+            {
+                await this.DeleteAllVetsServices(input.Id);
+            }
+            else if (input.ServicesInput != null && input.ServicesInput.Count() != vet.VetsServices.Count)
+            {
+                await this.DeleteAllVetsServices(input.Id);
+                await this.AddServicesToVet(input.ServicesInput,input.Id);
+            }
+
+            await this.vetsRepository.SaveChangesAsync();
+        }
+
+        private async Task DeleteAllVetsServices(string vetId)
+        {
+            var vetsServices = this.vetsServicesRepository.All().Where(x => x.VetId == vetId);
+
+            foreach (var vetsService in vetsServices)
+            {
+                this.vetsServicesRepository.Delete(vetsService);
+            }
+
+            await this.vetsServicesRepository.SaveChangesAsync();
+        }
+
+        private async Task AddServicesToVet(IEnumerable<string> serviceIds,string vetId)
+        {
+            foreach (var serviceId in serviceIds)
+            {
+                var service = this.servicesRepository.All().FirstOrDefault(x => x.Id.ToString() == serviceId);
+                VetsServices vetsServices = new VetsServices
+                {
+                    VetId = vetId,
+                    ServiceId = serviceId.ToString(),
+                    Service = service,
+                };
+
+                await this.vetsServicesRepository.AddAsync(vetsServices);
+            }
+
+            await this.vetsServicesRepository.SaveChangesAsync();
         }
     }
 }

@@ -77,5 +77,32 @@
             await this.servicesServices.AddServiceToVet(input);
             return this.RedirectToAction("All","Vet",new { area="Vet" });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteVet(string id)
+        {
+            await this.vetsService.DeleteVet(id);
+            return this.RedirectToAction("All", "Vet", new { area = "Vet" });
+        }
+
+        public IActionResult EditVet(string id)
+        {
+            var model = this.vetsService.GetById<EditVetInputModel>(id);
+            model.Services = this.vetsService.GetServices<EditVetsServicesDropDown>(id);
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditVet(EditVetInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                var model = this.vetsService.GetById<EditVetInputModel>(input.Id);
+                model.Services = this.vetsService.GetServices<EditVetsServicesDropDown>(input.Id);
+                return this.View(input);
+            }
+            await this.vetsService.EditVet(input);
+            return this.RedirectToAction("Details", "Vet", new { area = "Vet",id=input.Id });
+        }
     }
 }

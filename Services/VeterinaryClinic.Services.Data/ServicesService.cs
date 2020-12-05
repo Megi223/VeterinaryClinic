@@ -59,10 +59,12 @@
         {
             foreach (var serviceId in input.Services)
             {
+                var service = this.servicesRepository.All().FirstOrDefault(x => x.Id == serviceId);
                 VetsServices vetsServices = new VetsServices
                 {
                     VetId = input.VetId,
                     ServiceId = serviceId.ToString(),
+                    Service = service,
                 };
 
                 await this.vetsServicesRepository.AddAsync(vetsServices);

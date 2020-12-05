@@ -133,6 +133,15 @@
                 </div>
             </div>
             <a class="btn btn-primary" asp-area="Vet" asp-controller="Vet" asp-action="All">Back To All</a>
+            @if (this.User.IsInRole("Administrator"))
+            {
+                <hr />
+                <a class="btn btn-info" asp-area="Administration" asp-controller="Administration" asp-action="EditVet" asp-route-id="@Model.Id">Edit</a>
+                <div class="clearfix"></div>
+                <br />
+                <form method="post" asp-area="Administration" asp-controller="Administration" asp-action="DeleteVet" id="deleteForm" asp-route-id="@Model.Id"></form>
+                <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#Delete">Delete</button>
+            }
         </div>
         <div class="col-md-8">
 
@@ -174,6 +183,28 @@
             <input type="submit" class="btn btn-primary" value="Add comment" />
         </div>
     </form>
+</div>
+
+
+<div id="Delete" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa fa-exclamation-triangle fa-3x"></i>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are You sure You want to delete this @(Model.FirstName+" "+Model.LastName) 's profile?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="deleteForm.submit()">Yes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+            </div>
+        </div>
+
+    </div>
 </div>
 <br />
 @section Scripts {

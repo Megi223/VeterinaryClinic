@@ -28,5 +28,11 @@
         int GetPatientsCount(string vetId);
 
         string GetNameById(string vetId);
+
+        Task DeleteVet(string vetId);
+
+        IEnumerable<T> GetServices<T>(string vetId);
+
+        Task EditVet(EditVetInputModel input);
     }
 }
