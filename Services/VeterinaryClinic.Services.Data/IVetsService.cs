@@ -26,5 +26,7 @@
         IEnumerable<T> GetVetsPatientsForAPage<T>(string vetId, int page);
 
         int GetPatientsCount(string vetId);
+
+        string GetNameById(string vetId);
     }
 }

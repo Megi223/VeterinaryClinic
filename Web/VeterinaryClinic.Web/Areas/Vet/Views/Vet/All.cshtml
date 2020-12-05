@@ -39,6 +39,11 @@
                                     <li class="ftco-animate"><a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"></span></a></li>
                                 </ul>
                                 <a class="btn btn-info" asp-area="Vet" asp-controller="Vet" asp-action="Details" asp-route-id="@vet.Id">Learn more</a>
+                                @if (this.User.IsInRole("Administrator"))
+                                {
+                                   
+                                    <a class="btn btn-outline-info" asp-area="Administration" asp-controller="Administration" asp-action="AddServiceToVet" asp-route-id="@vet.Id">Add Service To Vet</a>
+                                }
                             </div>
                         </div>
                     </div>

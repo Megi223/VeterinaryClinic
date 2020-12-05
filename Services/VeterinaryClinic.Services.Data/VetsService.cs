@@ -121,5 +121,11 @@
             return this.petsRepository.AllAsNoTracking().Where(x => x.VetId == vetId)
                 .ToList().Count;
         }
+
+        public string GetNameById(string vetId)
+        {
+            var vet = this.vetsRepository.AllAsNoTracking().FirstOrDefault(x => x.Id == vetId);
+            return vet.FirstName + " " + vet.LastName;
+        }
     }
 }

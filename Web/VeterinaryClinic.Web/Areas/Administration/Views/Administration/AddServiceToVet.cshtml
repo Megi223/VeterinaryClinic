@@ -1,0 +1,36 @@
+﻿@model VeterinaryClinic.Web.ViewModels.Vets.AddServiceToVetViewModel
+@{
+    this.ViewData["Title"] = "Add Service To Vet";
+    
+}
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <h2>Which service/s would You like to add to <b>@Model.VetName</b>?</h2>
+            <form method="post">
+                <input type="hidden" asp-for="@Model.VetId" value="@Model.VetId" />
+                @foreach (var service in Model.Services)
+                {
+                    <div class="form-group">
+                        <input id="service_@service.Id"
+                               type="checkbox"
+                               name="Services"
+                               value="@service.Id"
+                               class="form-control custom-control-input" />
+                        <label class="custom-control-label" for="service_@service.Id">@service.Name</label>
+                    </div>
+                }
+                <button type="submit" class="btn btn-primary">Add Services</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script>$('select').selectpicker();</script>
+}

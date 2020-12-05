@@ -2,18 +2,22 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.Vets;
 
     public class ServicesService : IServicesService
     {
         private readonly IDeletableEntityRepository<Service> servicesRepository;
+        private readonly IDeletableEntityRepository<VetsServices> vetsServicesRepository;
 
-        public ServicesService(IDeletableEntityRepository<Service> servicesRepository)
+
+        public ServicesService(IDeletableEntityRepository<Service> servicesRepository, IDeletableEntityRepository<VetsServices> vetsServicesRepository)
         {
             this.servicesRepository = servicesRepository;
+            this.vetsServicesRepository = vetsServicesRepository;
         }
 
         public IEnumerable<T> GetAll<T>()
@@ -36,6 +40,35 @@
             var service = this.servicesRepository.All().Where(x => x.Id == id)
                 .FirstOrDefault();
             return service.Name;
+        }
+
+        public IEnumerable<T> GetAllServicesWhichAVetDoesNotHave<T>(string vetId)
+        {
+            var vetsServices =
+                this.vetsServicesRepository.All().Where(x=>x.VetId==vetId);
+            var services = this.servicesRepository.All();
+            foreach (var vetsService in vetsServices)
+            {
+                services = services.Where(x => x.Id.ToString() != vetsService.ServiceId);
+            }
+
+            return services.To<T>().ToList();
+        }
+
+        public async Task AddServiceToVet(AddServiceToVetInputModel input)
+        {
+            foreach (var serviceId in input.Services)
+            {
+                VetsServices vetsServices = new VetsServices
+                {
+                    VetId = input.VetId,
+                    ServiceId = serviceId.ToString(),
+                };
+
+                await this.vetsServicesRepository.AddAsync(vetsServices);
+            }
+
+            await this.vetsServicesRepository.SaveChangesAsync();
         }
     }
 }

@@ -12,6 +12,7 @@
     using VeterinaryClinic.Services;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.Controllers;
+    using VeterinaryClinic.Web.ViewModels.Services;
     using VeterinaryClinic.Web.ViewModels.Vets;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -21,12 +22,15 @@
         private readonly INewsScraperService newsScraperService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IVetsService vetsService;
+        private readonly IServicesService servicesServices;
 
-        public AdministrationController(INewsScraperService newsScraperService, UserManager<ApplicationUser> userManager, IVetsService vetsService)
+
+        public AdministrationController(INewsScraperService newsScraperService, UserManager<ApplicationUser> userManager, IVetsService vetsService, IServicesService servicesServices)
         {
             this.newsScraperService = newsScraperService;
             this.userManager = userManager;
             this.vetsService = vetsService;
+            this.servicesServices = servicesServices;
         }
 
         public IActionResult AddVet()
@@ -54,6 +58,24 @@
 
             return this.RedirectToAction("Index", "Home", new { area = string.Empty });
 
+        }
+
+        public IActionResult AddServiceToVet(string id)
+        {
+            var vetName = this.vetsService.GetNameById(id);
+            var services = this.servicesServices.GetAllServicesWhichAVetDoesNotHave<ServiceDropDown>(id);
+            var viewModel = new AddServiceToVetViewModel();
+            viewModel.VetId = id;
+            viewModel.VetName = vetName;
+            viewModel.Services = services;
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddServiceToVet(AddServiceToVetInputModel input)
+        {
+            await this.servicesServices.AddServiceToVet(input);
+            return this.RedirectToAction("All","Vet",new { area="Vet" });
         }
     }
 }
