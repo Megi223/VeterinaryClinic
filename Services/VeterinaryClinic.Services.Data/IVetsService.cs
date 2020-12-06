@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Http;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using VeterinaryClinic.Web.ViewModels.Vets;
 
@@ -34,5 +35,7 @@
         IEnumerable<T> GetServices<T>(string vetId);
 
         Task EditVet(EditVetInputModel input);
+
+        IQueryable<T> GetVetsPatients<T>(string vetId);
     }
 }

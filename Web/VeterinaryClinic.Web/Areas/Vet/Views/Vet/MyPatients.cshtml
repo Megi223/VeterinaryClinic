@@ -2,46 +2,119 @@
 @{
     this.ViewData["Title"] = "My Patients";
 }
+<link rel="stylesheet" href="~/lib/datatables/media/css/jquery.dataTables.min.css" />
 
 <link rel="stylesheet" href="~/css/customPagination.css" />
 <br />
 <h1 style="text-align:center"><b>@this.ViewData["Title"]</b></h1>
-<section class="ftco-section bg-light">
+@*<section class="ftco-section bg-light">
     <div class="container">
-        <div class="row d-flex">
-            @if (Model.Count() == 0)
-            {
-                <h3>No patients to show</h3>
-                <hr />
+        <div class="row d-flex">*@
+@if (Model.Count() == 0)
+{
+    <h3>No patients to show</h3>
+    <hr />
 
-            }
-            @foreach (var pet in Model)
-            {
-                <div class="col-md-4 ftco-animate">
-                    <div class="block-7">
-                        <div class="img" style="background-image: url(@pet.Picture);"></div>
-                        <div class="text-center p-4">
-                            <span class="excerpt d-block">@pet.Name</span>
+}
+else
+{
+    <div class="container">
+        <br />
+        <div style="width:90%; margin:0 auto;">
+            <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Type</th>
+                        <th>Owner Name</th>
+                        <th>More</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @* @foreach (var pet in Model)
+                        {
+                            <div class="col-md-4 ftco-animate">
+                                <div class="block-7">
+                                    <div class="img" style="background-image: url(@pet.Picture);"></div>
+                                    <div class="text-center p-4">
+                                        <span class="excerpt d-block">@pet.Name</span>
 
-                            <ul class="pricing-text mb-5">
-                                <li><i class="fa fa-birthday-cake" style="color:#00bd56"></i>  Age (in years): @pet.Age</li>
-                                <li><i class="fa fa-venus-mars" style="color:#00bd56"></i>  Gender: @pet.Gender</li>
-                            </ul>
+                                        <ul class="pricing-text mb-5">
+                                            <li><i class="fa fa-birthday-cake" style="color:#00bd56"></i>  Age (in years): @pet.Age</li>
+                                            <li><i class="fa fa-venus-mars" style="color:#00bd56"></i>  Gender: @pet.Gender</li>
+                                        </ul>
 
-                            <a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@pet.Id" class="btn btn-primary">More</a>
+                                        <a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@pet.Id" class="btn btn-primary">More</a>
 
-                        </div>
-                    </div>
-                </div>
-            }
+                                    </div>
+                                </div>
+                            </div>
 
+
+
+
+                        }*@
+
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="row mt-5">
-        <div class="col text-center">
-            <div class="block-27">
-                <pioneer-pagination info="@ViewBag.PaginatedMeta" route="/Vet/Vet/MyPatients" previous-page-text="<" next-page-text=">"></pioneer-pagination>
-            </div>
+}
+
+@*</div>
         </div>
-    </div>
-</section>
+
+    </section>*@
+
+<form method="post" id="antiForgeryForm"></form>
+
+@section Scripts{
+    <script src="~/lib/datatables/media/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+        $(document).ready(function () {
+            $("#datatable").DataTable({
+                "processing": true,
+                "serverSide": true,
+                "filter": true,
+                "ajax": {
+                    "url": "/api/patientsapi",
+                    "type": "POST",
+                    "datatype": "json",
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                },
+                "columnDefs": [{
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }],
+                "columns": [
+                    { "data": "id", "name": "Id", "autoWidth": true },
+                    { "data": "name", "name": "Name", "autoWidth": true },
+                    {
+                        "data": "gender", "name": "Gender", "autoWidth": true, "orderable": false
+                    },
+                    {
+                        "data": "type", "name": "Type", "autoWidth": true, "orderable": false
+                    },
+                    {
+                        "data": "ownerFullName", "name": "OwnerFullName", "autoWidth": true, "orderable":false },
+
+                    {
+                        "orderable":false,
+                        "render": function (data,type, row) {
+                            var myUrl = '@Url.Action("Details", "Pet",new { area = "Owner" })/' + row.id;
+                            return '<a href=\"'+myUrl+'\" class=\"btn btn-info \">More</a>';
+                            //return "<a href='/Owner/Pet/Details'" + row.Id + "' class='btn btn-info'  >More</a>";
+                        }
+                    },
+                ]
+            });
+        });
+    </script>
+} 

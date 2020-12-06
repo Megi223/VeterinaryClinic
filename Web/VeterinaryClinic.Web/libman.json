@@ -82,6 +82,20 @@
       "files": [
         "min/moment-with-locales.min.js"
       ]
+    },
+    {
+      "library": "datatables@1.10.18",
+      "destination": "wwwroot/lib/datatables",
+      "files": [
+        "media/css/jquery.dataTables.min.css",
+        "media/js/jquery.dataTables.min.js",
+        "media/images/Sorting icons.psd",
+        "media/images/sort_asc.png",
+        "media/images/sort_asc_disabled.png",
+        "media/images/sort_both.png",
+        "media/images/sort_desc.png",
+        "media/images/sort_desc_disabled.png"
+      ]
     }
   ]
 }

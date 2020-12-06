@@ -194,5 +194,10 @@
 
             await this.vetsServicesRepository.SaveChangesAsync();
         }
+
+        public IQueryable<T> GetVetsPatients<T>(string vetId)
+        {
+            return this.petsRepository.All().Where(x => x.VetId == vetId).To<T>();
+        }
     }
 }
