@@ -15,10 +15,11 @@
             this.Pets = new HashSet<Pet>();
             this.Comments = new HashSet<Comment>();
             this.Reminders = new HashSet<Reminder>();
-            this.ChatNotifications = new HashSet<ChatNotification>();
+            this.ChatMessages = new HashSet<ChatMessage>();
             this.Rating = new HashSet<Rating>();
             this.Appointments = new HashSet<Appointment>();
             this.Reviews = new HashSet<Review>();
+            this.Notifications = new HashSet<Notification>();
         }
 
         [Required]
@@ -42,7 +43,9 @@
 
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public virtual ICollection<ChatNotification> ChatNotifications { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
+
+        public virtual ICollection<Notification> Notifications { get; set; }
 
         public virtual ICollection<Reminder> Reminders { get; set; }
 

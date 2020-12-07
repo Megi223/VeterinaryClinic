@@ -1,23 +1,17 @@
-﻿namespace VeterinaryClinic.Data.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+using VeterinaryClinic.Common;
+using VeterinaryClinic.Data.Common.Models;
+
+namespace VeterinaryClinic.Data.Models
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-
-    using VeterinaryClinic.Common;
-    using VeterinaryClinic.Data.Common.Models;
-
-    public class ChatNotification : BaseDeletableModel<string>
+    public class ChatMessage : BaseDeletableModel<int>
     {
-        public ChatNotification()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-
         [Required]
         [MaxLength(GlobalConstants.ChatNotificationContentMaxLength)]
         public string Content { get; set; }
-
-        public DateTime ReceivedOn { get; set; }
 
         [Required]
         public string OwnerId { get; set; }

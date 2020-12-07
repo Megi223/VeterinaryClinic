@@ -24,6 +24,7 @@
     // using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Services.Mapping;
     using VeterinaryClinic.Services.Messaging;
+    using VeterinaryClinic.Web.Hubs;
     using VeterinaryClinic.Web.ViewModels;
 
     public class Startup
@@ -63,6 +64,7 @@
             {
                 options.HeaderName = "X-CSRF-TOKEN";
             });
+            services.AddSignalR();
 
             // Data repositories
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
@@ -87,6 +89,9 @@
             services.AddTransient<IReviewsService, ReviewsService>();
             services.AddTransient<IAppointmentsService, AppointmentsService>();
             services.AddTransient<IPetsMedicationsService, PetsMedicationsService>();
+            services.AddTransient<INotificationsService, NotificationsService>();
+            services.AddTransient<IUsersService, UsersService>();
+
 
             Account account = new Account(
                 this.configuration["Cloudinary:AppName"],
@@ -147,6 +152,7 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapHub<NotificationHub>("/notifications");
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

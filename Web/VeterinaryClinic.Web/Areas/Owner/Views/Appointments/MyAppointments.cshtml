@@ -28,15 +28,15 @@ else
             <tbody>
                 @foreach (var appointment in Model)
                 {
-                <tr>
-                    <td><a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@appointment.PetId">@appointment.PetName</a></td>
-                    <td>@appointment.Subject</td>
-                    <th scope="row">@appointment.VetFullName</th>
-                    <td><time appTime="@appointment.StartTime.ToString("O")"></time></td>
-                    <td>
-                        <a class="btn btn-danger" asp-area="Owner" asp-controller="Appointments" asp-action="Cancel" asp-route-id="@appointment.Id"><i class="fa fa-times"></i>Cancel</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><a asp-area="Owner" asp-controller="Pet" asp-action="Details" asp-route-id="@appointment.PetId">@appointment.PetName</a></td>
+                        <td>@appointment.Subject</td>
+                        <th scope="row">@appointment.VetFullName</th>
+                        <td><time appTime="@appointment.StartTime.ToString("O")"></time></td>
+                        <td>
+                            <a class="btn btn-danger" asp-area="Owner" asp-controller="Appointments" asp-action="Cancel" asp-route-id="@appointment.Id"><i class="fa fa-times"></i>Cancel</a>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -59,4 +59,21 @@ else
             });
         });
     </script>
+
+    
+        <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+        <script>
+            var connection =
+                new signalR.HubConnectionBuilder()
+                    .withUrl("/notifications")
+                    .build();
+
+            connection.on("SendMessage", "message");
+
+          
+
+            connection.start();
+        </script>
+
+    
 }

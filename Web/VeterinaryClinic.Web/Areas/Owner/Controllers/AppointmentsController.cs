@@ -6,8 +6,10 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.Hubs;
     using VeterinaryClinic.Web.ViewModels.Appointments;
 
     [Authorize(Roles = GlobalConstants.OwnerRoleName)]
@@ -15,12 +17,18 @@
     public class AppointmentsController : Controller
     {
         private readonly IAppointmentsService appointmentsService;
+        private readonly INotificationsService notificationsService;
         private readonly IOwnersService ownersService;
+        private readonly IUsersService usersService;
+        private readonly IHubContext<NotificationHub> notificationHub;
 
-        public AppointmentsController(IAppointmentsService appointmentsService, IOwnersService ownersService)
+        public AppointmentsController(IAppointmentsService appointmentsService, IOwnersService ownersService, INotificationsService notificationsService, IHubContext<NotificationHub> notificationHub, IUsersService usersService)
         {
             this.appointmentsService = appointmentsService;
             this.ownersService = ownersService;
+            this.notificationsService = notificationsService;
+            this.notificationHub = notificationHub;
+            this.usersService = usersService;
         }
 
         [HttpPost]
@@ -50,9 +58,16 @@
 
         public async Task<IActionResult> Cancel(string id)
         {
+            var appointment = this.appointmentsService.GetById<CancelAppointmentViewModel>(id);
             await this.appointmentsService.CancelAsync(id);
+            string content = $"Your appointment with {appointment.OwnerFullName} and pet {appointment.PetName} has been cancelled by the owner.";
+            var notification = await this.notificationsService.CreateNotificationForVetAsync(appointment.VetId, content);
+            var userId = notification.Vet.UserId;
+            var userName = this.usersService.GetUserUserName(userId);
+            await this.notificationHub.Clients.User(userName).SendAsync("SendNotification", notification.Content);
+            //await this.notificationHub.Clients.User(userName).SendAsync("displayNotification","");
+            
 
-            // TODO: Send notification to vet
             return this.RedirectToAction("MyAppointments");
         }
     }

@@ -17,8 +17,6 @@
         [MaxLength(GlobalConstants.ReminderContentMaxLength)]
         public string Content { get; set; }
 
-        public DateTime ReceivedOn { get; set; }
-
         [Required]
         public string OwnerId { get; set; }
 
@@ -28,13 +26,5 @@
         public string VetId { get; set; }
 
         public virtual Vet Vet { get; set; }
-
-        public bool IsCompleted { get; set; }
-
-        public int MedicationId { get; set; }
-
-        public virtual Medication Medication { get; set; }
-
-        public DateTime DateTime { get; set; }
     }
 }

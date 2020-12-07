@@ -12,7 +12,8 @@
         public Vet()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.ChatNotifications = new HashSet<ChatNotification>();
+            this.ChatMessages = new HashSet<ChatMessage>();
+            this.Notifications = new HashSet<Notification>();
             this.Reminders = new HashSet<Reminder>();
             this.VetsServices = new HashSet<VetsServices>();
             this.Comments = new HashSet<Comment>();
@@ -41,7 +42,9 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<ChatNotification> ChatNotifications { get; set; }
+        public virtual ICollection<ChatMessage> ChatMessages { get; set; }
+
+        public virtual ICollection<Notification> Notifications { get; set; }
 
         public virtual ICollection<Reminder> Reminders { get; set; }
 

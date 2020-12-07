@@ -45,7 +45,9 @@
 
         public DbSet<Reminder> Reminders { get; set; }
 
-        public DbSet<ChatNotification> ChatNotifications { get; set; }
+        public DbSet<ChatMessage> ChatMessages { get; set; }
+
+        public DbSet<Notification> Notifications { get; set; }
 
         public DbSet<VetsServices> VetsServices { get; set; }
 
