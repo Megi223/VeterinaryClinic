@@ -120,12 +120,12 @@ namespace VeterinaryClinic.Services.Data.Tests
             await servicesRepository.AddAsync(new Service { Name = "test3", Description = "testDesc3" });
             await servicesRepository.SaveChangesAsync();
 
-            await vetsServicesRepository.AddAsync(new VetsServices { ServiceId = 1.ToString(), VetId = "dspps-4592-sjfis-sjs" });
+            await vetsServicesRepository.AddAsync(new VetsServices { ServiceId = 1.ToString(), VetId = "dspps-4592-sjfis-sj" });
             await vetsServicesRepository.SaveChangesAsync();
 
             AutoMapperConfig.RegisterMappings(typeof(ServiceViewModel).Assembly);
 
-            var services = servicesService.GetAllServicesWhichAVetDoesNotHave<ServiceViewModel>("dspps-4592-sjfis-sjs").ToList();
+            var services = servicesService.GetAllServicesWhichAVetDoesNotHave<ServiceViewModel>("dspps-4592-sjfis-sj").ToList();
 
             for (int i = 1; i <= services.Count(); i++)
             {
@@ -148,12 +148,12 @@ namespace VeterinaryClinic.Services.Data.Tests
             await servicesRepository.AddAsync(new Service { Name = "test3", Description = "testDesc3" });
             await servicesRepository.SaveChangesAsync();
 
-            await vetsServicesRepository.AddAsync(new VetsServices { ServiceId = 1.ToString(), VetId = "dspps-4592-sjfis-sjs" });
+            await vetsServicesRepository.AddAsync(new VetsServices { ServiceId = 1.ToString(), VetId = "dspps-4592-sjfis-sj" });
             await vetsServicesRepository.SaveChangesAsync();
 
             AutoMapperConfig.RegisterMappings(typeof(ServiceViewModel).Assembly);
 
-            var services = servicesService.GetAllServicesWhichAVetDoesNotHave<ServiceViewModel>("dspps-4592-sjfis-sjs").ToList();
+            var services = servicesService.GetAllServicesWhichAVetDoesNotHave<ServiceViewModel>("dspps-4592-sjfis-sj").ToList();
 
             Assert.Equal(2, services.Count);
         }
@@ -172,15 +172,12 @@ namespace VeterinaryClinic.Services.Data.Tests
             await servicesRepository.AddAsync(new Service { Name = "test3", Description = "testDesc3" });
             await servicesRepository.SaveChangesAsync();
 
-            await vetsServicesRepository.AddAsync(new VetsServices { ServiceId = 1.ToString(), VetId = "dspps-4592-sjfis-sjs" });
-            await vetsServicesRepository.SaveChangesAsync();
-
             AutoMapperConfig.RegisterMappings(typeof(ServiceViewModel).Assembly);
 
-            await servicesService.AddServiceToVet(new AddServiceToVetInputModel { VetId = "dspps-4592-sjfis-sjs", Services = new List<int> { 1, 2 } });
+            await servicesService.AddServiceToVet(new AddServiceToVetInputModel { VetId = "dspps-4592-sjfis", Services = new List<int> { 1, 2 } });
 
             var expectedCount = 2;
-            var actualCount = vetsServicesRepository.All().Where(x => x.VetId == "dspps-4592-sjfis-sjs").Count();
+            var actualCount = vetsServicesRepository.All().Where(x => x.VetId == "dspps-4592-sjfis").Count();
 
             Assert.Equal(expectedCount, actualCount);
         }
