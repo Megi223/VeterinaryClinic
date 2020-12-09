@@ -197,6 +197,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             Assert.Equal(1, actualCount);
         }
 
+        // TODO
         [Fact]
         public async Task GetAppointmentsShouldReturnCorrectEntities()
         {
