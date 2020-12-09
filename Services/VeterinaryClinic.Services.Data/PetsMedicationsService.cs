@@ -53,7 +53,7 @@ namespace VeterinaryClinic.Services.Data
                 };
                 await this.petsMedicationsRepository.AddAsync(petsMedications);
                 await this.petsMedicationsRepository.SaveChangesAsync();
-                ;
+                
             }
         }
     }
