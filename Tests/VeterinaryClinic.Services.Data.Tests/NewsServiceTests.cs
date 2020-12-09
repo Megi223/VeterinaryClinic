@@ -64,7 +64,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             var newsService = new NewsService(repository);
             AutoMapperConfig.RegisterMappings(typeof(NewsDetailsViewModel).Assembly);
             var news = newsService.GetAllForAPage<NewsDetailsViewModel>(1).ToList();
-            
+            Assert.Equal(6, news.Count);
             for (int i = 1; i <= news.Count(); i++)
             {
                 Assert.Equal("test" + i, news[i-1].Title);

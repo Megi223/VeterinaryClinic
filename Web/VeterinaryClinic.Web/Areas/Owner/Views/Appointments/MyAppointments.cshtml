@@ -34,7 +34,7 @@ else
                         <th scope="row">@appointment.VetFullName</th>
                         <td><time appTime="@appointment.StartTime.ToString("O")"></time></td>
                         <td>
-                            <a class="btn btn-danger" asp-area="Owner" asp-controller="Appointments" asp-action="Cancel" asp-route-id="@appointment.Id"><i class="fa fa-times"></i>Cancel</a>
+                            <a id="cancel" class="btn btn-danger" asp-area="Owner" asp-controller="Appointments" asp-action="Cancel" asp-route-id="@appointment.Id"><i class="fa fa-times"></i>Cancel</a>
                         </td>
                     </tr>
                 }
@@ -61,19 +61,22 @@ else
     </script>
 
     
-        <script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
+        @*<script src="~/lib/signalr/dist/browser/signalr.min.js"></script>
         <script>
             var connection =
                 new signalR.HubConnectionBuilder()
                     .withUrl("/notifications")
                     .build();
 
+            /*$('#cancel').click(function () {
+                var message = $("#messageInput").val();
+                connection.invoke("Send", message);)*/
             connection.on("SendMessage", "message");
 
           
 
             connection.start();
-        </script>
+        </script>*@
 
     
 }

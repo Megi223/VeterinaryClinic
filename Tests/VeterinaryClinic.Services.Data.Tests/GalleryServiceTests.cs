@@ -38,14 +38,14 @@ namespace VeterinaryClinic.Services.Data.Tests
         {
             var repository = new Mock<IDeletableEntityRepository<Gallery>>();
 
-            repository.Setup(r => r.AllAsNoTracking())
+            repository.Setup(r => r.All())
 
             .Returns(this.GetTestData().AsQueryable());
             AutoMapperConfig.RegisterMappings(typeof(GalleryAllViewModel).Assembly);
             IGalleryService service = new GalleryService(repository.Object);
 
             List<GalleryAllViewModel> gallery = service.GetAllForAPage<GalleryAllViewModel>(1).ToList();
-
+            
             for (int i = 1; i <= gallery.Count(); i++)
             {
                 Assert.Equal("test" + i, gallery[i - 1].Title);

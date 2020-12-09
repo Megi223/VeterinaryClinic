@@ -11,17 +11,12 @@
 }
 else
 {
-    <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <p id="user"></p>
-        <div id="articleList"></div>
-    </div>
-    <button id="button" class="btn btn-warning">Refresh</button>
+   
     <hr />
     @foreach (var notification in Model)
     {
         <div class="alert alert-primary alert-dismissible" role="alert">
-            <p>@notification.Content</p>
+            <p id="notificationContent"></p>
             <form asp-area="" asp-controller="Notifications" asp-action="Delete" asp-route-id="@notification.Id">
                 <input type="submit" value="Remove" class="btn btn-danger float-right" />
                 <div class="clearfix"></div>
@@ -40,20 +35,17 @@ else
                 .withUrl("/notifications")
                 .build();
 
-        connection.on("SendMessage", (articleHeading, articleContent) => {
-            var heading = document.createElement("h3");
-            heading.textContent = articleHeading;
-            var p = document.createElement("p");
-            p.innerText = articleContent;
-            var div = document.createElement("div");
-            div.appendChild(heading);
-            div.appendChild(p);
+        connection.on("SendNotification", function (notification) {
+            // $('#notificationContent').append(notification.content);
+            console.log(notification.content);
+        });
 
-            document.getElementById("articleList").appendChild(div);
-        });
-        $("#button").click(function () {
+        //connection.invoke("SendNotification", message);
+
+        
+        /*$("#button").click(function () {
             console.log(1);
-        });
+        });*/
         connection.start();
     </script>
 

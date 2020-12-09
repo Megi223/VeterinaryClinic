@@ -64,10 +64,8 @@
             var notification = await this.notificationsService.CreateNotificationForVetAsync(appointment.VetId, content);
             var userId = notification.Vet.UserId;
             var userName = this.usersService.GetUserUserName(userId);
-            await this.notificationHub.Clients.User(userName).SendAsync("SendNotification", notification.Content);
-            //await this.notificationHub.Clients.User(userName).SendAsync("displayNotification","");
-            
-
+            await this.notificationHub.Clients.User(userName).SendAsync("SendNotification", notification);
+           
             return this.RedirectToAction("MyAppointments");
         }
     }

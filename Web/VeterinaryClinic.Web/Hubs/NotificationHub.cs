@@ -5,15 +5,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VeterinaryClinic.Common;
+using VeterinaryClinic.Services.Data;
+using VeterinaryClinic.Web.ViewModels.Notifications;
 
 namespace VeterinaryClinic.Web.Hubs
 {
     [Authorize(Roles = GlobalConstants.OwnerRoleName + ", " + GlobalConstants.VetRoleName)]
     public class NotificationHub : Hub
     {
-        public async Task SendNotification(string message)
+        private readonly INotificationsService notificationsService;
+
+        public NotificationHub(INotificationsService notificationsService)
         {
-            await this.Clients.Caller.SendAsync("SendNotification", message);
+            this.notificationsService = notificationsService;
+        }
+
+        public async Task SendNotification(SendNotificationViewModel notification)
+        {
+            await this.Clients.Caller.SendAsync("SendNotification", notification);
+        }
+
+        public async Task ReceiveNotification(string vetId)
+        {
+            //this.notificationsService.GetVetNotifications
         }
     }
 }
