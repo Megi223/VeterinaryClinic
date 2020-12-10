@@ -70,10 +70,12 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             repository.Setup(r => r.AllAsNoTracking())
 
-            .Returns(this.GetTestData().AsQueryable());
+            .Returns(this.GetTestDataWithIds().AsQueryable());
 
             //AutoMapperConfig.RegisterMappings(Assembly.GetCallingAssembly());
 
+            AutoMapperConfig.RegisterMappings(typeof(IEnumerable<AppointmentInProgressViewModel>).Assembly);
+            AutoMapperConfig.RegisterMappings(typeof(AppointmentInProgressViewModel).Assembly);
             AutoMapperConfig.RegisterMappings(typeof(AppointmentInProgressViewModel).Assembly);
 
             IAppointmentsService service = new AppointmentsService(repository.Object);
