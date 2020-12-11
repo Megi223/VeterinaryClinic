@@ -27,8 +27,4 @@
     <ProjectReference Include="..\VeterinaryClinic.Web.Infrastructure\VeterinaryClinic.Web.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Owners\" />
-  </ItemGroup>
-
 </Project>

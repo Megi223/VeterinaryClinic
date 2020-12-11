@@ -12,5 +12,7 @@
         string GetOwnerId(string userId);
 
         Task WriteReviewAsync(string ownerId, ReviewInputModel input);
+
+        T GetById<T>(string id);
     }
 }

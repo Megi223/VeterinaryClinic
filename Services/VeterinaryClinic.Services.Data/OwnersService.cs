@@ -5,6 +5,7 @@
 
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
     using VeterinaryClinic.Web.ViewModels.Reviews;
 
     public class OwnersService : IOwnersService
@@ -48,6 +49,13 @@
 
             await this.reviewsRepository.AddAsync(review);
             await this.reviewsRepository.SaveChangesAsync();
+        }
+
+        public T GetById<T>(string id)
+        {
+            var owner = this.ownersRepository.All().Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return owner;
         }
     }
 }

@@ -81,7 +81,13 @@
             </div>
 
 
-            <button type="button" class="btn btn-primary float-right" onclick="showAddCommentForm(0)"><i class="fa fa-plus"></i>&nbsp; Add Comment</button>
+                <button type="button" class="btn btn-primary float-right" onclick="showAddCommentForm(0)"><i class="fa fa-plus"></i>&nbsp; Add Comment</button>
+                @if (this.User.IsInRole(VeterinaryClinic.Common.GlobalConstants.OwnerRoleName))
+                {
+                    <br />
+                    <a class="btn btn-info" asp-area="Owner" asp-action="Chat" asp-controller="Owner" asp-route-id="@Model.Id"><i class="fa fa-comments"></i>&nbsp; Start Chat</a>
+                }
+            
         </div>
     </div>
 

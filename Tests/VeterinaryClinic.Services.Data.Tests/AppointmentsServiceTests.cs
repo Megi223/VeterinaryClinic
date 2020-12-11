@@ -76,7 +76,7 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             AutoMapperConfig.RegisterMappings(typeof(IEnumerable<AppointmentInProgressViewModel>).Assembly);
             AutoMapperConfig.RegisterMappings(typeof(AppointmentInProgressViewModel).Assembly);
-            AutoMapperConfig.RegisterMappings(typeof(AppointmentInProgressViewModel).Assembly);
+            AutoMapperConfig.RegisterMappings(typeof(AppointmentInProgressViewModel).GetTypeInfo().Assembly);
 
             IAppointmentsService service = new AppointmentsService(repository.Object);
            
