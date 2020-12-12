@@ -6,6 +6,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Security.Claims;
+    using System.Threading.Tasks;
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels.ChatMessages;
@@ -20,12 +21,15 @@
         private readonly IVetsService vetsService;
         private readonly IOwnersService ownersService;
         private readonly IPaginatedMetaService paginatedMetaService;
+        private readonly IChatMessagesService chatMessagesService;
 
-        public VetController(IVetsService vetsService, IPaginatedMetaService paginatedMetaService, IOwnersService ownersService)
+
+        public VetController(IVetsService vetsService, IPaginatedMetaService paginatedMetaService, IOwnersService ownersService, IChatMessagesService chatMessagesService)
         {
             this.vetsService = vetsService;
             this.paginatedMetaService = paginatedMetaService;
             this.ownersService = ownersService;
+            this.chatMessagesService = chatMessagesService;
         }
 
         [AllowAnonymous]
@@ -109,6 +113,12 @@
             var model = this.vetsService.GetVetsPatients<SelectChatViewModel>(vetId).ToList().GroupBy(x => x.OwnerFullName);
 
             return this.View(model);
+        }
+
+        public async Task<IActionResult> MarkAsRead(int id)
+        {
+            await this.chatMessagesService.MarkAsReadAsync(id);
+            return this.RedirectToAction("StartChat");
         }
     }
 }

@@ -26,14 +26,16 @@
         private readonly IOwnersService ownersService;
         private readonly IPaginatedMetaService paginatedMetaService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IChatMessagesService chatMessagesService;
 
-        public OwnerController(IPetsService petsService, IOwnersService ownersService, IPaginatedMetaService paginatedMetaService, UserManager<ApplicationUser> userManager, IVetsService vetsService)
+        public OwnerController(IPetsService petsService, IOwnersService ownersService, IPaginatedMetaService paginatedMetaService, UserManager<ApplicationUser> userManager, IVetsService vetsService, IChatMessagesService chatMessagesService)
         {
             this.petsService = petsService;
             this.ownersService = ownersService;
             this.paginatedMetaService = paginatedMetaService;
             this.userManager = userManager;
             this.vetsService = vetsService;
+            this.chatMessagesService = chatMessagesService;
         }
 
         public IActionResult MyPets(int id = 1)
@@ -95,6 +97,12 @@
             model.OwnerProfilePicture = owner.ProfilePicture;
             model.OwnerUserId = owner.UserId;
             return this.View("~/Views/Chat/Chat.cshtml", model);
+        }
+
+        public async Task<IActionResult> MarkAsRead(int id)
+        {
+            await this.chatMessagesService.MarkAsReadAsync(id);
+            return this.RedirectToAction("All","Vet",new { area = "Vet" });
         }
     }
 }

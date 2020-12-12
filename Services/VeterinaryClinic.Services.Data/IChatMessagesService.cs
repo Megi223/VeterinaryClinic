@@ -10,5 +10,9 @@ namespace VeterinaryClinic.Services.Data
     public interface IChatMessagesService
     {
         Task CreateAsync(RoleName senderRoleName, RoleName receiverRoleName, string ownerId, string vetId, string content);
+
+        IEnumerable<T> GetLatestChatMessages<T>(RoleName receiverRoleName, string currentReceiverUserId);
+
+        Task MarkAsReadAsync(int id);
     }
 }

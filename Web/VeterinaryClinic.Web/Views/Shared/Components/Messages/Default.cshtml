@@ -1,0 +1,54 @@
+﻿@model IEnumerable<VeterinaryClinic.Web.ViewModels.ChatMessages.LatestMessagesViewModel>
+
+@if (this.User.IsInRole(VeterinaryClinic.Common.GlobalConstants.OwnerRoleName))
+{
+    @foreach (var message in Model)
+    {
+        <li class="new">
+            <span class="avatar available">
+                <img src="@message.VetProfilePicture" alt="avatar" class="img-circle">
+            </span>
+            <div class="body">
+                <div class="header">
+                    <span class="username">@message.VetFullName</span>
+                    <small class="timestamp text-muted">
+                        <i class="fa fa-clock-o"></i><time datetime="@message.CreatedOn.ToString("O")"></time>
+                    </small>
+                </div>
+                <p>
+                    @message.Content
+                </p>
+                <a asp-area="Owner" asp-controller="Owner" asp-action="MarkAsRead" asp-route-id="@message.Id" class="btn btn-danger float-right" style="color:white;padding-bottom:1px;padding-top:1px">X</a>
+                <div class="clearfix"></div>
+            </div>
+        </li>
+    }
+}
+else if (this.User.IsInRole(VeterinaryClinic.Common.GlobalConstants.VetRoleName))
+{
+    @foreach (var message in Model)
+    {
+        <li class="new">
+            <span class="avatar available">
+                <img src="@message.OwnerProfilePicture" alt="avatar" class="img-circle">
+            </span>
+            <div class="body">
+                <div class="header">
+                    <span class="username">@message.OwnerFullName</span>
+                    <small class="timestamp text-muted">
+                        <i class="fa fa-clock-o"></i><time datetime="@message.CreatedOn.ToString()" style="font-size:12px"></time>
+                    </small>
+                </div>
+                <p>
+                    @message.Content
+                </p>
+                <a asp-area="Vet" asp-controller="Vet" asp-action="MarkAsRead" asp-route-id="@message.Id" class="btn btn-danger float-right" style="color:white;padding-bottom:1px;padding-top:1px">X</a>
+                <div class="clearfix"></div>
+            </div>
+        </li>
+    }
+}
+
+
+
+
