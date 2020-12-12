@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using VeterinaryClinic.Common;
 using VeterinaryClinic.Data.Common.Models;
+using VeterinaryClinic.Data.Models.Enumerations;
 
 namespace VeterinaryClinic.Data.Models
 {
@@ -24,5 +25,10 @@ namespace VeterinaryClinic.Data.Models
         public virtual Vet Vet { get; set; }
 
         public bool IsRead { get; set; }
+
+        public RoleName SenderRole { get; set; }
+
+        public RoleName ReceiverRole { get; set; }
+
     }
 }

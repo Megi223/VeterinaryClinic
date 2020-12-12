@@ -15,8 +15,8 @@
     using VeterinaryClinic.Web.ViewModels.Reviews;
     using VeterinaryClinic.Web.ViewModels.Vets;
 
-    //[Authorize(Roles = GlobalConstants.OwnerRoleName)]
-    [Authorize(Roles = GlobalConstants.OwnerRoleName + ", " + GlobalConstants.VetRoleName)]
+    [Authorize(Roles = GlobalConstants.OwnerRoleName)]
+    //[Authorize(Roles = GlobalConstants.OwnerRoleName + ", " + GlobalConstants.VetRoleName)]
     [Area("Owner")]
     public class OwnerController : Controller
     {
@@ -77,7 +77,6 @@
             return this.RedirectToAction("AllReviews", "Home", new { area = string.Empty });
         }
 
-        [Authorize(Roles = GlobalConstants.OwnerRoleName + ", " + GlobalConstants.VetRoleName)]
         public IActionResult Chat(string id)
         {
             ChatPageViewModel model = new ChatPageViewModel();
@@ -86,13 +85,10 @@
             model.VetId = id;
             model.VetProfilePicture = vet.ProfilePicture;
             model.VetUserId = vet.UserId;
-            var ownerId = "eb04a5e9-c863-42db-9ac1-fa020acd0d64";
-            if (this.User.IsInRole(GlobalConstants.OwnerRoleName))
-            {
-                string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                ownerId = this.ownersService.GetOwnerId(currentUserId);
-            }
-            
+
+            string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var ownerId = this.ownersService.GetOwnerId(currentUserId);
+
             var owner = this.ownersService.GetById<OwnerViewModel>(ownerId);
             model.OwnerId = ownerId;
             model.OwnerFullName = owner.FullName;

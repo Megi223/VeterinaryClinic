@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,11 @@ namespace VeterinaryClinic.Services.Data.Tests
 {
     public class AppointmentsServiceTests
     {
+        public AppointmentsServiceTests()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(PendingAppointmentViewModel).GetTypeInfo().Assembly);
+        }
+
         [Fact]
         public async Task CreateAppointmentAsyncShouldAddAppointmentToDb()
         {
@@ -64,23 +70,25 @@ namespace VeterinaryClinic.Services.Data.Tests
 
         // TODO
         [Fact]
-        public async Task GetVetPendingAppointmentsShouldReturnCorrectAppointments()
+        public void GetVetPendingAppointmentsShouldReturnCorrectAppointments()
         {
+            
             var repository = new Mock<IDeletableEntityRepository<Appointment>>();
 
             repository.Setup(r => r.AllAsNoTracking())
 
-            .Returns(this.GetTestDataWithIds().AsQueryable());
+            .Returns(this.GetTestData().AsQueryable());
 
             //AutoMapperConfig.RegisterMappings(Assembly.GetCallingAssembly());
 
-            AutoMapperConfig.RegisterMappings(typeof(IEnumerable<AppointmentInProgressViewModel>).Assembly);
-            AutoMapperConfig.RegisterMappings(typeof(AppointmentInProgressViewModel).Assembly);
-            AutoMapperConfig.RegisterMappings(typeof(AppointmentInProgressViewModel).GetTypeInfo().Assembly);
+            /*AutoMapperConfig.RegisterMappings(typeof(IEnumerable<AppointmentInProgressViewModel>).Assembly);
+            AutoMapperConfig.RegisterMappings(typeof(AppointmentInProgressViewModel).Assembly);*/
+            AutoMapperConfig.RegisterMappings(typeof(PendingAppointmentViewModel).GetTypeInfo().Assembly);
 
             IAppointmentsService service = new AppointmentsService(repository.Object);
            
-            List<AppointmentInProgressViewModel> pendingAppointments = service.GetVetPendingAppointments<AppointmentInProgressViewModel>("testVetId123").ToList();
+            List<PendingAppointmentViewModel> pendingAppointments = service.GetVetPendingAppointments<PendingAppointmentViewModel>("testVetId123").ToList();
+
             Assert.Equal(3, pendingAppointments.Count());
             /*for (int i = 1; i <= gallery.Count(); i++)
             {

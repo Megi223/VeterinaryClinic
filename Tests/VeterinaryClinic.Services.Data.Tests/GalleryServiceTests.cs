@@ -45,7 +45,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             IGalleryService service = new GalleryService(repository.Object);
 
             List<GalleryAllViewModel> gallery = service.GetAllForAPage<GalleryAllViewModel>(1).ToList();
-            
+            ;
             for (int i = 1; i <= gallery.Count(); i++)
             {
                 Assert.Equal("test" + i, gallery[i - 1].Title);

@@ -91,6 +91,8 @@
             services.AddTransient<IPetsMedicationsService, PetsMedicationsService>();
             services.AddTransient<INotificationsService, NotificationsService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IChatMessagesService, ChatMessagesService>();
+
 
 
             Account account = new Account(
