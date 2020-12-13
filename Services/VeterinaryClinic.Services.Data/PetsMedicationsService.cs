@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Web.ViewModels.Appointments;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Web.ViewModels.Appointments;
+
     public class PetsMedicationsService : IPetsMedicationsService
     {
         private readonly IDeletableEntityRepository<PetsMedications> petsMedicationsRepository;
         private readonly IDeletableEntityRepository<Medication> medicationsRepository;
-
 
         public PetsMedicationsService(IDeletableEntityRepository<PetsMedications> petsMedicationsRepository, IDeletableEntityRepository<Medication> medicationsRepository)
         {
@@ -38,14 +35,12 @@ namespace VeterinaryClinic.Services.Data
             {
                 Medication medication = new Medication
                 {
-
                     Name = medicationModel.MedicationName,
                     NumberOfDosesPerServing = medicationModel.MedicationNumberOfDosesPerServing,
                 };
 
                 await this.medicationsRepository.AddAsync(medication);
                 await this.medicationsRepository.SaveChangesAsync();
-                ;
                 PetsMedications petsMedications = new PetsMedications
                 {
                     PetId = model.PetId,
@@ -53,7 +48,6 @@ namespace VeterinaryClinic.Services.Data
                 };
                 await this.petsMedicationsRepository.AddAsync(petsMedications);
                 await this.petsMedicationsRepository.SaveChangesAsync();
-                
             }
         }
     }

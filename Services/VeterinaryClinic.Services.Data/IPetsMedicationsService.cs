@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Web.ViewModels.Appointments;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System.Threading.Tasks;
+
+    using VeterinaryClinic.Web.ViewModels.Appointments;
+
     public interface IPetsMedicationsService
     {
         Task PrescribeMedicationAsync(PrescribeMedicationViewModel model);

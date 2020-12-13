@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.Vets
+﻿namespace VeterinaryClinic.Web.ViewModels.Vets
 {
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class EditVetsServicesDropDown : IMapFrom<VetsServices>
     {
         public string ServiceId { get; set; }

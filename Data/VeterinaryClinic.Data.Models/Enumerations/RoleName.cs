@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VeterinaryClinic.Data.Models.Enumerations
+﻿namespace VeterinaryClinic.Data.Models.Enumerations
 {
     public enum RoleName
     {

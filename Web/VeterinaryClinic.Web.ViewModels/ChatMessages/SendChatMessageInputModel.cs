@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace VeterinaryClinic.Web.ViewModels.ChatMessages
+﻿namespace VeterinaryClinic.Web.ViewModels.ChatMessages
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class SendChatMessageInputModel
     {
         [Required]

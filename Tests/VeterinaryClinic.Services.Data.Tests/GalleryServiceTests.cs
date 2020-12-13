@@ -1,20 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Repositories;
-using VeterinaryClinic.Services.Mapping;
-using VeterinaryClinic.Web.ViewModels.Gallery;
-using Xunit;
-
-namespace VeterinaryClinic.Services.Data.Tests
+﻿namespace VeterinaryClinic.Services.Data.Tests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Moq;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.Gallery;
+    using Xunit;
+
     public class GalleryServiceTests
     {
         [Fact]
@@ -45,13 +41,12 @@ namespace VeterinaryClinic.Services.Data.Tests
             IGalleryService service = new GalleryService(repository.Object);
 
             List<GalleryAllViewModel> gallery = service.GetAllForAPage<GalleryAllViewModel>(1).ToList();
-            ;
+
             for (int i = 1; i <= gallery.Count(); i++)
             {
                 Assert.Equal("test" + i, gallery[i - 1].Title);
                 Assert.Null(gallery[i - 1].ImageUrl);
             }
-
         }
 
         [Theory]
@@ -71,7 +66,6 @@ namespace VeterinaryClinic.Services.Data.Tests
             var actualCount = gallery.Count();
 
             Assert.Equal(expectedCount, actualCount);
-
         }
 
         private List<Gallery> GetTestData()

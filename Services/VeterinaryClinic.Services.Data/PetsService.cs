@@ -146,8 +146,9 @@
             pet.VetId = edit.VetId;
             if (edit.NewPicture != null)
             {
-                pet.Picture= await this.cloudinaryService.UploudAsync(edit.NewPicture);
+                pet.Picture = await this.cloudinaryService.UploudAsync(edit.NewPicture);
             }
+
             await this.petsRepository.SaveChangesAsync();
         }
 

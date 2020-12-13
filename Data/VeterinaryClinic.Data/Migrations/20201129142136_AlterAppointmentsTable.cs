@@ -37,7 +37,7 @@
                 type: "nvarchar(50)",
                 maxLength: 50,
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -79,7 +79,7 @@
                     OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PetId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VetId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    VetId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                 },
                 constraints: table =>
                 {

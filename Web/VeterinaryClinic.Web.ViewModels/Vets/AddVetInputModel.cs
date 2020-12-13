@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Web.Infrastructure.Attributes;
-
-namespace VeterinaryClinic.Web.ViewModels.Vets
+﻿namespace VeterinaryClinic.Web.ViewModels.Vets
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Web.Infrastructure.Attributes;
+
     public class AddVetInputModel
     {
         [Required]
@@ -42,7 +41,7 @@ namespace VeterinaryClinic.Web.ViewModels.Vets
         public string LastName { get; set; }
 
         [AllowedExtensions(new string[] { ".jpg", ".png" })]
-        [Display(Name ="Profile Picture")]
+        [Display(Name = "Profile Picture")]
         public IFormFile ProfilePicture { get; set; }
 
         [Required]

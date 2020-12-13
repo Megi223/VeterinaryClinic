@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VeterinaryClinic.Web.ViewModels.Appointments
+﻿namespace VeterinaryClinic.Web.ViewModels.Appointments
 {
+    using System;
+
     public class PastAppointmentViewModel : AppointmentBaseViewModel
     {
         public DateTime EndTime { get; set; }

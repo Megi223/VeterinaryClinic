@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Data.Common.Models;
-
-namespace VeterinaryClinic.Data.Models
+﻿namespace VeterinaryClinic.Data.Models
 {
+    using VeterinaryClinic.Data.Common.Models;
+
     public class Notification : BaseDeletableModel<int>
     {
         public string OwnerId { get; set; }

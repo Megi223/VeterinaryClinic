@@ -1,24 +1,22 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Models.Enumerations;
-using VeterinaryClinic.Data.Repositories;
-using VeterinaryClinic.Services.Data.Tests.TestViewModels;
-using VeterinaryClinic.Services.Mapping;
-using VeterinaryClinic.Web.ViewModels.Appointments;
-using Xunit;
-
-namespace VeterinaryClinic.Services.Data.Tests
+﻿namespace VeterinaryClinic.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using Moq;
+    using VeterinaryClinic.Data;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Models.Enumerations;
+    using VeterinaryClinic.Data.Repositories;
+    using VeterinaryClinic.Services.Data.Tests.TestViewModels;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.Appointments;
+    using Xunit;
+
     public class AppointmentsServiceTests
     {
         [Fact]
@@ -97,7 +95,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             for (int i = 1; i <= pendingAppointments.Count(); i++)
             {
                 Assert.Equal("testSubject" + i, pendingAppointments[i - 1].Subject);
-                Assert.Equal("testPetId123",pendingAppointments[i - 1].PetId);
+                Assert.Equal("testPetId123", pendingAppointments[i - 1].PetId);
                 Assert.Equal("testVetId123", pendingAppointments[i - 1].VetId);
                 Assert.Equal("testOwnerId123", pendingAppointments[i - 1].OwnerId);
                 Assert.Equal(new DateTime(2020, 12, 13, 14, 30, 30), pendingAppointments[i - 1].StartTime);
@@ -109,7 +107,7 @@ namespace VeterinaryClinic.Services.Data.Tests
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
-            
+
             var repository = new EfDeletableEntityRepository<Appointment>(new ApplicationDbContext(options.Options));
 
             await PopulateRepositoryWithData(repository);
@@ -117,14 +115,13 @@ namespace VeterinaryClinic.Services.Data.Tests
             var service = new AppointmentsService(repository);
 
             await service.AcceptAsync("testId1");
-          
+
             Assert.True(repository.All().First().IsAcceptedByVet);
         }
 
         [Fact]
         public async Task EndShouldEndAppointmentProperly()
         {
-
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
@@ -134,16 +131,15 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             var service = new AppointmentsService(repository);
 
-            await service.EndAsync("testId1",new DateTime(2020,12,8,19,30,30));
+            await service.EndAsync("testId1", new DateTime(2020, 12, 8, 19, 30, 30));
 
             Assert.Equal(new DateTime(2020, 12, 8, 19, 30, 30), repository.All().First().EndTime);
-            Assert.True(repository.All().First().Status==Status.Finished);
+            Assert.True(repository.All().First().Status == Status.Finished);
         }
 
         [Fact]
         public async Task DeclineShouldSetIsDeletedToTrue()
         {
-
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
@@ -155,13 +151,12 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             await service.DeclineAsync("testId1");
 
-            Assert.Equal(1,repository.All().Count());
+            Assert.Equal(1, repository.All().Count());
         }
 
         [Fact]
         public async Task CancelShouldSetIsDeletedToTrue()
         {
-
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
@@ -179,7 +174,6 @@ namespace VeterinaryClinic.Services.Data.Tests
         [Fact]
         public async Task StartAsyncShouldSetStatusToInPogress()
         {
-
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
@@ -197,7 +191,6 @@ namespace VeterinaryClinic.Services.Data.Tests
         [Fact]
         public async Task GetAppointmentsInProgressShouldReturnCorrectCount()
         {
-
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
@@ -208,7 +201,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             var service = new AppointmentsService(repository);
 
             await service.StartAsync("testId1");
-            var actualCount=service.GetAppointmentsInProgressCount("testVetId123");
+            var actualCount = service.GetAppointmentsInProgressCount("testVetId123");
 
             Assert.Equal(1, actualCount);
         }
@@ -299,7 +292,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             for (int i = 1; i <= upcomingAppointments.Count(); i++)
             {
                 Assert.Equal("testSubject" + i, upcomingAppointments[i - 1].Subject);
-                Assert.Equal("testPetId123"+i, upcomingAppointments[i - 1].PetId);
+                Assert.Equal("testPetId123" + i, upcomingAppointments[i - 1].PetId);
                 Assert.Equal("testVetId123", upcomingAppointments[i - 1].VetId);
                 Assert.Equal("testOwnerId123", upcomingAppointments[i - 1].OwnerId);
             }
@@ -336,7 +329,7 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             List<AppointmentViewModelTest> upcomingAppointments = service.GetOwnerUpcomingAppointments<AppointmentViewModelTest>("testOwnerId123").ToList();
 
-            Assert.Equal(2,upcomingAppointments.Count());
+            Assert.Equal(2, upcomingAppointments.Count());
         }
 
         [Fact]
@@ -355,7 +348,7 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             for (int i = 1; i <= upcomingAppointments.Count; i++)
             {
-                Assert.Equal(new DateTime(2020, 12, 13, 14, 30, 30),upcomingAppointments[i - 1].StartTime);
+                Assert.Equal(new DateTime(2020, 12, 13, 14, 30, 30), upcomingAppointments[i - 1].StartTime);
                 Assert.Equal("testPetId1233", upcomingAppointments[i - 1].PetId);
                 Assert.Equal("testSubject3", upcomingAppointments[i - 1].Subject);
                 Assert.Equal("AnotherVetId123", upcomingAppointments[i - 1].VetId);
@@ -369,14 +362,16 @@ namespace VeterinaryClinic.Services.Data.Tests
             var repository = new Mock<IDeletableEntityRepository<Appointment>>();
 
             repository.Setup(r => r.All())
-            .Returns(new List<Appointment> {
-                new Appointment 
+            .Returns(new List<Appointment>
+            {
+                new Appointment
                 {
                 PetId = "testPetId123",
                 Subject = "testSubject1",
                 VetId = "testVetId123",
                 OwnerId = "testOwnerId123",
-                Status=Status.Finished, },
+                Status = Status.Finished,
+                },
             }.AsQueryable());
 
             AutoMapperConfig.RegisterMappings(typeof(AppointmentViewModelTest).Assembly);
@@ -394,14 +389,16 @@ namespace VeterinaryClinic.Services.Data.Tests
             var repository = new Mock<IDeletableEntityRepository<Appointment>>();
 
             repository.Setup(r => r.All())
-            .Returns(new List<Appointment> {
+            .Returns(new List<Appointment>
+            {
                 new Appointment
                 {
                 PetId = "testPetId123",
                 Subject = "testSubject1",
                 VetId = "testVetId123",
                 OwnerId = "testOwnerId123",
-                Status=Status.Finished, },
+                Status = Status.Finished,
+                },
             }.AsQueryable());
 
             AutoMapperConfig.RegisterMappings(typeof(AppointmentViewModelTest).Assembly);
@@ -461,9 +458,9 @@ namespace VeterinaryClinic.Services.Data.Tests
                     Subject = "testSubject1",
                     VetId = "testVetId123",
                     OwnerId = "testOwnerId123",
-                    IsAcceptedByVet=true,
-                    IsCancelledByOwner=false,
-                    Status=Status.Upcoming,
+                    IsAcceptedByVet = true,
+                    IsCancelledByOwner = false,
+                    Status = Status.Upcoming,
                 },
                 new Appointment
                 {
@@ -472,9 +469,9 @@ namespace VeterinaryClinic.Services.Data.Tests
                      Subject = "testSubject2",
                      VetId = "testVetId123",
                      OwnerId = "testOwnerId123",
-                     IsAcceptedByVet=true,
-                     IsCancelledByOwner=false,
-                     Status=Status.Upcoming,
+                     IsAcceptedByVet = true,
+                     IsCancelledByOwner = false,
+                     Status = Status.Upcoming,
                 },
                 new Appointment
                 {
@@ -483,9 +480,9 @@ namespace VeterinaryClinic.Services.Data.Tests
                      Subject = "testSubject3",
                      VetId = "AnotherVetId123",
                      OwnerId = "testAnotherOwnerId123",
-                     IsAcceptedByVet=true,
-                     IsCancelledByOwner=false,
-                     Status=Status.Upcoming,
+                     IsAcceptedByVet = true,
+                     IsCancelledByOwner = false,
+                     Status = Status.Upcoming,
                 },
                 new Appointment
                 {
@@ -494,45 +491,9 @@ namespace VeterinaryClinic.Services.Data.Tests
                      Subject = "testSubject4",
                      VetId = "testVetId123",
                      OwnerId = "testOwnerId123",
-                     Status=Status.Finished,
+                     Status = Status.Finished,
                 },
             };
         }
-
-        private List<Appointment> GetTestDataWithIds()
-        {
-            return new List<Appointment>()
-            {
-                new Appointment
-                {
-                    Id="testId1",
-                    Date = DateTime.UtcNow,
-                    PetId = "testPetId123",
-                    Subject = "testSubject1",
-                    VetId = "testVetId123",
-                    OwnerId = "testOwnerId123",
-                },
-                new Appointment
-                {
-                    Id="testId2",
-                    Date = DateTime.UtcNow,
-                    PetId = "testPetId123",
-                    Subject = "testSubject2",
-                    VetId = "testVetId123",
-                    OwnerId = "testOwnerId123",
-                },
-                new Appointment
-                {
-                    Id="testId3",
-                    Date = DateTime.UtcNow,
-                    PetId = "testPetId123",
-                    Subject = "testSubject3",
-                    VetId = "testVetId123",
-                    OwnerId = "testOwnerId123",
-                },
-            };
-        }
-
-
     }
 }

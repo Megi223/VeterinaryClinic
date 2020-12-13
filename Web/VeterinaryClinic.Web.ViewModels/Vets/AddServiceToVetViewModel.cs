@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Web.ViewModels.Services;
-
-namespace VeterinaryClinic.Web.ViewModels.Vets
+﻿namespace VeterinaryClinic.Web.ViewModels.Vets
 {
+    using System.Collections.Generic;
+
+    using VeterinaryClinic.Web.ViewModels.Services;
+
     public class AddServiceToVetViewModel
     {
         public string VetId { get; set; }

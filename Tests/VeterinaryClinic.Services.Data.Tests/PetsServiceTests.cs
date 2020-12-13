@@ -1,37 +1,30 @@
-﻿using CloudinaryDotNet;
-using Microsoft.AspNetCore.Http;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Pipelines;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using Xunit;
-using System.Drawing;
-using Microsoft.Extensions.Configuration;
-using System.Threading;
-using VeterinaryClinic.Data;
-using Microsoft.EntityFrameworkCore;
-using VeterinaryClinic.Data.Repositories;
-using VeterinaryClinic.Data.Models.Enumerations;
-using VeterinaryClinic.Web.ViewModels.Pets;
-using VeterinaryClinic.Services.Mapping;
-using AutoMapper;
-using VeterinaryClinic.Services.Data.Tests.TestViewModels;
-
-namespace VeterinaryClinic.Services.Data.Tests
+﻿namespace VeterinaryClinic.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CloudinaryDotNet;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Moq;
+    using VeterinaryClinic.Data;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Models.Enumerations;
+    using VeterinaryClinic.Data.Repositories;
+    using VeterinaryClinic.Services.Data.Tests.TestViewModels;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.Pets;
+    using Xunit;
+
     public class PetsServiceTests
     {
         [Theory]
         [InlineData("1", "https://res.cloudinary.com/dpwroiluv/image/upload/v1606324362/dog_gxboja.png")]
         [InlineData("2", "https://res.cloudinary.com/dpwroiluv/image/upload/v1606324384/cat_y8yj67.png")]
-        public async Task DeterminePhotoUrlShouldReturnCorrectPhotoUrl(string typeOfAnimal,string expected)
+        public async Task DeterminePhotoUrlShouldReturnCorrectPhotoUrl(string typeOfAnimal, string expected)
         {
             var petsRepository = new Mock<IDeletableEntityRepository<Pet>>();
             var diagnoseRepository = new Mock<IDeletableEntityRepository<Diagnose>>();
@@ -44,9 +37,8 @@ namespace VeterinaryClinic.Services.Data.Tests
                 configuration["Cloudinary:AppSecret"]);
             Cloudinary cloudinary = new Cloudinary(account);
             ICloudinaryService cloudinaryService = new CloudinaryService(cloudinary);
-            IPetsService service = new PetsService(petsRepository.Object,cloudinaryService,diagnoseRepository.Object);
+            IPetsService service = new PetsService(petsRepository.Object, cloudinaryService, diagnoseRepository.Object);
             var actualPhotoUrl = await service.DeterminePhotoUrl(null, typeOfAnimal);
-            ;
             Assert.Equal(expected, actualPhotoUrl);
         }
 
@@ -120,7 +112,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             ICloudinaryService cloudinaryService = new CloudinaryService(cloudinary);
             IPetsService service = new PetsService(petsRepository, cloudinaryService, diagnoseRepository);
 
-            await petsRepository.AddAsync(new Pet { Name = "test", Birthday = DateTime.UtcNow, Gender = Gender.Male, IdentificationNumber = "123456", VetId = "testVetId123", Sterilised = false, Type = TypeOfAnimal.Dog, Weight = 2.5F, OwnerId="testOwnerId123" });
+            await petsRepository.AddAsync(new Pet { Name = "test", Birthday = DateTime.UtcNow, Gender = Gender.Male, IdentificationNumber = "123456", VetId = "testVetId123", Sterilised = false, Type = TypeOfAnimal.Dog, Weight = 2.5F, OwnerId = "testOwnerId123" });
             await petsRepository.SaveChangesAsync();
 
             var actualCount = service.GetCountForOwner("testOwnerId123");
@@ -147,7 +139,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             ICloudinaryService cloudinaryService = new CloudinaryService(cloudinary);
             IPetsService service = new PetsService(petsRepository, cloudinaryService, diagnoseRepository);
 
-            await petsRepository.AddAsync(new Pet { Id = "testPetId", Name = "test", Birthday = new DateTime(2020,12,05), Gender = Gender.Male, IdentificationNumber = "123456", VetId = "testVetId123", Sterilised = false, Type = TypeOfAnimal.Dog, Weight = 2.5F, OwnerId = "testOwnerId123" });
+            await petsRepository.AddAsync(new Pet { Id = "testPetId", Name = "test", Birthday = new DateTime(2020, 12, 05), Gender = Gender.Male, IdentificationNumber = "123456", VetId = "testVetId123", Sterilised = false, Type = TypeOfAnimal.Dog, Weight = 2.5F, OwnerId = "testOwnerId123" });
             await petsRepository.SaveChangesAsync();
 
             var actualPet = service.GetById<PetViewModelTest>("testPetId");
@@ -158,7 +150,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             Assert.Equal(2.5F, actualPet.Weight);
             Assert.Equal("testOwnerId123", actualPet.OwnerId);
             Assert.Equal("testVetId123", actualPet.VetId);
-            Assert.Equal(Gender.Male,actualPet.Gender);
+            Assert.Equal(Gender.Male, actualPet.Gender);
             Assert.Equal("123456", actualPet.IdentificationNumber);
             Assert.Equal("test", actualPet.Name);
             Assert.False(actualPet.Sterilised);
@@ -200,7 +192,7 @@ namespace VeterinaryClinic.Services.Data.Tests
         [InlineData(1, 3)]
         [InlineData(2, 1)]
         [InlineData(3, 0)]
-        public void GetAllForAPageShouldReturnCorrectCountForAPage(int page,int expectedCount)
+        public void GetAllForAPageShouldReturnCorrectCountForAPage(int page, int expectedCount)
         {
             AutoMapperConfig.RegisterMappings(typeof(PetViewModelTest).Assembly);
             var petsRepository = new Mock<IDeletableEntityRepository<Pet>>();
@@ -383,7 +375,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             ICloudinaryService cloudinaryService = new CloudinaryService(cloudinary);
             IPetsService service = new PetsService(petsRepository, cloudinaryService, diagnoseRepository);
 
-            await petsRepository.AddAsync(new Pet { Id="testPetId", Name = "test", Birthday = DateTime.UtcNow, Gender = Gender.Male, IdentificationNumber = "123456", VetId = "testVetId123", Sterilised = false, Type = TypeOfAnimal.Dog, Weight = 2.5F });
+            await petsRepository.AddAsync(new Pet { Id = "testPetId", Name = "test", Birthday = DateTime.UtcNow, Gender = Gender.Male, IdentificationNumber = "123456", VetId = "testVetId123", Sterilised = false, Type = TypeOfAnimal.Dog, Weight = 2.5F });
             await petsRepository.SaveChangesAsync();
 
             await service.DeleteAsync("testPetId");
@@ -406,7 +398,7 @@ namespace VeterinaryClinic.Services.Data.Tests
                     Sterilised = false,
                     Type = TypeOfAnimal.Dog,
                     Weight = 2.5F,
-                    OwnerId = "testOwnerId123", 
+                    OwnerId = "testOwnerId123",
                 },
                 new Pet
                 {

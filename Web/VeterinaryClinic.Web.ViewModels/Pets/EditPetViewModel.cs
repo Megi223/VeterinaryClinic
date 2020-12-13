@@ -1,18 +1,16 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Models.Enumerations;
-using VeterinaryClinic.Services.Mapping;
-using VeterinaryClinic.Web.Infrastructure.Attributes;
-
-namespace VeterinaryClinic.Web.ViewModels.Pets
+﻿namespace VeterinaryClinic.Web.ViewModels.Pets
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using AutoMapper;
+    using Microsoft.AspNetCore.Http;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.Infrastructure.Attributes;
+
     public class EditPetViewModel : IMapFrom<Pet>, IHaveCustomMappings
     {
         public string Id { get; set; }
@@ -20,7 +18,6 @@ namespace VeterinaryClinic.Web.ViewModels.Pets
         [Required]
         [MaxLength(GlobalConstants.NameMaxLength)]
         public string Name { get; set; }
-
 
         [Required]
         [Display(Name = "Vet")]
@@ -39,14 +36,12 @@ namespace VeterinaryClinic.Web.ViewModels.Pets
         [Required]
         public string Sterilised { get; set; }
 
-
         public string PictureFromDatabase { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Pet, EditPetViewModel>()
                 .ForMember(x => x.PictureFromDatabase, opt => opt.MapFrom(x => x.Picture));
-            
         }
     }
 }

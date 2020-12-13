@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace VeterinaryClinic.Data.Migrations
+﻿namespace VeterinaryClinic.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AlterTableAppointmentsDeleteTableDosingTime : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +35,7 @@ namespace VeterinaryClinic.Data.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     MedicationId = table.Column<int>(type: "int", nullable: true),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Time = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Time = table.Column<DateTime>(type: "datetime2", nullable: false),
                 },
                 constraints: table =>
                 {

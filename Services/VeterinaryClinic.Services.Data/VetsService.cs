@@ -1,9 +1,11 @@
 ﻿namespace VeterinaryClinic.Services.Data
 {
     using Microsoft.AspNetCore.Http;
+
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
@@ -152,14 +154,14 @@
             }
 
             vet.Specialization = input.Specialization;
-            if(input.ServicesInput == null)
+            if (input.ServicesInput == null)
             {
                 await this.DeleteAllVetsServices(input.Id);
             }
             else if (input.ServicesInput != null && input.ServicesInput.Count() != vet.VetsServices.Count)
             {
                 await this.DeleteAllVetsServices(input.Id);
-                await this.AddServicesToVet(input.ServicesInput,input.Id);
+                await this.AddServicesToVet(input.ServicesInput, input.Id);
             }
 
             await this.vetsRepository.SaveChangesAsync();
@@ -177,7 +179,7 @@
             await this.vetsServicesRepository.SaveChangesAsync();
         }
 
-        private async Task AddServicesToVet(IEnumerable<string> serviceIds,string vetId)
+        private async Task AddServicesToVet(IEnumerable<string> serviceIds, string vetId)
         {
             foreach (var serviceId in serviceIds)
             {
@@ -199,7 +201,5 @@
         {
             return this.petsRepository.All().Where(x => x.VetId == vetId).To<T>();
         }
-
-        
     }
 }

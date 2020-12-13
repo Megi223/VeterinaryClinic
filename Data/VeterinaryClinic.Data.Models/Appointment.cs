@@ -3,6 +3,7 @@
     using System;
 
     using System.ComponentModel.DataAnnotations;
+
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Common.Models;
     using VeterinaryClinic.Data.Models.Enumerations;

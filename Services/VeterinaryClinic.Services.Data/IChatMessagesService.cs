@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Models.Enumerations;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using VeterinaryClinic.Data.Models.Enumerations;
+
     public interface IChatMessagesService
     {
         Task CreateAsync(RoleName senderRoleName, RoleName receiverRoleName, string ownerId, string vetId, string content);

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Common.Models;
-using VeterinaryClinic.Data.Models.Enumerations;
-
-namespace VeterinaryClinic.Data.Models
+﻿namespace VeterinaryClinic.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using VeterinaryClinic.Data.Common.Models;
+    using VeterinaryClinic.Data.Models.Enumerations;
+
     public class ChatMessage : BaseDeletableModel<int>
     {
         [Required]
@@ -28,6 +25,5 @@ namespace VeterinaryClinic.Data.Models
         public RoleName SenderRole { get; set; }
 
         public RoleName ReceiverRole { get; set; }
-
     }
 }

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-using VeterinaryClinic.Web.ViewModels.Notifications;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.Notifications;
+
     public class NotificationsService : INotificationsService
     {
         private readonly IDeletableEntityRepository<Notification> notificationsRepository;
@@ -19,10 +18,9 @@ namespace VeterinaryClinic.Services.Data
         {
             this.notificationsRepository = notificationsRepository;
             this.vetsRepository = vetsRepository;
-            
         }
 
-        public async Task CreateNotificationForOwnerAsync(string ownerId,string content)
+        public async Task CreateNotificationForOwnerAsync(string ownerId, string content)
         {
             Notification notification = new Notification
             {
@@ -41,7 +39,7 @@ namespace VeterinaryClinic.Services.Data
                 VetId = vetId,
                 Content = content,
             };
-            
+
             await this.notificationsRepository.AddAsync(notification);
             await this.notificationsRepository.SaveChangesAsync();
 
@@ -70,7 +68,6 @@ namespace VeterinaryClinic.Services.Data
             var notification = this.notificationsRepository.All().FirstOrDefault(x => x.Id == id);
             this.notificationsRepository.Delete(notification);
             await this.notificationsRepository.SaveChangesAsync();
-
         }
     }
 }

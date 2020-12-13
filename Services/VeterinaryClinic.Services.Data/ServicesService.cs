@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Services.Mapping;
@@ -12,7 +13,6 @@
     {
         private readonly IDeletableEntityRepository<Service> servicesRepository;
         private readonly IDeletableEntityRepository<VetsServices> vetsServicesRepository;
-
 
         public ServicesService(IDeletableEntityRepository<Service> servicesRepository, IDeletableEntityRepository<VetsServices> vetsServicesRepository)
         {
@@ -45,7 +45,7 @@
         public IEnumerable<T> GetAllServicesWhichAVetDoesNotHave<T>(string vetId)
         {
             var vetsServices =
-                this.vetsServicesRepository.All().Where(x=>x.VetId==vetId);
+                this.vetsServicesRepository.All().Where(x => x.VetId == vetId);
             var services = this.servicesRepository.All();
             foreach (var vetsService in vetsServices)
             {

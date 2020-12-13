@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.Owners
+﻿namespace VeterinaryClinic.Web.ViewModels.Owners
 {
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class OwnerViewModel : IMapFrom<Owner>
     {
         public string Id { get; set; }

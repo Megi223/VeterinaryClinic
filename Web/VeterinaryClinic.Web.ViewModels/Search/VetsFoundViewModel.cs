@@ -1,8 +1,5 @@
 ﻿namespace VeterinaryClinic.Web.ViewModels.Search
 {
-    using System.Linq;
-
-    using AutoMapper;
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Services.Mapping;
 

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.ChatMessages
+﻿namespace VeterinaryClinic.Web.ViewModels.ChatMessages
 {
+    using System;
+
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class LatestMessagesViewModel : IMapFrom<ChatMessage>
     {
         public int Id { get; set; }

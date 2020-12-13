@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.Notifications
+﻿namespace VeterinaryClinic.Web.ViewModels.Notifications
 {
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class SendNotificationViewModel : IMapFrom<Notification>
     {
         public string OwnerId { get; set; }

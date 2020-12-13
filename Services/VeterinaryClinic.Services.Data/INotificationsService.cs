@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using VeterinaryClinic.Web.ViewModels.Notifications;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using VeterinaryClinic.Web.ViewModels.Notifications;
+
     public interface INotificationsService
     {
         Task CreateNotificationForOwnerAsync(string ownerId, string content);

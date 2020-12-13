@@ -1,13 +1,12 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.Appointments
+﻿namespace VeterinaryClinic.Web.ViewModels.Appointments
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class AppointmentInProgressViewModel : IMapFrom<Appointment>
     {
         public string Id { get; set; }

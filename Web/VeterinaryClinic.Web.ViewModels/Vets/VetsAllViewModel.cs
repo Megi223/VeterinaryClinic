@@ -18,7 +18,5 @@
         public string Specialization { get; set; }
 
         public string Services { get; set; }
-
-        
     }
 }

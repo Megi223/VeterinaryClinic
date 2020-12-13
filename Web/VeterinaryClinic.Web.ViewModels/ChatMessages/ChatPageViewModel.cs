@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace VeterinaryClinic.Web.ViewModels.ChatMessages
+﻿namespace VeterinaryClinic.Web.ViewModels.ChatMessages
 {
     public class ChatPageViewModel
     {
@@ -21,7 +17,5 @@ namespace VeterinaryClinic.Web.ViewModels.ChatMessages
         public string OwnerProfilePicture { get; set; }
 
         public string OwnerUserId { get; set; }
-
-
     }
 }

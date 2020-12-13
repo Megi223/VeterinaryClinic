@@ -1,17 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Repositories;
-using VeterinaryClinic.Web.ViewModels.Appointments;
-using Xunit;
-
-namespace VeterinaryClinic.Services.Data.Tests
+﻿namespace VeterinaryClinic.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using VeterinaryClinic.Data;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Repositories;
+    using VeterinaryClinic.Web.ViewModels.Appointments;
+    using Xunit;
+
     public class PetsMedicationsServiceTests
     {
         [Fact]
@@ -24,7 +24,7 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             var service = new PetsMedicationsService(petsMedicationsRepository, medicationsRepository);
 
-            await service.PrescribeMedicationAsync(new PrescribeMedicationViewModel { PetId="testPetId123",Medications=new List<PetsMedicationsInputModel> { new PetsMedicationsInputModel { MedicationName="testMedicationName", MedicationNumberOfDosesPerServing="5"}, new PetsMedicationsInputModel { MedicationName="testMedicationName2",MedicationNumberOfDosesPerServing="3"} } });
+            await service.PrescribeMedicationAsync(new PrescribeMedicationViewModel { PetId = "testPetId123", Medications = new List<PetsMedicationsInputModel> { new PetsMedicationsInputModel { MedicationName = "testMedicationName", MedicationNumberOfDosesPerServing = "5" }, new PetsMedicationsInputModel { MedicationName = "testMedicationName2", MedicationNumberOfDosesPerServing = "3" } } });
 
             var medicationsRepositoryActualCount = medicationsRepository.All().Count();
             var petsMedicationRepositoryActualCount = medicationsRepository.All().Count();
@@ -59,6 +59,5 @@ namespace VeterinaryClinic.Services.Data.Tests
             Assert.Equal(1, medicationsRepositoryActualCount);
             Assert.Equal(1, petsMedicationRepositoryActualCount);
         }
-
     }
 }

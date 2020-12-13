@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace VeterinaryClinic.Data.Migrations
+﻿namespace VeterinaryClinic.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class RemoveRemindersTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -42,7 +43,7 @@ namespace VeterinaryClinic.Data.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     OwnerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    VetId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    VetId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                 },
                 constraints: table =>
                 {

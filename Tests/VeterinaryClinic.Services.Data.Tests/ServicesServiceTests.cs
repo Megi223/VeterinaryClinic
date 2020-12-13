@@ -1,19 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Repositories;
-using VeterinaryClinic.Services.Mapping;
-using VeterinaryClinic.Web.ViewModels.Services;
-using VeterinaryClinic.Web.ViewModels.Vets;
-using Xunit;
-
-namespace VeterinaryClinic.Services.Data.Tests
+﻿namespace VeterinaryClinic.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using VeterinaryClinic.Data;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Repositories;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.Services;
+    using VeterinaryClinic.Web.ViewModels.Vets;
+    using Xunit;
+
     public class ServicesServiceTests
     {
         [Fact]
@@ -24,10 +24,10 @@ namespace VeterinaryClinic.Services.Data.Tests
             var servicesRepository = new EfDeletableEntityRepository<Service>(new ApplicationDbContext(options.Options));
             var vetsServicesRepository = new EfDeletableEntityRepository<VetsServices>(new ApplicationDbContext(options.Options));
 
-            await servicesRepository.AddAsync(new Service { Name="test",Description="testDesc" });
+            await servicesRepository.AddAsync(new Service { Name = "test", Description = "testDesc" });
             await servicesRepository.SaveChangesAsync();
 
-            var servicesService = new ServicesService(servicesRepository,vetsServicesRepository);
+            var servicesService = new ServicesService(servicesRepository, vetsServicesRepository);
 
             var actualName = servicesService.GetNameById(1);
 
@@ -75,9 +75,9 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             for (int i = 1; i <= services.Count(); i++)
             {
-                Assert.Equal("test" + i, services[i-1].Name);
-                Assert.Equal("testDesc" + i, services[i-1].Description);
-                Assert.Null(services[i-1].ImageUrl);
+                Assert.Equal("test" + i, services[i - 1].Name);
+                Assert.Equal("testDesc" + i, services[i - 1].Description);
+                Assert.Null(services[i - 1].ImageUrl);
             }
         }
 
@@ -103,7 +103,6 @@ namespace VeterinaryClinic.Services.Data.Tests
             var actualCount = services.Count();
 
             Assert.Equal(expectedCount, actualCount);
-
         }
 
         [Fact]
@@ -114,7 +113,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             var servicesRepository = new EfDeletableEntityRepository<Service>(new ApplicationDbContext(options.Options));
             var vetsServicesRepository = new EfDeletableEntityRepository<VetsServices>(new ApplicationDbContext(options.Options));
             var servicesService = new ServicesService(servicesRepository, vetsServicesRepository);
-            
+
             await servicesRepository.AddAsync(new Service { Name = "test1", Description = "testDesc1" });
             await servicesRepository.AddAsync(new Service { Name = "test2", Description = "testDesc2" });
             await servicesRepository.AddAsync(new Service { Name = "test3", Description = "testDesc3" });
@@ -129,9 +128,8 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             for (int i = 1; i <= services.Count(); i++)
             {
-                Assert.Equal(i+1, services[i - 1].Id);
+                Assert.Equal(i + 1, services[i - 1].Id);
             }
-
         }
 
         [Fact]
@@ -181,8 +179,5 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             Assert.Equal(expectedCount, actualCount);
         }
-
-
-
     }
 }

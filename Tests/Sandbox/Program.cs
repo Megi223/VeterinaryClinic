@@ -17,7 +17,6 @@
     using VeterinaryClinic.Data.Repositories;
     using VeterinaryClinic.Data.Seeding;
     using VeterinaryClinic.Services.Data;
-    using VeterinaryClinic.Services.Messaging;
 
     public static class Program
     {

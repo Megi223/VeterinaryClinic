@@ -1,16 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Repositories;
-using Xunit;
-
-namespace VeterinaryClinic.Services.Data.Tests
+﻿namespace VeterinaryClinic.Services.Data.Tests
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using VeterinaryClinic.Data;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Repositories;
+    using Xunit;
+
     public class RatingServiceTests
     {
         [Fact]
@@ -22,7 +21,7 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             var service = new RatingService(ratingsRepository);
 
-            await service.SetRatingAsync("testVetId","testOwnerId",2);
+            await service.SetRatingAsync("testVetId", "testOwnerId", 2);
 
             var raringsRepositoryActualCount = ratingsRepository.All().Count();
 
@@ -55,9 +54,9 @@ namespace VeterinaryClinic.Services.Data.Tests
         }
 
         [Theory]
-        [InlineData(3,5,4)]
-        [InlineData(2,5,3.5)]
-        public async Task GetAverageRatingShouldReturnCorrectResult(int firstScore,int secondScore,float expectedResult)
+        [InlineData(3, 5, 4)]
+        [InlineData(2, 5, 3.5)]
+        public async Task GetAverageRatingShouldReturnCorrectResult(int firstScore, int secondScore, float expectedResult)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());

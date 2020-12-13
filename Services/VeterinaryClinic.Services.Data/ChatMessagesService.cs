@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Models.Enumerations;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Services.Data
+﻿namespace VeterinaryClinic.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Models.Enumerations;
+    using VeterinaryClinic.Services.Mapping;
+
     public class ChatMessagesService : IChatMessagesService
     {
         private readonly IDeletableEntityRepository<ChatMessage> chatMessagesRepository;
         private readonly IDeletableEntityRepository<Owner> ownersRepository;
         private readonly IDeletableEntityRepository<Vet> vetsRepository;
-
 
         public ChatMessagesService(IDeletableEntityRepository<ChatMessage> chatMessagesRepository, IDeletableEntityRepository<Owner> ownersRepository, IDeletableEntityRepository<Vet> vetsRepository)
         {
@@ -39,7 +37,7 @@ namespace VeterinaryClinic.Services.Data
             await this.chatMessagesRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> GetLatestChatMessages<T>(RoleName receiverRoleName,string currentReceiverUserId)
+        public IEnumerable<T> GetLatestChatMessages<T>(RoleName receiverRoleName, string currentReceiverUserId)
         {
             if (receiverRoleName == RoleName.Owner)
             {
@@ -58,6 +56,5 @@ namespace VeterinaryClinic.Services.Data
             this.chatMessagesRepository.All().FirstOrDefault(x => x.Id == id).IsRead = true;
             await this.chatMessagesRepository.SaveChangesAsync();
         }
-
     }
 }
