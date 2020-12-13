@@ -20,14 +20,12 @@
         private readonly INotificationsService notificationsService;
         private readonly IOwnersService ownersService;
         private readonly IUsersService usersService;
-        private readonly IHubContext<NotificationHub> notificationHub;
 
-        public AppointmentsController(IAppointmentsService appointmentsService, IOwnersService ownersService, INotificationsService notificationsService, IHubContext<NotificationHub> notificationHub, IUsersService usersService)
+        public AppointmentsController(IAppointmentsService appointmentsService, IOwnersService ownersService, INotificationsService notificationsService, IUsersService usersService)
         {
             this.appointmentsService = appointmentsService;
             this.ownersService = ownersService;
             this.notificationsService = notificationsService;
-            this.notificationHub = notificationHub;
             this.usersService = usersService;
         }
 
@@ -63,9 +61,6 @@
             await this.appointmentsService.CancelAsync(id);
             string content = $"Your appointment with {appointment.OwnerFullName} and pet {appointment.PetName} has been cancelled by the owner.";
             var notification = await this.notificationsService.CreateNotificationForVetAsync(appointment.VetId, content);
-            var userId = notification.Vet.UserId;
-            var userName = this.usersService.GetUserUserName(userId);
-            await this.notificationHub.Clients.User(userName).SendAsync("SendNotification", notification);
 
             return this.RedirectToAction("MyAppointments");
         }
