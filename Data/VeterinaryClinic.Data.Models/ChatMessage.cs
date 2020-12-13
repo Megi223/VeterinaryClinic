@@ -11,7 +11,6 @@ namespace VeterinaryClinic.Data.Models
     public class ChatMessage : BaseDeletableModel<int>
     {
         [Required]
-        [MaxLength(GlobalConstants.ChatNotificationContentMaxLength)]
         public string Content { get; set; }
 
         [Required]

@@ -43,8 +43,6 @@
 
         public DbSet<Medication> Medications { get; set; }
 
-        public DbSet<Reminder> Reminders { get; set; }
-
         public DbSet<ChatMessage> ChatMessages { get; set; }
 
         public DbSet<Notification> Notifications { get; set; }

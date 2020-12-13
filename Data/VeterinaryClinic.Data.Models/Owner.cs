@@ -14,7 +14,6 @@
             this.Id = Guid.NewGuid().ToString();
             this.Pets = new HashSet<Pet>();
             this.Comments = new HashSet<Comment>();
-            this.Reminders = new HashSet<Reminder>();
             this.ChatMessages = new HashSet<ChatMessage>();
             this.Rating = new HashSet<Rating>();
             this.Appointments = new HashSet<Appointment>();
@@ -46,8 +45,6 @@
         public virtual ICollection<ChatMessage> ChatMessages { get; set; }
 
         public virtual ICollection<Notification> Notifications { get; set; }
-
-        public virtual ICollection<Reminder> Reminders { get; set; }
 
         public virtual ICollection<Rating> Rating { get; set; }
 

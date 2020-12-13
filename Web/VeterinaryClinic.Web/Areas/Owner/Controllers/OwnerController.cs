@@ -102,7 +102,7 @@
         public async Task<IActionResult> MarkAsRead(int id)
         {
             await this.chatMessagesService.MarkAsReadAsync(id);
-            return this.RedirectToAction("All","Vet",new { area = "Vet" });
+            return this.RedirectToAction("All", "Vet", new { area = "Vet" });
         }
     }
 }
