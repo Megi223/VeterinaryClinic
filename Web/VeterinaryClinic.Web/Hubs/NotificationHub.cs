@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Notifications;
-
-namespace VeterinaryClinic.Web.Hubs
+﻿namespace VeterinaryClinic.Web.Hubs
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.SignalR;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Notifications;
+
     [Authorize(Roles = GlobalConstants.OwnerRoleName + ", " + GlobalConstants.VetRoleName)]
     public class NotificationHub : Hub
     {
@@ -23,11 +21,6 @@ namespace VeterinaryClinic.Web.Hubs
         public async Task SendNotification(SendNotificationViewModel notification)
         {
             await this.Clients.Caller.SendAsync("SendNotification", notification);
-        }
-
-        public async Task ReceiveNotification(string vetId)
-        {
-            //this.notificationsService.GetVetNotifications
         }
     }
 }

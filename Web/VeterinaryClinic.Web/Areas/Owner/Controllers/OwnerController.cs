@@ -2,6 +2,7 @@
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,6 @@
     using VeterinaryClinic.Web.ViewModels.Vets;
 
     [Authorize(Roles = GlobalConstants.OwnerRoleName)]
-    //[Authorize(Roles = GlobalConstants.OwnerRoleName + ", " + GlobalConstants.VetRoleName)]
     [Area("Owner")]
     public class OwnerController : Controller
     {

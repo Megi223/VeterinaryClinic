@@ -1,19 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Models.Enumerations;
-using VeterinaryClinic.Services.Data;
-using System.Linq;
-using Microsoft.AspNetCore.Identity;
-using VeterinaryClinic.Web.ViewModels.ChatMessages;
-
-namespace VeterinaryClinic.Web.ViewComponents
+﻿namespace VeterinaryClinic.Web.ViewComponents
 {
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Models.Enumerations;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.ChatMessages;
+
     public class MessagesViewComponent : ViewComponent
     {
         private readonly IChatMessagesService chatMessagesService;

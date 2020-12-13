@@ -1,12 +1,12 @@
 ﻿namespace VeterinaryClinic.Web.Areas.Vet.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using Pioneer.Pagination;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Pioneer.Pagination;
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels.ChatMessages;
@@ -22,7 +22,6 @@
         private readonly IOwnersService ownersService;
         private readonly IPaginatedMetaService paginatedMetaService;
         private readonly IChatMessagesService chatMessagesService;
-
 
         public VetController(IVetsService vetsService, IPaginatedMetaService paginatedMetaService, IOwnersService ownersService, IChatMessagesService chatMessagesService)
         {
@@ -80,7 +79,7 @@
                 return this.RedirectToAction("All", new { id = allPagesCount });
             }
 
-            var viewModel = this.vetsService.GetVetsPatientsForAPage<AllPetsViewModel>(vetId,id);
+            var viewModel = this.vetsService.GetVetsPatientsForAPage<AllPetsViewModel>(vetId, id);
             this.ViewBag.PaginatedMeta = this.paginatedMetaService.GetMetaData(vetsPatientsCount, id, GlobalConstants.VetsPatientsOnOnePage);
             return this.View(viewModel);
         }

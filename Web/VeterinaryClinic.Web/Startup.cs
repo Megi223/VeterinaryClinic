@@ -93,8 +93,6 @@
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IChatMessagesService, ChatMessagesService>();
 
-
-
             Account account = new Account(
                 this.configuration["Cloudinary:AppName"],
                 this.configuration["Cloudinary:AppKey"],

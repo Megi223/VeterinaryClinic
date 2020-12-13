@@ -1,20 +1,19 @@
-﻿using Ganss.XSS;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.ChatMessages;
-using VeterinaryClinic.Web.ViewModels.Owners;
-using VeterinaryClinic.Web.ViewModels.Vets;
-
-namespace VeterinaryClinic.Web.Hubs
+﻿namespace VeterinaryClinic.Web.Hubs
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Ganss.XSS;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.SignalR;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.ChatMessages;
+    using VeterinaryClinic.Web.ViewModels.Owners;
+    using VeterinaryClinic.Web.ViewModels.Vets;
+
     [Authorize(Roles = GlobalConstants.OwnerRoleName + ", " + GlobalConstants.VetRoleName)]
     public class ChatHub : Hub
     {
@@ -55,14 +54,14 @@ namespace VeterinaryClinic.Web.Hubs
                 caller = this.vetsService.GetById<VetViewModel>(vetId).ProfilePicture;
                 name = this.vetsService.GetById<VetViewModel>(vetId).Name;
             }
-            
+
             await this.Clients
                 .User(inputModel.UserId)
                 .SendAsync("RecieveMessage", message, caller, name);
 
             await this.Clients
                 .Caller
-                .SendAsync("SendMessage", message,caller,name);
+                .SendAsync("SendMessage", message, caller, name);
         }
     }
 }

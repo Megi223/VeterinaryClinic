@@ -1,9 +1,7 @@
 ﻿namespace VeterinaryClinic.Web.Areas.Vet.Controllers
 {
     using System;
-    using System.Diagnostics;
     using System.Security.Claims;
-    using System.Text;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -25,7 +23,6 @@
         private readonly IPetsMedicationsService petsMedicationsService;
         private readonly IEmailSender emailSender;
         private readonly UserManager<ApplicationUser> userManager;
-
 
         public AppointmentsController(IAppointmentsService appointmentsService, IVetsService vetsService, IPetsService petsService, IPetsMedicationsService petsMedicationsService, IEmailSender emailSender, UserManager<ApplicationUser> userManager)
         {
@@ -91,6 +88,7 @@
                 this.TempData["EarlyStart"] = "You cannot start the appointment before the arranged hour!";
                 return this.RedirectToAction("Upcoming");
             }
+
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             string vetId = this.vetsService.GetVetId(userId);
             var appointmentsInProgressCount = this.appointmentsService.GetAppointmentsInProgressCount(vetId);
@@ -100,23 +98,23 @@
                 var viewModel = this.appointmentsService.GetAppointmentInProgress<AppointmentInProgressViewModel>(vetId);
                 return this.View(viewModel);
             }
+
             await this.appointmentsService.StartAsync(id);
             var model = this.appointmentsService.GetAppointmentInProgress<AppointmentInProgressViewModel>(vetId);
             return this.View(model);
-
         }
 
         public async Task<IActionResult> Diagnose(AppointmentInProgressViewModel model)
         {
-            await this.petsService.SetDiagnoseAsync(model.PetDiagnoseDescription,model.PetDiagnoseName,model.PetId);
+            await this.petsService.SetDiagnoseAsync(model.PetDiagnoseDescription, model.PetDiagnoseName, model.PetId);
             var viewModel = this.appointmentsService.GetAppointmentInProgress<AppointmentInProgressViewModel>(model.VetId);
             this.TempData["SuccessfulDiagnose"] = "You successfully wrote the diagnosis";
-            return this.View("Start",viewModel);
+            return this.View("Start", viewModel);
         }
 
         public async Task<IActionResult> End(string id)
         {
-            await this.appointmentsService.EndAsync(id,DateTime.UtcNow);
+            await this.appointmentsService.EndAsync(id, DateTime.UtcNow);
             return this.RedirectToAction("Upcoming");
         }
 
@@ -135,6 +133,7 @@
                 this.TempData["InvalidMedication"] = "Please provide valid madication";
                 return this.View(model);
             }
+
             await this.petsMedicationsService.PrescribeMedicationAsync(model);
             return this.RedirectToAction("Current");
         }
@@ -144,7 +143,7 @@
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             string vetId = this.vetsService.GetVetId(userId);
             var viewModel = this.appointmentsService.GetAppointmentInProgress<AppointmentInProgressViewModel>(vetId);
-            return this.View("Start",viewModel);
+            return this.View("Start", viewModel);
         }
 
         public async Task<IActionResult> Stop(int id)

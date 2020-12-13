@@ -40,12 +40,13 @@
                 this.TempData["InvalidDate"] = "Please select a valid date";
                 return this.RedirectToAction("Contact", "Home", new { area = string.Empty });
             }
+
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             string ownerId = this.ownersService.GetOwnerId(userId);
 
             await this.appointmentsService.CreateAppointmentAsync(input, ownerId);
             this.TempData["SuucessfulRequest"] = "You have successfully requested an appointment";
-            return this.RedirectToAction("Index", "Home", new { area = "" });
+            return this.RedirectToAction("Index", "Home", new { area = string.Empty });
         }
 
         public IActionResult MyAppointments()
@@ -65,7 +66,7 @@
             var userId = notification.Vet.UserId;
             var userName = this.usersService.GetUserUserName(userId);
             await this.notificationHub.Clients.User(userName).SendAsync("SendNotification", notification);
-           
+
             return this.RedirectToAction("MyAppointments");
         }
     }

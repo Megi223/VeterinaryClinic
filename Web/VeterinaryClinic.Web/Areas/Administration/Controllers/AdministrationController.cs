@@ -3,10 +3,9 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
-    using System.Collections.Generic;
-    using System.Linq;
+
     using System.Threading.Tasks;
+
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Services;
@@ -23,7 +22,6 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IVetsService vetsService;
         private readonly IServicesService servicesServices;
-
 
         public AdministrationController(INewsScraperService newsScraperService, UserManager<ApplicationUser> userManager, IVetsService vetsService, IServicesService servicesServices)
         {
@@ -57,7 +55,6 @@
             }
 
             return this.RedirectToAction("Index", "Home", new { area = string.Empty });
-
         }
 
         public IActionResult AddServiceToVet(string id)
@@ -75,7 +72,7 @@
         public async Task<IActionResult> AddServiceToVet(AddServiceToVetInputModel input)
         {
             await this.servicesServices.AddServiceToVet(input);
-            return this.RedirectToAction("All","Vet",new { area="Vet" });
+            return this.RedirectToAction("All", "Vet", new { area = "Vet" });
         }
 
         [HttpPost]
@@ -101,8 +98,9 @@
                 model.Services = this.vetsService.GetServices<EditVetsServicesDropDown>(input.Id);
                 return this.View(input);
             }
+
             await this.vetsService.EditVet(input);
-            return this.RedirectToAction("Details", "Vet", new { area = "Vet",id=input.Id });
+            return this.RedirectToAction("Details", "Vet", new { area = "Vet", id = input.Id });
         }
     }
 }

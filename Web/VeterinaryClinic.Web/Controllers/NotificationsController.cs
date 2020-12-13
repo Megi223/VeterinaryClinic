@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using VeterinaryClinic.Common;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Notifications;
-
-namespace VeterinaryClinic.Web.Controllers
+﻿namespace VeterinaryClinic.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Common;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Notifications;
+
     [Authorize(Roles = GlobalConstants.OwnerRoleName + ", " + GlobalConstants.VetRoleName)]
     public class NotificationsController : Controller
     {
@@ -18,14 +17,13 @@ namespace VeterinaryClinic.Web.Controllers
         private readonly IOwnersService ownersService;
         private readonly IVetsService vetsService;
 
-
         public NotificationsController(INotificationsService notificationsService, IOwnersService ownersService, IVetsService vetsService)
         {
             this.notificationsService = notificationsService;
             this.ownersService = ownersService;
             this.vetsService = vetsService;
         }
-        
+
         public IActionResult MyNotifications()
         {
             var viewModel = new List<NotificationViewModel>();
@@ -34,7 +32,6 @@ namespace VeterinaryClinic.Web.Controllers
             {
                 string ownerId = this.ownersService.GetOwnerId(currentUserId);
                 viewModel = this.notificationsService.GetOwnerNotifications<NotificationViewModel>(ownerId);
-
             }
             else
             {

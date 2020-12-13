@@ -31,7 +31,6 @@
             this.cloudinaryService = cloudinaryService;
         }
 
-        
         public IActionResult Details(string id)
         {
             var model = this.petsService.GetById<PetViewModel>(id);
@@ -43,8 +42,8 @@
                     this.TempData["InvalidPetRquest"] = "This is not your pet! You are not allowed to see information about other people's pets.";
                     return this.RedirectToAction("MyPets", "Owner", new { area = "Owner" });
                 }
-
             }
+
             return this.View(model);
         }
 
@@ -100,6 +99,7 @@
                 edit.Vet = vets;
                 return this.View(edit);
             }
+
             await this.petsService.EditAsync(edit);
             return this.RedirectToAction("MyPets", "Owner", new { area = "Owner" });
         }

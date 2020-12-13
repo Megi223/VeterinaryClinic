@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VeterinaryClinic.Services.Data;
-using VeterinaryClinic.Web.ViewModels.Vets;
-using System.Linq.Dynamic.Core;
-using System.Security.Claims;
-
-namespace VeterinaryClinic.Web.Areas.Vet.Controllers
+﻿namespace VeterinaryClinic.Web.Areas.Vet.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Linq.Dynamic.Core;
+    using System.Security.Claims;
+
+    using Microsoft.AspNetCore.Mvc;
+    using VeterinaryClinic.Services.Data;
+    using VeterinaryClinic.Web.ViewModels.Vets;
+
     [Route("api/[controller]")]
     [ApiController]
     public class PatientsApiController : ControllerBase
@@ -21,6 +19,7 @@ namespace VeterinaryClinic.Web.Areas.Vet.Controllers
         {
             this.vetsService = vetsService;
         }
+
         [HttpPost]
         [Route("/api/patientsapi")]
         public IActionResult GetPatients()
@@ -43,13 +42,14 @@ namespace VeterinaryClinic.Web.Areas.Vet.Controllers
                 {
                     patientData = patientData.OrderBy(sortColumn + " " + sortColumnDirection);
                 }
+
                 if (!string.IsNullOrEmpty(searchValue))
                 {
                     patientData = patientData.Where(m => m.Name.Contains(searchValue)
                                                 || m.OwnerFirstName.Contains(searchValue)
-                                                || m.OwnerLastName.Contains(searchValue)
-                                                );
+                                                || m.OwnerLastName.Contains(searchValue));
                 }
+
                 recordsTotal = patientData.Count();
                 var data = patientData.Skip(skip).Take(pageSize).ToList();
                 var jsonData = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data };
