@@ -8,10 +8,17 @@
     using VeterinaryClinic.Data;
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Data.Repositories;
+    using VeterinaryClinic.Services.Data.Tests.TestViewModels;
+    using VeterinaryClinic.Services.Mapping;
     using Xunit;
 
     public class OwnersServiceTests
     {
+        public OwnersServiceTests()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(OwnerViewModelTest).Assembly);
+        }
+
         [Fact]
         public async Task CreateOwnerAsyncShouldAddToDbCorrectEntity()
         {
@@ -66,6 +73,28 @@
             var count = reviewsRepository.All().Count();
 
             Assert.Equal(1, count);
+        }
+
+        [Fact]
+        public async Task GetByIdShouldReturnCorrectEntity()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var ownersRepository = new EfDeletableEntityRepository<Owner>(new ApplicationDbContext(options.Options));
+            var reviewsRepository = new EfDeletableEntityRepository<Review>(new ApplicationDbContext(options.Options));
+
+            var service = new OwnersService(ownersRepository, reviewsRepository);
+
+            await ownersRepository.AddAsync(new Owner { Id = "testOwnerId123", UserId = "testUserId123", FirstName = "firstName", LastName = "lastName", ProfilePicture = "someUrl", City = "city" });
+            await ownersRepository.SaveChangesAsync();
+
+            var actualOwner = service.GetById<OwnerViewModelTest>("testOwnerId123");
+
+            Assert.Equal("testOwnerId123", actualOwner.Id);
+            Assert.Equal("firstName", actualOwner.FirstName);
+            Assert.Equal("lastName", actualOwner.LastName);
+            Assert.Equal("someUrl", actualOwner.ProfilePicture);
+            Assert.Equal("city", actualOwner.City);
         }
     }
 }
