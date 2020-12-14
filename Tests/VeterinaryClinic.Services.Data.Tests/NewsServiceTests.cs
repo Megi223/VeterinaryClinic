@@ -8,12 +8,17 @@
     using VeterinaryClinic.Data;
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Data.Repositories;
+    using VeterinaryClinic.Services.Data.Tests.TestViewModels;
     using VeterinaryClinic.Services.Mapping;
-    using VeterinaryClinic.Web.ViewModels.News;
     using Xunit;
 
     public class NewsServiceTests
     {
+        public NewsServiceTests()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(NewsViewModelTest).Assembly);
+        }
+
         [Fact]
         public void GetCountShouldReturnCorrectNumberOfNews()
         {
@@ -37,8 +42,7 @@
             await repository.AddAsync(new News { Title = "test", Content = "testContent", Summary = "testSummary" });
             await repository.SaveChangesAsync();
             var newsService = new NewsService(repository);
-            AutoMapperConfig.RegisterMappings(typeof(NewsDetailsViewModel).Assembly);
-            var news = newsService.GetById<NewsDetailsViewModel>(1);
+            var news = newsService.GetById<NewsViewModelTest>(1);
 
             Assert.Equal("test", news.Title);
             Assert.Equal("testContent", news.Content);
@@ -60,8 +64,7 @@
             await repository.AddAsync(new News { Title = "test7", Content = "testContent7", Summary = "testSummary7" });
             await repository.SaveChangesAsync();
             var newsService = new NewsService(repository);
-            AutoMapperConfig.RegisterMappings(typeof(NewsDetailsViewModel).Assembly);
-            var news = newsService.GetAllForAPage<NewsDetailsViewModel>(1).ToList();
+            var news = newsService.GetAllForAPage<NewsViewModelTest>(1).ToList();
             Assert.Equal(6, news.Count);
             for (int i = 1; i <= news.Count(); i++)
             {
@@ -89,8 +92,7 @@
             await repository.AddAsync(new News { Title = "test7", Content = "testContent7", Summary = "testSummary7" });
             await repository.SaveChangesAsync();
             var newsService = new NewsService(repository);
-            AutoMapperConfig.RegisterMappings(typeof(NewsDetailsViewModel).Assembly);
-            var news = newsService.GetAllForAPage<NewsDetailsViewModel>(page).ToList();
+            var news = newsService.GetAllForAPage<NewsViewModelTest>(page).ToList();
 
             var actualCount = news.Count();
 

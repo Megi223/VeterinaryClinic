@@ -9,13 +9,17 @@
     using VeterinaryClinic.Data;
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Data.Repositories;
+    using VeterinaryClinic.Services.Data.Tests.TestViewModels;
     using VeterinaryClinic.Services.Mapping;
-    using VeterinaryClinic.Web.ViewModels.Services;
     using VeterinaryClinic.Web.ViewModels.Vets;
     using Xunit;
 
     public class ServicesServiceTests
     {
+        public ServicesServiceTests()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(ServiceViewModelTest).Assembly);
+        }
         [Fact]
         public async Task GetNameByIdShouldReturnCorrectName()
         {
@@ -47,8 +51,7 @@
 
             var servicesService = new ServicesService(servicesRepository, vetsServicesRepository);
 
-            AutoMapperConfig.RegisterMappings(typeof(ServiceDetailsViewModel).Assembly);
-            var service = servicesService.GetById<ServiceDetailsViewModel>(1);
+            var service = servicesService.GetById<ServiceViewModelTest>(1);
 
             Assert.Equal("test", service.Name);
             Assert.Equal("testDesc", service.Description);
@@ -70,8 +73,7 @@
 
             var servicesService = new ServicesService(servicesRepository, vetsServicesRepository);
 
-            AutoMapperConfig.RegisterMappings(typeof(ServiceDetailsViewModel).Assembly);
-            var services = servicesService.GetAll<ServiceDetailsViewModel>().ToList();
+            var services = servicesService.GetAll<ServiceViewModelTest>().ToList();
 
             for (int i = 1; i <= services.Count(); i++)
             {
@@ -96,8 +98,7 @@
 
             var servicesService = new ServicesService(servicesRepository, vetsServicesRepository);
 
-            AutoMapperConfig.RegisterMappings(typeof(ServiceDetailsViewModel).Assembly);
-            var services = servicesService.GetAll<ServiceDetailsViewModel>().ToList();
+            var services = servicesService.GetAll<ServiceViewModelTest>().ToList();
 
             var expectedCount = 3;
             var actualCount = services.Count();
@@ -122,9 +123,7 @@
             await vetsServicesRepository.AddAsync(new VetsServices { ServiceId = 1.ToString(), VetId = "dspps-4592-sjfis-sj" });
             await vetsServicesRepository.SaveChangesAsync();
 
-            AutoMapperConfig.RegisterMappings(typeof(ServiceViewModel).Assembly);
-
-            var services = servicesService.GetAllServicesWhichAVetDoesNotHave<ServiceViewModel>("dspps-4592-sjfis-sj").ToList();
+            var services = servicesService.GetAllServicesWhichAVetDoesNotHave<ServiceViewModelTest>("dspps-4592-sjfis-sj").ToList();
 
             for (int i = 1; i <= services.Count(); i++)
             {
@@ -149,9 +148,7 @@
             await vetsServicesRepository.AddAsync(new VetsServices { ServiceId = 1.ToString(), VetId = "dspps-4592-sjfis-sj" });
             await vetsServicesRepository.SaveChangesAsync();
 
-            AutoMapperConfig.RegisterMappings(typeof(ServiceViewModel).Assembly);
-
-            var services = servicesService.GetAllServicesWhichAVetDoesNotHave<ServiceViewModel>("dspps-4592-sjfis-sj").ToList();
+            var services = servicesService.GetAllServicesWhichAVetDoesNotHave<ServiceViewModelTest>("dspps-4592-sjfis-sj").ToList();
 
             Assert.Equal(2, services.Count);
         }
@@ -164,13 +161,6 @@
             var servicesRepository = new EfDeletableEntityRepository<Service>(new ApplicationDbContext(options.Options));
             var vetsServicesRepository = new EfDeletableEntityRepository<VetsServices>(new ApplicationDbContext(options.Options));
             var servicesService = new ServicesService(servicesRepository, vetsServicesRepository);
-
-            await servicesRepository.AddAsync(new Service { Name = "test1", Description = "testDesc1" });
-            await servicesRepository.AddAsync(new Service { Name = "test2", Description = "testDesc2" });
-            await servicesRepository.AddAsync(new Service { Name = "test3", Description = "testDesc3" });
-            await servicesRepository.SaveChangesAsync();
-
-            AutoMapperConfig.RegisterMappings(typeof(ServiceViewModel).Assembly);
 
             await servicesService.AddServiceToVet(new AddServiceToVetInputModel { VetId = "dspps-4592-sjfis", Services = new List<int> { 1, 2 } });
 

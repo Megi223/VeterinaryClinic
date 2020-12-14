@@ -167,6 +167,11 @@
             await this.vetsRepository.SaveChangesAsync();
         }
 
+        public IQueryable<T> GetVetsPatients<T>(string vetId)
+        {
+            return this.petsRepository.All().Where(x => x.VetId == vetId).To<T>();
+        }
+
         private async Task DeleteAllVetsServices(string vetId)
         {
             var vetsServices = this.vetsServicesRepository.All().Where(x => x.VetId == vetId);
@@ -195,11 +200,6 @@
             }
 
             await this.vetsServicesRepository.SaveChangesAsync();
-        }
-
-        public IQueryable<T> GetVetsPatients<T>(string vetId)
-        {
-            return this.petsRepository.All().Where(x => x.VetId == vetId).To<T>();
         }
     }
 }

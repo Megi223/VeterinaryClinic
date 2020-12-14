@@ -19,6 +19,11 @@
 
     public class AppointmentsServiceTests
     {
+        public AppointmentsServiceTests()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(AppointmentViewModelTest).Assembly);
+        }
+
         [Fact]
         public async Task CreateAppointmentAsyncShouldAddAppointmentToDb()
         {
@@ -68,8 +73,6 @@
 
             repository.Setup(r => r.AllAsNoTracking())
             .Returns(this.GetTestData().AsQueryable());
-
-            AutoMapperConfig.RegisterMappings(typeof(AppointmentViewModelTest).Assembly);
 
             IAppointmentsService service = new AppointmentsService(repository.Object);
 

@@ -7,12 +7,17 @@
     using Moq;
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Data.Tests.TestViewModels;
     using VeterinaryClinic.Services.Mapping;
-    using VeterinaryClinic.Web.ViewModels.Gallery;
     using Xunit;
 
     public class GalleryServiceTests
     {
+        public GalleryServiceTests()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(GalleryViewModelTest).Assembly);
+        }
+
         [Fact]
         public void GetCountShouldReturnCorrectNumberOfNews()
         {
@@ -37,10 +42,10 @@
             repository.Setup(r => r.All())
 
             .Returns(this.GetTestData().AsQueryable());
-            AutoMapperConfig.RegisterMappings(typeof(GalleryAllViewModel).Assembly);
+
             IGalleryService service = new GalleryService(repository.Object);
 
-            List<GalleryAllViewModel> gallery = service.GetAllForAPage<GalleryAllViewModel>(1).ToList();
+            List<GalleryViewModelTest> gallery = service.GetAllForAPage<GalleryViewModelTest>(1).ToList();
 
             for (int i = 1; i <= gallery.Count(); i++)
             {
@@ -53,16 +58,16 @@
         [InlineData(1, 6)]
         [InlineData(2, 1)]
         [InlineData(3, 0)]
-        public async Task GetAllForAPageShouldReturnCorrectCount(int page, int expectedCount)
+        public void GetAllForAPageShouldReturnCorrectCount(int page, int expectedCount)
         {
             var repository = new Mock<IDeletableEntityRepository<Gallery>>();
 
             repository.Setup(r => r.All())
             .Returns(this.GetTestData().AsQueryable());
-            AutoMapperConfig.RegisterMappings(typeof(GalleryAllViewModel).Assembly);
+
             IGalleryService service = new GalleryService(repository.Object);
 
-            List<GalleryAllViewModel> gallery = service.GetAllForAPage<GalleryAllViewModel>(page).ToList();
+            List<GalleryViewModelTest> gallery = service.GetAllForAPage<GalleryViewModelTest>(page).ToList();
             var actualCount = gallery.Count();
 
             Assert.Equal(expectedCount, actualCount);
