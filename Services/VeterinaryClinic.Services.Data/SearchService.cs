@@ -22,39 +22,39 @@
 
         public List<string> SearchVet(string term)
         {
-            return this.vetsRepository.AllAsNoTracking().Where(v => v.FirstName.ToLower().Contains(term) || v.LastName.ToLower().Contains(term))
+            return this.vetsRepository.AllAsNoTracking().Where(v => v.FirstName.ToLower().Contains(term.ToLower()) || v.LastName.ToLower().Contains(term.ToLower()))
                 .Select(v => v.FirstName + " " + v.LastName).ToList();
         }
 
         public List<string> SearchServices(string term)
         {
-            return this.servicesRepository.AllAsNoTracking().Where(s => s.Name.ToLower().Contains(term))
+            return this.servicesRepository.AllAsNoTracking().Where(s => s.Name.ToLower().Contains(term.ToLower()))
                 .Select(s => s.Name).ToList();
         }
 
         public List<string> SearchNews(string term)
         {
-            return this.newsRepository.AllAsNoTracking().Where(n => n.Title.ToLower().Contains(term) || n.Summary.ToLower().Contains(term))
+            return this.newsRepository.AllAsNoTracking().Where(n => n.Title.ToLower().Contains(term.ToLower()) || n.Summary.ToLower().Contains(term.ToLower()))
                 .Select(n => n.Title).ToList();
         }
 
         public List<T> SearchVet<T>(string term)
         {
             return this.vetsRepository.AllAsNoTracking()
-                .Where(v => v.FirstName.ToLower().Contains(term) || v.LastName.ToLower().Contains(term))
+                .Where(v => v.FirstName.ToLower().Contains(term.ToLower()) || v.LastName.ToLower().Contains(term.ToLower()))
                 .To<T>()
                 .ToList();
         }
 
         public List<T> SearchServices<T>(string term)
         {
-            return this.servicesRepository.AllAsNoTracking().Where(s => s.Name.ToLower().Contains(term))
+            return this.servicesRepository.AllAsNoTracking().Where(s => s.Name.ToLower().Contains(term.ToLower()))
                 .To<T>().ToList();
         }
 
         public List<T> SearchNews<T>(string term)
         {
-            return this.newsRepository.AllAsNoTracking().Where(n => n.Title.ToLower().Contains(term) || n.Summary.ToLower().Contains(term))
+            return this.newsRepository.AllAsNoTracking().Where(n => n.Title.ToLower().Contains(term.ToLower()) || n.Summary.ToLower().Contains(term.ToLower()))
                 .To<T>().ToList();
         }
     }

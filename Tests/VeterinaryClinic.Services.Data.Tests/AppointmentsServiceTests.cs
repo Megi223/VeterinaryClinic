@@ -212,8 +212,6 @@
         [Fact]
         public async Task GetAppointmentInProgressShouldReturnCorrectEntity()
         {
-            AutoMapperConfig.RegisterMappings(typeof(AppointmentViewModelTest).Assembly);
-
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
@@ -234,8 +232,6 @@
         [Fact]
         public async Task GetByIdShouldReturnCorrectEntity()
         {
-            AutoMapperConfig.RegisterMappings(typeof(AppointmentViewModelTest).Assembly);
-
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
@@ -285,8 +281,6 @@
 
             repository.Setup(r => r.All())
             .Returns(this.GetTestDataForUpcomingAppointments().AsQueryable());
-
-            AutoMapperConfig.RegisterMappings(typeof(AppointmentViewModelTest).Assembly);
 
             IAppointmentsService service = new AppointmentsService(repository.Object);
 
