@@ -1,11 +1,14 @@
-﻿using Moq;
+﻿using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VeterinaryClinic.Data;
 using VeterinaryClinic.Data.Common.Repositories;
 using VeterinaryClinic.Data.Models;
+using VeterinaryClinic.Data.Repositories;
 using VeterinaryClinic.Services.Data.Tests.TestViewModels;
 using VeterinaryClinic.Services.Mapping;
 using Xunit;
@@ -14,6 +17,11 @@ namespace VeterinaryClinic.Services.Data.Tests
 {
     public class ReviewsServiceTests
     {
+        public ReviewsServiceTests()
+        {
+            AutoMapperConfig.RegisterMappings(typeof(ReviewViewModelTest).Assembly);
+        }
+
         [Fact]
         public void GetCountShouldReturnCorrectNumberOfReviews()
         {
@@ -36,7 +44,6 @@ namespace VeterinaryClinic.Services.Data.Tests
             .Returns(this.GetTestData().AsQueryable());
 
             IReviewsService service = new ReviewsService(repository.Object);
-            AutoMapperConfig.RegisterMappings(typeof(ReviewViewModelTest).Assembly);
 
             List<ReviewViewModelTest> actualReviews = service.GetAllForAPage<ReviewViewModelTest>(1).ToList();
 
@@ -59,13 +66,51 @@ namespace VeterinaryClinic.Services.Data.Tests
             .Returns(this.GetTestData().AsQueryable());
 
             IReviewsService service = new ReviewsService(repository.Object);
-            AutoMapperConfig.RegisterMappings(typeof(ReviewViewModelTest).Assembly);
 
             List<ReviewViewModelTest> actualReviews = service.GetAllForAPage<ReviewViewModelTest>(page).ToList();
 
             var actualCount = actualReviews.Count();
 
             Assert.Equal(expectedCount, actualCount);
+        }
+
+        [Fact]
+        public async Task GetLatestReviewsShouldReturnCorrectEntities()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var repository = new EfDeletableEntityRepository<Review>(new ApplicationDbContext(options.Options));
+            await repository.AddAsync(new Review { Content = "testContent1", CreatedOn = new DateTime(2020, 12, 12) });
+            await repository.AddAsync(new Review { Content = "testContent2", CreatedOn = new DateTime(2020, 11, 12) });
+            await repository.AddAsync(new Review { Content = "testContent3", CreatedOn = new DateTime(2020, 10, 12) });
+            await repository.AddAsync(new Review { Content = "testContent4", CreatedOn = new DateTime(2020, 09, 12) });
+            await repository.SaveChangesAsync();
+
+            var reviewsService = new ReviewsService(repository);
+            var latestReviews = reviewsService.GetLatestReviews<ReviewViewModelTest>().ToList();
+
+            for (int i = 1; i <= latestReviews.Count(); i++)
+            {
+                Assert.Equal("testContent" + i, latestReviews[i - 1].Content);
+            }
+        }
+
+        [Fact]
+        public async Task GetLatestReviewsShouldReturnCorrectCount()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var repository = new EfDeletableEntityRepository<Review>(new ApplicationDbContext(options.Options));
+            await repository.AddAsync(new Review { Content = "testContent1", CreatedOn = new DateTime(2020, 12, 12) });
+            await repository.AddAsync(new Review { Content = "testContent2", CreatedOn = new DateTime(2020, 11, 12) });
+            await repository.AddAsync(new Review { Content = "testContent3", CreatedOn = new DateTime(2020, 10, 12) });
+            await repository.AddAsync(new Review { Content = "testContent4", CreatedOn = new DateTime(2020, 09, 12) });
+            await repository.SaveChangesAsync();
+
+            var reviewsService = new ReviewsService(repository);
+            var latestReviews = reviewsService.GetLatestReviews<ReviewViewModelTest>().ToList();
+
+            Assert.Equal(4, latestReviews.Count);
         }
 
         private List<Review> GetTestData()

@@ -5,23 +5,24 @@
     using Microsoft.AspNetCore.Mvc;
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Services.Mapping;
     using VeterinaryClinic.Web.ViewModels.Reviews;
 
     public class ReviewsViewComponent : ViewComponent
     {
-        private readonly IDeletableEntityRepository<Review> reviewsRepository;
+        private readonly IReviewsService reviewsService;
 
-        public ReviewsViewComponent(IDeletableEntityRepository<Review> reviewsRepository)
+        public ReviewsViewComponent(IReviewsService reviewsService)
         {
-            this.reviewsRepository = reviewsRepository;
+            this.reviewsService = reviewsService;
         }
 
         public IViewComponentResult Invoke()
         {
             var model = new ReviewViewModel
             {
-                Reviews = this.reviewsRepository.AllAsNoTracking().OrderByDescending(x => x.CreatedOn).To<SingleReviewViewModel>().Take(7).ToList(),
+                Reviews = this.reviewsService.GetLatestReviews< SingleReviewViewModel>(),
             };
 
             return this.View(model);

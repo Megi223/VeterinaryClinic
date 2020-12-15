@@ -57,5 +57,10 @@
             await this.newsRepository.AddAsync(news);
             await this.newsRepository.SaveChangesAsync();
         }
+
+        public IEnumerable<T> GetLatestNews<T>()
+        {
+            return this.newsRepository.All().OrderByDescending(x => x.CreatedOn).To<T>().Take(2).ToList();
+        }
     }
 }

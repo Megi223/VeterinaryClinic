@@ -131,5 +131,46 @@
 
             Assert.Equal(expectedCount, actualCount);
         }
+
+        [Fact]
+        public async Task GetLatestNewsShouldReturnCorrectEntities()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var repository = new EfDeletableEntityRepository<News>(new ApplicationDbContext(options.Options));
+            await repository.AddAsync(new News { Title = "test1", Content = "testContent1", Summary = "testSummary1", CreatedOn = new DateTime(2020, 12, 12) });
+            await repository.AddAsync(new News { Title = "test2", Content = "testContent2", Summary = "testSummary2", CreatedOn = new DateTime(2020, 11, 12) });
+            await repository.AddAsync(new News { Title = "test3", Content = "testContent3", Summary = "testSummary3", CreatedOn = new DateTime(2020, 10, 12) });
+            await repository.AddAsync(new News { Title = "test4", Content = "testContent4", Summary = "testSummary4", CreatedOn = new DateTime(2020, 09, 12) });
+            await repository.SaveChangesAsync();
+
+            var newsService = new NewsService(repository, this.cloudinaryService);
+            var latestNews = newsService.GetLatestNews<NewsViewModelTest>().ToList();
+
+            for (int i = 1; i <= latestNews.Count(); i++)
+            {
+                Assert.Equal("test" + i, latestNews[i - 1].Title);
+                Assert.Equal("testSummary" + i, latestNews[i - 1].Summary);
+                Assert.Equal("testContent" + i, latestNews[i - 1].Content);
+                Assert.Null(latestNews[i - 1].ImageUrl);
+            }
+        }
+
+        [Fact]
+        public async Task GetLatestNewsShouldReturnCorrectCount()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var repository = new EfDeletableEntityRepository<News>(new ApplicationDbContext(options.Options));
+            await repository.AddAsync(new News { Title = "test1", Content = "testContent1", Summary = "testSummary1", CreatedOn = new DateTime(2020, 12, 12) });
+            await repository.AddAsync(new News { Title = "test2", Content = "testContent2", Summary = "testSummary2", CreatedOn = new DateTime(2020, 11, 12) });
+            await repository.AddAsync(new News { Title = "test3", Content = "testContent3", Summary = "testSummary3", CreatedOn = new DateTime(2020, 10, 12) });
+            await repository.AddAsync(new News { Title = "test4", Content = "testContent4", Summary = "testSummary4", CreatedOn = new DateTime(2020, 09, 12) });
+            await repository.SaveChangesAsync();
+            var newsService = new NewsService(repository, this.cloudinaryService);
+            var latestNews = newsService.GetLatestNews<NewsViewModelTest>().ToList();
+
+            Assert.Equal(2, latestNews.Count());
+        }
     }
 }

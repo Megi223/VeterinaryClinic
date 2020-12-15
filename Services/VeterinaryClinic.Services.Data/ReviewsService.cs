@@ -32,5 +32,10 @@
         {
             return this.reviewsRepository.AllAsNoTracking().Count();
         }
+
+        public IEnumerable<T> GetLatestReviews<T>()
+        {
+            return this.reviewsRepository.AllAsNoTracking().OrderByDescending(x => x.CreatedOn).To<T>().Take(7).ToList();
+        }
     }
 }

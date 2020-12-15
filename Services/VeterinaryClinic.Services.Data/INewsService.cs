@@ -14,5 +14,7 @@
         int GetCount();
 
         Task AddNewsAsync(AddNewsInputModel model);
+
+        IEnumerable<T> GetLatestNews<T>();
     }
 }

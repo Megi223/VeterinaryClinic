@@ -5,23 +5,24 @@
     using Microsoft.AspNetCore.Mvc;
     using VeterinaryClinic.Data.Common.Repositories;
     using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Services.Mapping;
     using VeterinaryClinic.Web.ViewModels.News;
 
     public class NewsViewComponent : ViewComponent
     {
-        private readonly IDeletableEntityRepository<News> newsRepository;
+        private readonly INewsService newsService;
 
-        public NewsViewComponent(IDeletableEntityRepository<News> newsRepository)
+        public NewsViewComponent(INewsService newsService)
         {
-            this.newsRepository = newsRepository;
+            this.newsService = newsService;
         }
 
         public IViewComponentResult Invoke()
         {
             var model = new NewsBarViewModel
             {
-                LatestNews = this.newsRepository.All().OrderByDescending(x => x.CreatedOn).To<NewsViewModel>().Take(2).ToList(),
+                LatestNews = this.newsService.GetLatestNews<NewsViewModel>(),
             };
 
             return this.View(model);

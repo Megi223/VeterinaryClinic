@@ -7,5 +7,7 @@
         IEnumerable<T> GetAllForAPage<T>(int page);
 
         int GetCount();
+
+        IEnumerable<T> GetLatestReviews<T>();
     }
 }
