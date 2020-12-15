@@ -19,7 +19,6 @@
 
     public class HomeController : BaseController
     {
-        private readonly IServiceScraperService serviceScraperService;
         private readonly IReviewsService reviewsService;
         private readonly IPaginatedMetaService paginatedMetaService;
         private readonly IVetsService vetsService;
@@ -27,10 +26,9 @@
         private readonly IPetsService petsService;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public HomeController(IServiceScraperService serviceScraperService,
+        public HomeController(
             IReviewsService reviewsService, IPaginatedMetaService paginatedMetaService, IVetsService vetsService, IOwnersService ownersService, IPetsService petsService, UserManager<ApplicationUser> userManager)
         {
-            this.serviceScraperService = serviceScraperService;
             this.reviewsService = reviewsService;
             this.paginatedMetaService = paginatedMetaService;
             this.vetsService = vetsService;
@@ -88,13 +86,6 @@
         public IActionResult Contact(string subject, string name, string petname, string vetname, string date, string time)
         {
             return this.RedirectToAction("Contact");
-        }
-
-        // TODO: move it later
-        public async Task<IActionResult> AddServices()
-        {
-            await this.serviceScraperService.PopulateDbWithServices();
-            return this.RedirectToAction("Index");
         }
 
         public async Task<IActionResult> StatusCodeError(int errorCode)

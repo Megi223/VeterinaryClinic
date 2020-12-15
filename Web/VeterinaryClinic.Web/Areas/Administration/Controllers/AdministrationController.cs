@@ -11,6 +11,7 @@
     using VeterinaryClinic.Services;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.Controllers;
+    using VeterinaryClinic.Web.ViewModels.News;
     using VeterinaryClinic.Web.ViewModels.Services;
     using VeterinaryClinic.Web.ViewModels.Vets;
 
@@ -22,13 +23,17 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IVetsService vetsService;
         private readonly IServicesService servicesServices;
+        private readonly INewsService newsService;
+        private readonly IServiceScraperService serviceScraperService;
 
-        public AdministrationController(INewsScraperService newsScraperService, UserManager<ApplicationUser> userManager, IVetsService vetsService, IServicesService servicesServices)
+        public AdministrationController(INewsScraperService newsScraperService, UserManager<ApplicationUser> userManager, IVetsService vetsService, IServicesService servicesServices, IServiceScraperService serviceScraperService, INewsService newsService)
         {
             this.newsScraperService = newsScraperService;
             this.userManager = userManager;
             this.vetsService = vetsService;
             this.servicesServices = servicesServices;
+            this.serviceScraperService = serviceScraperService;
+            this.newsService = newsService;
         }
 
         public IActionResult AddVet()
@@ -101,6 +106,30 @@
 
             await this.vetsService.EditVet(input);
             return this.RedirectToAction("Details", "Vet", new { area = "Vet", id = input.Id });
+        }
+
+        public async Task<IActionResult> AddServices()
+        {
+            await this.serviceScraperService.PopulateDbWithServices();
+            return this.RedirectToAction("Index");
+        }
+
+        public IActionResult AddNews()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddNews(AddNewsInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.TempData["InvalidNews"] = "Invalid data!";
+                return this.View(input);
+            }
+
+            await this.newsService.AddNewsAsync(input);
+            return this.RedirectToAction("All", "News", new { area = string.Empty });
         }
     }
 }

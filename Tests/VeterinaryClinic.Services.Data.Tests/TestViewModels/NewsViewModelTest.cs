@@ -14,8 +14,8 @@ namespace VeterinaryClinic.Services.Data.Tests.TestViewModels
 
         public string ImageUrl { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-
         public string Content { get; set; }
+
+        public string Summary { get; set; }
     }
 }

@@ -55,7 +55,7 @@
         public async Task<IActionResult> Details(int id)
         {
             var newsCount = this.newsService.GetCount();
-            if (id < 1 || id > newsCount)
+            if (id < 1)
             {
                 return this.RedirectToAction("StatusCodeError", "Home", new { errorCode = 404 });
             }

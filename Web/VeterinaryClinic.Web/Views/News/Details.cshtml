@@ -20,15 +20,12 @@
                     <p>
                         <img src=@Model.ImageUrl alt="" class="img-fluid">
                     </p>
-                    <p>@Model.Content</p>
+                    <p>@Html.Raw(Model.SanitizedContent)</p>
 
                 </div>
-                <cache expires-after="TimeSpan.FromMinutes(10)">
+                <cache expires-after="TimeSpan.FromMinutes(2)">
                     <vc:news></vc:news>
-                </cache>
-                       
-                    
-                
+                </cache> 
             </div>
         </div>
     </section>

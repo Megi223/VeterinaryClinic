@@ -1,5 +1,6 @@
 ﻿namespace VeterinaryClinic.Web.ViewModels.News
 {
+    using Ganss.XSS;
     using System;
 
     using VeterinaryClinic.Services.Mapping;
@@ -13,5 +14,7 @@
         public DateTime CreatedOn { get; set; }
 
         public string Content { get; set; }
+
+        public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Content);
     }
 }

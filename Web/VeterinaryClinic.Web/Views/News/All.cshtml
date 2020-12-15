@@ -19,13 +19,13 @@
             {
                 <div class="col-md-6 d-flex ftco-animate">
                     <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20 rounded" style="background-image: url(@news.ImageUrl);">
+                        <a class="block-20 rounded" style="background-image: url(@news.ImageUrl); height:250px;width:540px">
                         </a>
                         <div class="text p-4">
                             <div class="meta mb-2">
                                 <div><a><time datetime="@news.CreatedOn.ToString("O")"></time></a></div>
                             </div>
-                            <h3 class="heading"><a asp-controller="News" asp-action="Details" asp-route-id="@news.Id"><b>@news.Title</b></a></h3>
+                            <h3 class="heading"><a asp-area="" asp-controller="News" asp-action="Details" asp-route-id="@news.Id"><b>@news.Title</b></a></h3>
                             <h6>@news.Summary</h6>
                         </div>
                     </div>

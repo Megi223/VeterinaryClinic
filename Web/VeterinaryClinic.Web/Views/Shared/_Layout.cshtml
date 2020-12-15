@@ -28,31 +28,6 @@
 
 </head>
 <body>
-    @*<header>
-            <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                        <partial name="_LoginPartial" />
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>*@
     <div class="wrap">
         <div class="container">
             <div class="row">
@@ -107,14 +82,9 @@
                 <div class="col-md-6 col-lg-3 mb-4 mb-md-0">
                     <h2 class="footer-heading">M&K</h2>
                     <p>A veterinary clinic in Veliko Tarnovo which has friendly staff and provides good care for your pets.</p>
-                    @*<ul class="ftco-footer-social p-0">
-                            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
-                            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li>
-                            <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="fa fa-instagram"></span></a></li>
-                        </ul>*@
                 </div>
 
-                <cache expires-after="TimeSpan.FromMinutes(10)">
+                <cache expires-after="TimeSpan.FromMinutes(2)">
                     <vc:news title="Latest news"></vc:news>
                 </cache>
 
@@ -124,9 +94,9 @@
                         <li><a asp-area="" asp-controller="Home" asp-action="Index" class="py-2 d-block">Home</a></li>
                         <li><a asp-area="" asp-controller="Home" asp-action="About" class="py-2 d-block">About</a></li>
                         <li><a asp-area="" asp-controller="Services" asp-action="All" class="py-2 d-block">Services</a></li>
-                        <li><a href="#" class="py-2 d-block">Veterinarians</a></li>
+                        <li><a asp-area="Vet" asp-controller="Vet" asp-action="All" class="py-2 d-block">Veterinarians</a></li>
                         <li><a asp-area="" asp-controller="News" asp-action="All" class="py-2 d-block">News</a></li>
-                        <li><a href="#" class="py-2 d-block">Contact</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact" class="py-2 d-block">Contact</a></li>
                         <li><a class="py-2 d-block" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
