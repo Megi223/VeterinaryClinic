@@ -34,10 +34,10 @@ https://mkvetclinic.azurewebsites.net/
    -- write diagnosis and medication to a pet
    
   - **Admin** - The admin can:
-   -- add, edit and delete vets
-   -- view information about news, services and the clinic by visiting the respective pages
-   -- add news
-   -- add service to a certain vet
+  -- add, edit and delete vets
+  -- view information about news, services and the clinic by visiting the respective pages
+  -- add news
+  -- add service to a certain vet
 
     
 ## :hammer: Built With
