@@ -44,20 +44,18 @@
 
         public async Task<IActionResult> Accept(string id)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
             await this.appointmentsService.AcceptAsync(id);
             var appointment = this.appointmentsService.GetById<SendEmailAppointmentViewModel>(id);
             var html = $"<h3>Your appointment with {appointment.VetFullName} at {appointment.StartTime.ToLocalTime()} has been accepted. We'll wait for you in MK clinic!</h3>";
-            await this.emailSender.SendEmailAsync("mkvetclinic@gmail.com", "MK", currentUser.Email, "Accepted appointment", html);
+            await this.emailSender.SendEmailAsync("mkvetclinic@gmail.com", "MK", appointment.OwnerUserEmail, "Accepted appointment", html);
             return this.RedirectToAction("Upcoming");
         }
 
         public async Task<IActionResult> Decline(string id)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
             var appointment = this.appointmentsService.GetById<SendEmailAppointmentViewModel>(id);
             var html = $"<h3>Your appointment with {appointment.VetFullName} at {appointment.StartTime.ToLocalTime()} has been declined. Please request a new one!</h3>";
-            await this.emailSender.SendEmailAsync("mkvetclinic@gmail.com", "MK", currentUser.Email, "Declined appointment", html);
+            await this.emailSender.SendEmailAsync("mkvetclinic@gmail.com", "MK", appointment.OwnerUserEmail, "Declined appointment", html);
             await this.appointmentsService.DeclineAsync(id);
             return this.RedirectToAction("Pending");
         }
@@ -72,10 +70,9 @@
 
         public async Task<IActionResult> Cancel(string id)
         {
-            var currentUser = await this.userManager.GetUserAsync(this.User);
             var appointment = this.appointmentsService.GetById<SendEmailAppointmentViewModel>(id);
             var html = $"<h3>{appointment.VetFullName} has cancelled your appointment {appointment.StartTime.ToLocalTime()} due to personal reasons. Please request a new one!</h3>";
-            await this.emailSender.SendEmailAsync("mkvetclinic@gmail.com", "MK", currentUser.Email, "Cancelled appointment", html);
+            await this.emailSender.SendEmailAsync("mkvetclinic@gmail.com", "MK", appointment.OwnerUserEmail, "Cancelled appointment", html); ;
             await this.appointmentsService.CancelAsync(id);
             return this.RedirectToAction("Upcoming");
         }

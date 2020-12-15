@@ -14,5 +14,7 @@
         public string VetFullName => this.VetFirstName + " " + this.VetLastName;
 
         public DateTime StartTime { get; set; }
+
+        public string OwnerUserEmail { get; set; }
     }
 }
