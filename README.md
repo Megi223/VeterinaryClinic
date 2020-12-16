@@ -23,21 +23,21 @@ https://mkvetclinic.azurewebsites.net/
     - view information about news, services and the clinic by visiting the respective pages
    
   - **Vet** - The vet has the following abilities:
-   - view his/her patients and all information about them ( owner, diagnosis, medication, etc. )
-   - accept/ decline an appointment when it is requested by the owner
-   - cancel an appointment with an owner 
-   - start chat with an owner
-   - view his/her latest messages
-   - view information about news, services and the clinic by visiting the respective pages
-   - view his/her notifications
-   - view his/her pending, upcoming, current and past appointments
-   - write diagnosis and medication to a pet
+    - view his/her patients and all information about them ( owner, diagnosis, medication, etc. )
+    - accept/ decline an appointment when it is requested by the owner
+    - cancel an appointment with an owner 
+    - start chat with an owner
+    - view his/her latest messages
+    - view information about news, services and the clinic by visiting the respective pages
+    - view his/her notifications
+    - view his/her pending, upcoming, current and past appointments
+    - write diagnosis and medication to a pet
    
   - **Admin** - The admin can:
-   - add, edit and delete vets
-   - view information about news, services and the clinic by visiting the respective pages
-   - add news
-   - add service to a certain vet
+    - add, edit and delete vets
+    - view information about news, services and the clinic by visiting the respective pages
+    - add news
+    - add service to a certain vet
 
     
 ## :hammer: Built With
