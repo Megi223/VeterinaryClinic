@@ -22,16 +22,14 @@
         private readonly IPetsService petsService;
         private readonly IPetsMedicationsService petsMedicationsService;
         private readonly IEmailSender emailSender;
-        private readonly UserManager<ApplicationUser> userManager;
 
-        public AppointmentsController(IAppointmentsService appointmentsService, IVetsService vetsService, IPetsService petsService, IPetsMedicationsService petsMedicationsService, IEmailSender emailSender, UserManager<ApplicationUser> userManager)
+        public AppointmentsController(IAppointmentsService appointmentsService, IVetsService vetsService, IPetsService petsService, IPetsMedicationsService petsMedicationsService, IEmailSender emailSender)
         {
             this.appointmentsService = appointmentsService;
             this.vetsService = vetsService;
             this.petsService = petsService;
             this.petsMedicationsService = petsMedicationsService;
             this.emailSender = emailSender;
-            this.userManager = userManager;
         }
 
         public IActionResult Pending()
@@ -44,17 +42,19 @@
 
         public async Task<IActionResult> Accept(string id)
         {
+            TimeZoneInfo zone = TimeZoneInfo.FindSystemTimeZoneById("FLE Standard Time");
             await this.appointmentsService.AcceptAsync(id);
             var appointment = this.appointmentsService.GetById<SendEmailAppointmentViewModel>(id);
-            var html = $"<h3>Your appointment with {appointment.VetFullName} at {appointment.StartTime.ToLocalTime()} has been accepted. We'll wait for you in MK clinic!</h3>";
+            var html = $"<h3>Your appointment with {appointment.VetFullName} at {TimeZoneInfo.ConvertTimeFromUtc(appointment.StartTime, zone)} has been accepted. We'll wait for you in MK clinic!</h3>";
             await this.emailSender.SendEmailAsync("mkvetclinic@gmail.com", "MK", appointment.OwnerUserEmail, "Accepted appointment", html);
             return this.RedirectToAction("Upcoming");
         }
 
         public async Task<IActionResult> Decline(string id)
         {
+            TimeZoneInfo zone = TimeZoneInfo.FindSystemTimeZoneById("FLE Standard Time");
             var appointment = this.appointmentsService.GetById<SendEmailAppointmentViewModel>(id);
-            var html = $"<h3>Your appointment with {appointment.VetFullName} at {appointment.StartTime.ToLocalTime()} has been declined. Please request a new one!</h3>";
+            var html = $"<h3>Your appointment with {appointment.VetFullName} at {TimeZoneInfo.ConvertTimeFromUtc(appointment.StartTime, zone)} has been declined. Please request a new one!</h3>";
             await this.emailSender.SendEmailAsync("mkvetclinic@gmail.com", "MK", appointment.OwnerUserEmail, "Declined appointment", html);
             await this.appointmentsService.DeclineAsync(id);
             return this.RedirectToAction("Pending");
@@ -70,8 +70,9 @@
 
         public async Task<IActionResult> Cancel(string id)
         {
+            TimeZoneInfo zone = TimeZoneInfo.FindSystemTimeZoneById("FLE Standard Time");
             var appointment = this.appointmentsService.GetById<SendEmailAppointmentViewModel>(id);
-            var html = $"<h3>{appointment.VetFullName} has cancelled your appointment {appointment.StartTime.ToLocalTime()} due to personal reasons. Please request a new one!</h3>";
+            var html = $"<h3>{appointment.VetFullName} has cancelled your appointment {TimeZoneInfo.ConvertTimeFromUtc(appointment.StartTime, zone)} due to personal reasons. Please request a new one!</h3>";
             await this.emailSender.SendEmailAsync("mkvetclinic@gmail.com", "MK", appointment.OwnerUserEmail, "Cancelled appointment", html); ;
             await this.appointmentsService.CancelAsync(id);
             return this.RedirectToAction("Upcoming");
@@ -91,7 +92,7 @@
             var appointmentsInProgressCount = this.appointmentsService.GetAppointmentsInProgressCount(vetId);
             if (appointmentsInProgressCount == 1)
             {
-                this.TempData["AppointmentProgress"] = "You are already in an appointment. You cannot start new one!";
+                this.TempData["AppointmentProgress"] = "You are already in an appointment. You cannot start a new one!";
                 var viewModel = this.appointmentsService.GetAppointmentInProgress<AppointmentInProgressViewModel>(vetId);
                 return this.View(viewModel);
             }
@@ -105,7 +106,7 @@
         {
             await this.petsService.SetDiagnoseAsync(model.PetDiagnoseDescription, model.PetDiagnoseName, model.PetId);
             var viewModel = this.appointmentsService.GetAppointmentInProgress<AppointmentInProgressViewModel>(model.VetId);
-            this.TempData["SuccessfulDiagnose"] = "You successfully wrote the diagnosis";
+            this.TempData["SuccessfulDiagnose"] = "You successfully wrote the diagnosis.";
             return this.View("Start", viewModel);
         }
 

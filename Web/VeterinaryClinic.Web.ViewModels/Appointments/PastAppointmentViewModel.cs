@@ -6,7 +6,9 @@
     {
         public DateTime EndTime { get; set; }
 
-        public double Duration => (this.EndTime - this.StartTime).TotalMinutes;
+        public DateTime ActualStartTime { get; set; }
+
+        public double Duration => (this.EndTime - this.ActualStartTime).TotalMinutes;
 
         public string DurationFormatted => this.Duration.ToString("0");
     }

@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -113,6 +114,12 @@
                 googleOptions.ClientId = this.configuration["GoogleSignIn:ClientID"];
                 googleOptions.ClientSecret = this.configuration["GoogleSignIn:ClientAppSecret"];
             });
+
+            ComputerVisionClient client =
+             new ComputerVisionClient(new ApiKeyServiceClientCredentials(this.configuration["ComputerVisionClient:Key"]))
+             { Endpoint = this.configuration["ComputerVisionClient:Endpoint"] };
+
+            services.AddSingleton(client);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

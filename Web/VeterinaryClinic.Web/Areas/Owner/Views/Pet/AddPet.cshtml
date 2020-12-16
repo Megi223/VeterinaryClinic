@@ -4,6 +4,24 @@
     ViewData["Title"] = "Add Pet";
     var vets = Model.Vet.Select(x => new SelectListItem(x.Name, x.Id));
 }
+@if (this.TempData["InvalidPicture"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @this.TempData["InvalidPicture"]
+    </div>
+}
+@if (this.TempData["InvalidModelState"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @this.TempData["InvalidModelState"]
+    </div>
+}
+@if (this.TempData["InvalidIdentificationNumber"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @this.TempData["InvalidIdentificationNumber"]
+    </div>
+}
 <br />
 <div class="container">
     <div class="row">

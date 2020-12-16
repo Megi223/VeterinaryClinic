@@ -11,33 +11,33 @@ https://mkvetclinic.azurewebsites.net/
 
   ## :busts_in_silhouette: Roles
   - **Owner** - when registering the user becomes automatically an owner. The login can be performed through external logins, too (Google and Facebook). The owner can do the following:
-   -- add, edit and delete pets
-   -- view information about each of his/her pets
-   -- request an appointment with a vet
-   -- cancel an appointment with a vet 
-   -- start chat with a vet
-   -- view his/her latest messages
-   -- vote certain vet
-   -- post comments on the vet's page
-   -- write reviews of the clinic
-   -- view information about news, services and the clinic by visiting the respective pages
+    - add, edit and delete pets
+    - view information about each of his/her pets
+    - request an appointment with a vet
+    - cancel an appointment with a vet 
+    - start chat with a vet
+    - view his/her latest messages
+    - vote certain vet
+    - post comments on the vet's page
+    - write reviews of the clinic
+    - view information about news, services and the clinic by visiting the respective pages
    
-   - **Vet** - The vet has the following abilities:
-   -- view his/her patients and all information about them ( owner, diagnosis, medication, etc. )
-   -- accept/ decline an appointment when it is requested by the owner
-   -- cancel an appointment with an owner 
-   -- start chat with an owner
-   -- view his/her latest messages
-   -- view information about news, services and the clinic by visiting the respective pages
-   -- view his/her notifications
-   -- view his/her pending, upcoming, current and past appointments
-   -- write diagnosis and medication to a pet
+  - **Vet** - The vet has the following abilities:
+   - view his/her patients and all information about them ( owner, diagnosis, medication, etc. )
+   - accept/ decline an appointment when it is requested by the owner
+   - cancel an appointment with an owner 
+   - start chat with an owner
+   - view his/her latest messages
+   - view information about news, services and the clinic by visiting the respective pages
+   - view his/her notifications
+   - view his/her pending, upcoming, current and past appointments
+   - write diagnosis and medication to a pet
    
   - **Admin** - The admin can:
-  -- add, edit and delete vets
-  -- view information about news, services and the clinic by visiting the respective pages
-  -- add news
-  -- add service to a certain vet
+   - add, edit and delete vets
+   - view information about news, services and the clinic by visiting the respective pages
+   - add news
+   - add service to a certain vet
 
     
 ## :hammer: Built With
@@ -58,33 +58,35 @@ https://mkvetclinic.azurewebsites.net/
 
 - jQuery
 
--  [SignalR](https://github.com/SignalR/SignalR)
+- [SignalR](https://github.com/SignalR/SignalR)
 
--  [AngleSharp](https://anglesharp.github.io/  "AngleSharp")
+- [Azure Cognitive Services](https://azure.microsoft.com/en-us/services/cognitive-services/)
 
--  [Pioneer.Pagination](https://github.com/PioneerCode/pioneer-pagination  "Pioneer.Pagination")
+- [AngleSharp](https://anglesharp.github.io/  "AngleSharp")
 
--  [FontAwesome](https://fontawesome.com/  "FontAwesome")
+- [Pioneer.Pagination](https://github.com/PioneerCode/pioneer-pagination  "Pioneer.Pagination")
 
--  [TinyMCE](https://github.com/tinymce/)
+- [FontAwesome](https://fontawesome.com/  "FontAwesome")
 
--  [xUnit](https://github.com/xunit/xunit)
+- [TinyMCE](https://github.com/tinymce/)
 
--  [Moq](https://github.com/moq/moq)
+- [xUnit](https://github.com/xunit/xunit)
 
--  [AutoMapper](https://github.com/AutoMapper/AutoMapper)
+- [Moq](https://github.com/moq/moq)
 
--  [SendGrid](https://github.com/sendgrid)
+- [AutoMapper](https://github.com/AutoMapper/AutoMapper)
 
--  [Cloudinary](https://github.com/cloudinary/CloudinaryDotNet)
+- [SendGrid](https://github.com/sendgrid)
 
--  [HtmlSanitizer](https://github.com/mganss/HtmlSanitizer)
+- [Cloudinary](https://github.com/cloudinary/CloudinaryDotNet)
 
--  [Open Street Map](https://www.openstreetmap.org  "Open Street Map")
+- [HtmlSanitizer](https://github.com/mganss/HtmlSanitizer)
 
--  [DataTables](https://datatables.net/  "DataTables")
+- [Open Street Map](https://www.openstreetmap.org  "Open Street Map")
 
--  [Moment.js](https://www.nuget.org/packages/Moment.js/  "Moment.js")
+- [DataTables](https://datatables.net/  "DataTables")
+
+- [Moment.js](https://www.nuget.org/packages/Moment.js/  "Moment.js")
 
 - External login with Google
 
