@@ -1,18 +1,16 @@
-﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Models.Enumerations;
-using VeterinaryClinic.Services.Data.Tests.TestViewModels;
-using VeterinaryClinic.Services.Mapping;
-using Xunit;
-
-namespace VeterinaryClinic.Services.Data.Tests
+﻿namespace VeterinaryClinic.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Moq;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Data.Tests.TestViewModels;
+    using VeterinaryClinic.Services.Mapping;
+    using Xunit;
+
     public class SearchServiceTests
     {
         public SearchServiceTests()
@@ -31,7 +29,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             vetsRepository.Setup(r => r.AllAsNoTracking())
             .Returns(this.GetTestDataForVetRepository().AsQueryable());
 
-            ISearchService service = new SearchService(vetsRepository.Object,servicesRepository.Object,newsRepository.Object);
+            ISearchService service = new SearchService(vetsRepository.Object, servicesRepository.Object, newsRepository.Object);
 
             var actualVetsFound = service.SearchVet<VetViewModelTest>("anoth").ToList();
 

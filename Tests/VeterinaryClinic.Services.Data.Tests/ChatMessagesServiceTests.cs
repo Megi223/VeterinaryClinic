@@ -1,21 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data;
-using VeterinaryClinic.Data.Common.Repositories;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Models.Enumerations;
-using VeterinaryClinic.Data.Repositories;
-using VeterinaryClinic.Services.Data.Tests.TestViewModels;
-using VeterinaryClinic.Services.Mapping;
-using Xunit;
-
-namespace VeterinaryClinic.Services.Data.Tests
+﻿namespace VeterinaryClinic.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
+    using Moq;
+    using VeterinaryClinic.Data;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Models.Enumerations;
+    using VeterinaryClinic.Data.Repositories;
+    using VeterinaryClinic.Services.Data.Tests.TestViewModels;
+    using VeterinaryClinic.Services.Mapping;
+    using Xunit;
+
     public class ChatMessagesServiceTests
     {
         [Fact]
@@ -27,7 +27,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             var vetsRepository = new EfDeletableEntityRepository<Vet>(new ApplicationDbContext(options.Options));
             var ownersRepository = new EfDeletableEntityRepository<Owner>(new ApplicationDbContext(options.Options));
 
-            var service = new ChatMessagesService(chatMessageRepository, ownersRepository,vetsRepository);
+            var service = new ChatMessagesService(chatMessageRepository, ownersRepository, vetsRepository);
 
             await service.CreateAsync(RoleName.Vet, RoleName.Owner, "testOwnerId", "testVetId", "testContent");
 
@@ -54,7 +54,7 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             AutoMapperConfig.RegisterMappings(typeof(ChatMessageViewModelTest).Assembly);
 
-            IChatMessagesService service = new ChatMessagesService(chatMessagesRepository.Object,ownersRepository.Object,vetsRepository.Object);
+            IChatMessagesService service = new ChatMessagesService(chatMessagesRepository.Object, ownersRepository.Object, vetsRepository.Object);
 
             var actualLatestMessages = service.GetLatestChatMessages<ChatMessageViewModelTest>(RoleName.Owner, "testUserIdForOwner1").ToList();
 

@@ -5,10 +5,8 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using VeterinaryClinic.Common;
-    using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Services.Messaging;
     using VeterinaryClinic.Web.ViewModels.Appointments;

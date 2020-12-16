@@ -3,10 +3,8 @@
     using System.Threading.Tasks;
 
     using Ganss.XSS;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using VeterinaryClinic.Common;
-    using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Data.Models.Enumerations;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels.ChatMessages;

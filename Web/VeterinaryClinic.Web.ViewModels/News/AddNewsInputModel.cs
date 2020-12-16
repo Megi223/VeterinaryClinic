@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Web.ViewModels.News
+﻿namespace VeterinaryClinic.Web.ViewModels.News
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
+    using VeterinaryClinic.Services.Mapping;
+
     public class AddNewsInputModel : IMapFrom<VeterinaryClinic.Data.Models.News>
     {
         [Required]

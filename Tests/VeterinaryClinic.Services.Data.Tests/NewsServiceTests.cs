@@ -40,7 +40,7 @@
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var newsRepository = new EfDeletableEntityRepository<News>(new ApplicationDbContext(options.Options));
 
-            var newsService = new NewsService(newsRepository,this.cloudinaryService);
+            var newsService = new NewsService(newsRepository, this.cloudinaryService);
 
             var count = newsService.GetCount();
 
@@ -54,7 +54,7 @@
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
             var newsRepository = new EfDeletableEntityRepository<News>(new ApplicationDbContext(options.Options));
 
-            var newsService = new NewsService(newsRepository,this.cloudinaryService);
+            var newsService = new NewsService(newsRepository, this.cloudinaryService);
 
             await newsService.AddNewsAsync(new AddNewsInputModel { Content = "testContent", Summary = "testSummary", Title = "testTitle", Image = null });
 
@@ -70,7 +70,7 @@
             await repository.AddAsync(new News { Title = "test", Content = "testContent", Summary = "testSummary" });
             await repository.SaveChangesAsync();
 
-            var newsService = new NewsService(repository,this.cloudinaryService);
+            var newsService = new NewsService(repository, this.cloudinaryService);
             var news = newsService.GetById<NewsViewModelTest>(1);
 
             Assert.Equal("test", news.Title);
@@ -94,7 +94,7 @@
             await repository.AddAsync(new News { Title = "test7", Content = "testContent7", Summary = "testSummary7" });
             await repository.SaveChangesAsync();
 
-            var newsService = new NewsService(repository,this.cloudinaryService);
+            var newsService = new NewsService(repository, this.cloudinaryService);
             var news = newsService.GetAllForAPage<NewsViewModelTest>(1).ToList();
 
             for (int i = news.Count(); i <= 1; i++)
@@ -124,7 +124,7 @@
             await repository.AddAsync(new News { Title = "test7", Content = "testContent7", Summary = "testSummary7" });
             await repository.SaveChangesAsync();
 
-            var newsService = new NewsService(repository,this.cloudinaryService);
+            var newsService = new NewsService(repository, this.cloudinaryService);
             var news = newsService.GetAllForAPage<NewsViewModelTest>(page).ToList();
 
             var actualCount = news.Count();

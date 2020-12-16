@@ -6,10 +6,8 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.SignalR;
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Services.Data;
-    using VeterinaryClinic.Web.Hubs;
     using VeterinaryClinic.Web.ViewModels.Appointments;
 
     [Authorize(Roles = GlobalConstants.OwnerRoleName)]
@@ -19,14 +17,12 @@
         private readonly IAppointmentsService appointmentsService;
         private readonly INotificationsService notificationsService;
         private readonly IOwnersService ownersService;
-        private readonly IUsersService usersService;
 
-        public AppointmentsController(IAppointmentsService appointmentsService, IOwnersService ownersService, INotificationsService notificationsService, IUsersService usersService)
+        public AppointmentsController(IAppointmentsService appointmentsService, IOwnersService ownersService, INotificationsService notificationsService)
         {
             this.appointmentsService = appointmentsService;
             this.ownersService = ownersService;
             this.notificationsService = notificationsService;
-            this.usersService = usersService;
         }
 
         [HttpPost]

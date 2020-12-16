@@ -16,13 +16,12 @@
     using VeterinaryClinic.Data.Models;
     using VeterinaryClinic.Data.Repositories;
     using VeterinaryClinic.Data.Seeding;
-    using VeterinaryClinic.Services.Data;
 
     public static class Program
     {
         public static int Main(string[] args)
         {
-            Console.WriteLine($"{typeof(Program).Namespace} ({string.Join(" ", args)}) starts working...");
+            /*Console.WriteLine($"{typeof(Program).Namespace} ({string.Join(" ", args)}) starts working...");
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider(true);
@@ -77,7 +76,8 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ISettingsService, SettingsService>();*/
+            return 1;
         }
     }
 }

@@ -10,7 +10,6 @@
     using Pioneer.Pagination;
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Models;
-    using VeterinaryClinic.Services;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels;
     using VeterinaryClinic.Web.ViewModels.Appointments;

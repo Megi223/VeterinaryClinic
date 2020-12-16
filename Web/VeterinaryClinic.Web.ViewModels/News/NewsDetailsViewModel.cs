@@ -1,8 +1,8 @@
 ﻿namespace VeterinaryClinic.Web.ViewModels.News
 {
-    using Ganss.XSS;
     using System;
 
+    using Ganss.XSS;
     using VeterinaryClinic.Services.Mapping;
 
     public class NewsDetailsViewModel : IMapFrom<VeterinaryClinic.Data.Models.News>

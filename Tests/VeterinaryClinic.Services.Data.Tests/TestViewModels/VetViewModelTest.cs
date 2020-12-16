@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Services.Mapping;
-
-namespace VeterinaryClinic.Services.Data.Tests.TestViewModels
+﻿namespace VeterinaryClinic.Services.Data.Tests.TestViewModels
 {
+    using System;
+
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Services.Mapping;
+
     public class VetViewModelTest : IMapFrom<Vet>
     {
         public string Id { get; set; }

@@ -22,7 +22,7 @@
 
         public List<string> SearchVet(string term)
         {
-            return this.vetsRepository.AllAsNoTracking().Where(v => v.FirstName.ToLower().Contains(term.ToLower()) || v.LastName.ToLower().Contains(term.ToLower()))
+            return this.vetsRepository.AllAsNoTracking().Where(v => v.FirstName.ToLower().Contains(term.ToLower()) || v.LastName.ToLower().Contains(term.ToLower()) || (v.FirstName + " " + v.LastName).ToLower().Contains(term.ToLower()))
                 .Select(v => v.FirstName + " " + v.LastName).ToList();
         }
 
@@ -41,7 +41,7 @@
         public List<T> SearchVet<T>(string term)
         {
             return this.vetsRepository.AllAsNoTracking()
-                .Where(v => v.FirstName.ToLower().Contains(term.ToLower()) || v.LastName.ToLower().Contains(term.ToLower()))
+                .Where(v => v.FirstName.ToLower().Contains(term.ToLower()) || v.LastName.ToLower().Contains(term.ToLower()) || (v.FirstName + " " + v.LastName).ToLower().Contains(term.ToLower()))
                 .To<T>()
                 .ToList();
         }

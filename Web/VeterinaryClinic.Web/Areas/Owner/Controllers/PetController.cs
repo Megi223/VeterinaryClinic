@@ -9,12 +9,10 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
     using Microsoft.Azure.CognitiveServices.Vision.ComputerVision.Models;
     using VeterinaryClinic.Common;
     using VeterinaryClinic.Data.Models.Enumerations;
-    using VeterinaryClinic.Services;
     using VeterinaryClinic.Services.Data;
     using VeterinaryClinic.Web.ViewModels.Pets;
 
@@ -90,7 +88,6 @@
                     return this.View(model);
                 }
             }
-            
 
             if (!this.ModelState.IsValid)
             {

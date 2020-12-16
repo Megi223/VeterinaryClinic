@@ -1,24 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VeterinaryClinic.Data;
-using VeterinaryClinic.Data.Models;
-using VeterinaryClinic.Data.Repositories;
-using Xunit;
-using Microsoft.Extensions.Configuration;
-using CloudinaryDotNet;
-using VeterinaryClinic.Data.Common.Repositories;
-using Moq;
-using VeterinaryClinic.Web.ViewModels.Vets;
-using VeterinaryClinic.Services.Mapping;
-using VeterinaryClinic.Services.Data.Tests.TestViewModels;
-using VeterinaryClinic.Data.Models.Enumerations;
-
-namespace VeterinaryClinic.Services.Data.Tests
+﻿namespace VeterinaryClinic.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CloudinaryDotNet;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Moq;
+    using VeterinaryClinic.Data;
+    using VeterinaryClinic.Data.Common.Repositories;
+    using VeterinaryClinic.Data.Models;
+    using VeterinaryClinic.Data.Models.Enumerations;
+    using VeterinaryClinic.Data.Repositories;
+    using VeterinaryClinic.Services.Data.Tests.TestViewModels;
+    using VeterinaryClinic.Services.Mapping;
+    using VeterinaryClinic.Web.ViewModels.Vets;
+    using Xunit;
+
     public class VetsServiceTests
     {
         public VetsServiceTests()
@@ -50,7 +50,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             IServicesService servicesService = new ServicesService(servicesRepository, mockedVetsServicesRepository.Object);
             IVetsService vetsService = new VetsService(vetsRepository, mockedVetsServicesRepository.Object, servicesService, cloudinaryService, petsRepository, servicesRepository);
 
-            await vetsService.AddVetAsync("testUserId", new AddVetInputModel { Email = "testEmail@gmail.com", FirstName = "testFirstName", LastName = "testLastName" , HireDate = DateTime.UtcNow , Password = "123456", Specialization = "testSpecialization" }, null);
+            await vetsService.AddVetAsync("testUserId", new AddVetInputModel { Email = "testEmail@gmail.com", FirstName = "testFirstName", LastName = "testLastName", HireDate = DateTime.UtcNow, Password = "123456", Specialization = "testSpecialization" }, null);
 
             var vetsRepositoryActualCount = vetsRepository.All().Count();
 
@@ -301,7 +301,7 @@ namespace VeterinaryClinic.Services.Data.Tests
 
             var vetId = vetsService.GetVetId("testUserId1");
 
-            Assert.Equal("VetId1",vetId);
+            Assert.Equal("VetId1", vetId);
         }
 
         [Fact]
@@ -547,7 +547,7 @@ namespace VeterinaryClinic.Services.Data.Tests
             await vetsServicesRepository.AddAsync(new VetsServices { VetId = "testVetId", ServiceId = "1" });
             await vetsServicesRepository.SaveChangesAsync();
 
-            await vetsService.EditVet(new EditVetInputModel { Id = "testVetId", Specialization = "newSpecialiation", ServicesInput = null});
+            await vetsService.EditVet(new EditVetInputModel { Id = "testVetId", Specialization = "newSpecialiation", ServicesInput = null });
             var editedVet = vetsRepository.All().FirstOrDefault(x => x.Id == "testVetId");
 
             var actualVetsServicesCount = vetsServicesRepository.All().Where(x => x.VetId == "testVetId").Count();
