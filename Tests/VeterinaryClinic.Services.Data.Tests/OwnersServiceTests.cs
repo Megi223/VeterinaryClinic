@@ -96,5 +96,24 @@
             Assert.Equal("someUrl", actualOwner.ProfilePicture);
             Assert.Equal("city", actualOwner.City);
         }
+
+        [Fact]
+        public async Task DeleteOwnerAsyncShouldSetIsDeletedToTrue()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            var ownersRepository = new EfDeletableEntityRepository<Owner>(new ApplicationDbContext(options.Options));
+            var reviewsRepository = new EfDeletableEntityRepository<Review>(new ApplicationDbContext(options.Options));
+
+            var service = new OwnersService(ownersRepository, reviewsRepository);
+
+            await ownersRepository.AddAsync(new Owner { Id = "testOwnerId123", UserId = "testUserId123", FirstName = "firstName", LastName = "lastName", ProfilePicture = "someUrl", City = "city" });
+            await ownersRepository.SaveChangesAsync();
+
+            await service.DeleteOwnerAsync("testUserId123");
+
+            Assert.Equal(0, ownersRepository.All().Count());
+            Assert.Equal(1, ownersRepository.AllWithDeleted().Count());
+        }
     }
 }

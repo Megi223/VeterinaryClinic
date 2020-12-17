@@ -14,5 +14,7 @@
         Task WriteReviewAsync(string ownerId, ReviewInputModel input);
 
         T GetById<T>(string id);
+
+        Task DeleteOwnerAsync(string userId);
     }
 }

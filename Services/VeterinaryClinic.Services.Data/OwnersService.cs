@@ -1,5 +1,6 @@
 ﻿namespace VeterinaryClinic.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -56,6 +57,13 @@
             var owner = this.ownersRepository.All().Where(x => x.Id == id)
                 .To<T>().FirstOrDefault();
             return owner;
+        }
+
+        public async Task DeleteOwnerAsync(string userId)
+        {
+            var targetOwner = this.ownersRepository.All().Where(x => x.UserId == userId).FirstOrDefault();
+            targetOwner.IsDeleted = true;
+            await this.ownersRepository.SaveChangesAsync();
         }
     }
 }

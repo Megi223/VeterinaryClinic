@@ -59,6 +59,14 @@
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+            [Required]
+            [MaxLength(GlobalConstants.NameMaxLength)]
+            public string FirstName { get; set; }
+
+            [Required]
+            [MaxLength(GlobalConstants.NameMaxLength)]
+            public string LastName { get; set; }
         }
 
         public IActionResult OnGetAsync()
@@ -141,7 +149,7 @@
                 {
                     result = await this.userManager.AddLoginAsync(user, info);
                     string photoUrl = await this.cloudinaryService.UploudAsync(null);
-                    await this.ownersService.CreateOwnerAsync(user, this.Input.Email, this.Input.Email, photoUrl, null);
+                    await this.ownersService.CreateOwnerAsync(user, this.Input.FirstName, this.Input.LastName, photoUrl, null);
                     if (result.Succeeded)
                     {
                         this.logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
