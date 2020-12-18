@@ -21,9 +21,9 @@
                 @for (int i = 0; i < Model.Count(); i++)
                 {
                 <tr>
-                    <td>@Model.ToList()[i].ElementAt(i).OwnerFullName</td>
-                    <td>@Model.ToList()[i].ElementAt(i).Pets</td>
-                    <td><a class="btn btn-info" asp-area="Vet" asp-controller="Vet" asp-action="Chat" asp-route-id="@Model.ToList()[i].ElementAt(i).OwnerId">Start Chat</a></td>
+                    <td>@Model.ToList()[i].ElementAt(0).OwnerFullName</td>
+                    <td>@Model.ToList()[i].ElementAt(0).Pets</td>
+                    <td><a class="btn btn-info" asp-area="Vet" asp-controller="Vet" asp-action="Chat" asp-route-id="@Model.ToList()[i].ElementAt(0).OwnerId">Start Chat</a></td>
                 </tr>
                 }
             </tbody>
